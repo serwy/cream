@@ -1,0 +1,103 @@
+<table><name>Interpretation</name>
+
+	<gc><name>Faulty diagnosis</name>
+		<ga>Cognitive bias</ga>
+		<ga>Wrong identification</ga>
+		<ga>Inadequate procedure</ga>
+		
+		<sa>Confusing symptoms</sa>
+		<sa>Error in mental model</sa>
+		<sa>Misleading symptoms</sa>
+		<sa>Mislearning</sa>
+		<sa>Multiple disturbances</sa>
+		<sa>New situation</sa>
+		<sa>Erroneous analogy</sa>
+
+		<sc><name>Wrong diagnosis</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incomplete diagnosis</name>
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+	<gc><name>Wrong reasoning</name>
+		<ga>Cognitive bias</ga>
+		<ga>Cognitive style</ga>
+
+		<sa>Too short planning horizon</sa>
+		<sa>False analogy</sa>
+		<sa>Overgeneralisation</sa>
+		<sa>Mode error</sa>
+
+		<sc><name>Induction error</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Deduction error</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Wrong priorities</name>
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+	<gc><name>Decision error</name>
+		<ga>Fear</ga>
+		<ga>Cognitive bias</ga>
+		<ga>Distraction</ga>
+		<ga>Social Pressure</ga>
+	
+		<sa>Lack of knowledge</sa>
+		<sa>Mode error</sa>
+		<sa>Shock</sa>
+		<sa>Stimulus overload</sa>
+		<sa>Workload</sa>
+
+		<sc><name>Decision paralysis</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Wrong decision</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Partial decision</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Delayed interpretation</name>
+		<ga>Inadequate procedure</ga>
+		<ga>Equipment failure</ga>
+		<ga>Fatigue</ga>
+
+		<sa>Indicator failure</sa>
+		<sa>Response slow-down</sa>
+
+		<sc><name>No identification</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Increased time pressure</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Incorrect prediction</name>
+		<ga>Cognitive bias</ga>
+		<ga>Ambiguous information</ga>
+		<ga>Incomplete information</ga>
+	
+		<sa>None defined</sa>
+
+		<sc><name>Unexpected state change</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Unexpected side-effects</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Process speed misjudged</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

@@ -1,0 +1,21 @@
+<div class='heading'>
+Overview
+</div>
+		
+<div class='content'>
+<p>
+CREAM is a structured method for analyzing an error and predicting possible errors. The purpose of this structure is to provide guidance in analyzing an error. Its structure is a result of many years of research in human reliability to understand the factors that can contribute to an error. 
+<p>
+The method is meant to be fully bi-directional, and uses the same principles for accident analysis and accident prediction. 
+<b>Retrospective analysis</b> is for accident analysis. <b>Prospective analysis</b> is for accident prediction.
+<p>
+
+Human actions, whether it be correct or an error, occur within the context of a situation. Context can have a strong influence on a person's actions. Understanding this context is crucial for performing a relevant and accurate analysis. CREAM identifies several aspects of context, called <b>Common Performance Conditions</b> (CPC's). There are nine CPC's, all of which help during the analysis. After indentifying context, the analyst can proceed.
+<p>
+CREAM makes an important distinction with error. The error under analysis must be a physical action that is measurable and observable. This physical action is called a <b>phenotype</b>. Its possible causes, which are influenced by context, are referred to as <b>genotypes</b>. There is a good reason for this distinction because it allows for better consistency between different analysts.  A good error modeling and analysis method should draw the same conclusions regardless of who performs the analysis. 
+<p>
+CREAM uses its own terminology for describing how errors happen. Instead of using “cause” and “effect”, CREAM uses “<b>antecedent</b>” and “<b>consequent</b>”, respectively. Each antecedent may have one or many consequents, and likewise, each consequent may have one or many antecedents. There are several tables of antecedents and consequents which are used for analysis. In general, a consequent in one table can be found as an antecedent in others. Likewise antecedents can be found as consequents in other tables. The specifics on how these tables are used will be discussed later.
+<p>
+CREAM separates the contextual antecedents and consequents of errors into three broad categories called the <b>Man-Technology-Organization (MTO) triad</b>. The Man category lists consequents related to the physical and cognitive limitations of a person. The Technology category lists consequents related to technological failures. The Organization category lists consequents related to shortcomings in the organization in which a person operates. Each step of an analysis has several suggestions for proceeding. Depending on context, some of these suggestions will be more likely than others, which can simplify the number of possible event sequences to explore.
+
+</div>

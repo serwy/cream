@@ -1,0 +1,33 @@
+<div class='heading'>
+The Navigator
+</div>
+		
+<div class='content'>
+<p>
+The '<b>Navigator</b>' tab of this software tool shows all the different groups within CREAM. It is meant to be a refererence. These groups are organized under the broader 
+categories of the Man-Technology-Organisation (MTO) triad, and 
+collectively represent phenotypes, or the contributions to an error influenced by context. The "Error Modes" represent the phenotypes, or the physical manifestation of the error.
+The "Error Modes" is the link between a genotype and the phenotypes. 
+<p> 
+The algorithm for CREAM is quite simple. Each table represents a group of links between 
+<b>General Consequents</b> and <b> General Antecedents</b>.
+For each general consequent there is a list of general antecedents. 
+The general antecedents and general consequents along the same row are called <b>direct links</b>. The general antecedents and general consequents on diffent rows in the same table are called <b>indirect links</b>
+<p>
+For example, refer to "Observation missed" in the "Observation" group under the "Man" category.
+It has "Equipment failure", "Faulty diagnosis", "Inadequate plan", "Functional impairment", and "Inattention" as direct links. 
+It has "Fatigue", "Distraction", "Missing information", and "Mislabelling" as indirect links. 
+<p>
+When performing a retrospective analysis, you identify a general consequent and move to the general antecedents. When performing prospective analysis, you move from general antecedents to general consequents. The process is a bit more search intensive.
+<p>
+For example. "Wrong Identification" in the "Observation" group under the "Man" category appears as a general antecedent in "Interpretations" and "Error Modes". In "Interpretations", the direct link is "Faulty diagnosis" and the indirect links are "Wrong reasoning", "Decision error", "Delayed interpretation". and "Incorrect prediction". In "Error Modes", the direct links are "Sequence" and "Wrong Object", and the indirect links are "Timing", "Duration", "Force", "Distance / Magnitude", "Speed", and "Direction".
+<p>
+The specific antecedents are used during retrospective analysis and are a stopping point in the analysis. None of the specific antecedents can be found as a general consequent.
+<p>
+The specific consequents are a better description of the general consequent. During an analysis, when choosing a general consequent, you should choose also a 
+specific consequent to better explain each step of an analysis.
+<p>
+The <b>Where Links Are</b> and <b>Descriptions</b> toggle some processing on the tables. The "Where Links Are" toggle will display where each link can be found in other tables. The "Descriptions" toggle will display an associated description for each element in the table, if available.
+
+
+</div>

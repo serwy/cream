@@ -1,0 +1,53 @@
+.selectedAnchor {
+	border: 1px solid #6d84b4;
+	border-left: 5px solid #6d84b4;
+	padding-left: 5px;
+	font-weight: bold;
+}
+
+.unselectedAnchor {
+	padding-left: 10px;
+	font-weight: bold;
+}
+
+#analysisPanel {
+	height: 200px;
+	overflow: auto;
+}
+
+.analysis {
+	font-size: inherit;
+	
+}
+
+
+.analysis .field {
+	font-size: 10px;
+	color: #333333;
+	width: 150px;
+	text-align: right;
+	vertical-align: top;
+	padding-top: 4px;
+}
+
+.analysis textarea {
+	width: 300px;
+	height: 30px;
+	border: 1px solid #cccccc;
+	font-family: inherit;
+	font-size: 10px;
+}
+
+.analysis td {
+	font-size: inherit;
+	padding: 5px;
+}
+.analysis table {
+	font-size: inherit;
+}
+
+.analysis a {
+	padding-right: 10px;
+}
+
+

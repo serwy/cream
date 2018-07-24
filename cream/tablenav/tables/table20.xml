@@ -1,0 +1,67 @@
+<table>
+	<name>Observation</name>
+
+	<gc><name>Observation missed</name>
+
+		<ga>Equipment failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Functional impairment</ga>
+		<ga>Inattention</ga>
+
+		<sa>Information overload</sa>
+		<sa>Multiple signals</sa>
+		<sa>Noise</sa>
+		<sa>Parallax</sa>
+
+		<sc>
+			<name>Overlook cue / signal</name>
+			<def>todo</def>
+		</sc>
+		<sc>
+			<name>Overlook measurement</name>
+			<def>todo</def>
+		</sc>
+		
+	</gc>
+
+	<gc><name>False observation</name>
+
+		<ga>Fatigue</ga>
+		<ga>Distraction</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>False reaction</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>False recognition</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Wrong identification</name>
+
+		<ga>Distraction</ga>
+		<ga>Missing information</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Mislabelling</ga>
+
+		<sa>Ambiguous symbol set</sa>
+		<sa>Ambiguous signals</sa>
+		<sa>Erroneous information</sa>
+		<sa>Habit, expectancy</sa>
+		<sa>Information overload</sa>
+
+		<sc><name>Mistaken cue</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Partial identification</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incorrect identification</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

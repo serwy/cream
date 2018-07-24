@@ -1,0 +1,128 @@
+
+#navPanel {
+	overflow: auto;
+	#border: 1px solid #FF0000;
+	font-size: inherit;
+	height: 100%;	
+	border-right: 1px solid #cccccc;
+}
+
+#workPanel {
+	#border: 1px solid #00ff00;
+	font-size: inherit;
+	overflow: auto;
+	height: 100%;
+	width: 100%;
+}
+#summaryPanel {
+	#background: #f7f7f7;
+	border-left: 1px solid #cccccc;
+	float:right;
+	overflow: auto;
+	width: 250px;
+	font-size: inherit;
+	height: 100%;
+}
+
+.entry {
+	padding: 5px;
+	font-size: 10px;
+	width: 200px;
+}
+
+.entry a {
+	text-decoration: none;
+}
+
+
+.entry a:hover {
+	text-decoration: underline;
+	color: #6d84b4;
+}
+
+.entry .preface {
+	font-weight: bold;
+	color: #6d84b4;
+}
+
+.entry .prefaceMore {
+	font-weight: bold;
+	color: #FF0000;
+}
+
+.entry .status {
+	font-size: 9px;
+	color: #333333;
+}
+
+.entry .title {
+	font-weight: bold;
+	color: #333333;
+}
+
+.entry .sc {
+	font-weight: normal;
+	font-size: 10px;
+	color: #777777;
+}
+
+.entry .notes {
+	width: 100%;
+	height: 75px;
+	border: 1px solid #cccccc;
+	font-size: 10px;
+	font-family: inherit;
+	color: #333333;
+}
+
+.entry .toolbar {
+	color: #6d84b4;
+
+}
+
+.entry .toolbar a {
+	text-decoration: none;
+	color: #6d84b4;
+	text-align: right;
+	float:	right;
+	padding-left: 5px;	
+
+}
+
+.entry .toolbar a:hover {
+	text-decoration: underline;
+	color: #6d84b4;
+	text-align: right;
+	float:	right;
+	padding-left: 5px;	
+
+}
+.entry td {
+	vertical-align: top;
+	width: 200px;
+
+}
+
+.entry .jump {
+	text-align: left;
+	font-size: 9px;
+	color: #333333;
+	#font-weight: bold;
+
+}
+
+.entry .notesDisabled {
+	width: 100%;
+	height: 75px;
+	border: 1px solid #cccccc;
+	font-size: 10px;
+	font-family: inherit;
+	color: #333333;
+	background: #F7F7F7;
+
+}
+
+
+.appBody {
+	height: 300px;
+}

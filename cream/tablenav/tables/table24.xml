@@ -1,0 +1,69 @@
+<table><name>Permanent person related functions</name>
+
+	<gc><name>Functional impairment</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Deafness</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Bad eyesight</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Colour blindness</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Dyslexia/aphasia</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Other disability</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Cognitive style</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+	
+		<sc><name>Simultaneous scanning</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Successive scanning</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Conservative focusing</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Cognitive bias</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Focus gambling</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incorrect revision of probabilities</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Hindsight bias</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Attribution error</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Illusion of control</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Confirmation bias</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Hypothesis fixation</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

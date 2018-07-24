@@ -1,0 +1,35 @@
+CREAM - Cognitive Reliability Error Analysis Method
+
+Roger D. Serwy
+roger.serwy@gmail.com
+
+API reference
+
+CREAM_HEAD - head pointer to the CREAM structure
+
+findGA(event_name) 
+	arg: event_name - a string 
+	ret: an array of pointers to GA entries 
+
+findGroup(group)
+	arg: group - a string
+	ret: pointer to the group in the CREAM structure
+
+findGC(event_name)
+	arg: event_name - a string
+	ret: a pointer to the GC
+
+getProspective(event_name)
+	arg: event_name - a string
+	ret: a structure - A
+		a.DL - array of pointers to GC's
+		a.IL - array of pointers to GC's
+
+getRetrospective(event_name)
+	arg: event_name - a string
+	ret: a structure - A
+		a.DL - array of pointers to GC's
+		a.IL - array of pointers to GC's
+
+loadTables() 
+	- load the CREAM tables

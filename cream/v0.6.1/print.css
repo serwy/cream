@@ -1,0 +1,72 @@
+
+body {
+	#overflow: scroll;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	font-size: 9pt;
+}
+
+
+.printEntry {
+		
+
+}
+
+.printEntry .appTitle {
+	border-bottom: 1px solid #000000;
+	text-align: center;
+	font-weight: bold;
+	padding: 5pt;
+	margin-bottom: 10pt;
+}
+
+.printEntry .info {
+#	border-bottom: 1px solid #000000;
+	margin-bottom: 10pt;
+	padding-bottom: 5pt;	
+
+
+}
+
+.printEntry .title {
+	border-bottom: 1px solid #000000;
+	margin-bottom: 5px;
+}
+
+
+
+.printEntry .entrylabel {
+	width: 45pt;
+	display: block;
+
+}
+
+
+
+
+.printEntry .incomplete {
+	color: #AA0000;
+	padding-left: 10pt;	
+}
+
+.printEntry .label {
+	display: block;
+	font-family: inherit;
+	font-size: inherit;
+	padding-right: 5pt;
+	text-align: right;
+}
+
+.printEntry .labelleft {
+	display: block;
+	font-family: inherit;
+	font-size: inherit;
+	padding-right: 5pt;
+	text-align: left;
+}
+.printEntry .subtitle {
+	border-bottom: 1px solid #000000;
+	text-align: center;
+	font-weight: bold;
+	padding-bottom: 5pt;
+	margin-bottom: 10pt;	
+}

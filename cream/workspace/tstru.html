@@ -1,0 +1,1227 @@
+<html><head>
+
+<style type="text/css">
+
+.cream_table_header {
+	#width: 200;
+	background-color: #c9ba65;
+	color: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+
+}
+.cream_table_data {
+	border-style: solid;
+	border-width: 1px;
+
+}
+
+.cream_table {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	padding: 5px;
+
+}
+
+.cream_link_out {
+	text-decoration: none;
+	#display: block;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_out0 {
+	text-decoration: none;
+	#display: block;
+	#width: 183;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_out1 {
+	text-decoration: none;
+	#display: block;
+	#width: 183;
+	background-color: #E5E5E5;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_over {
+	text-decoration:none;
+	display: block;
+	#width: 183;
+	background-color: #aa0000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+
+
+
+
+.cream_link_select {
+	display: block;
+	background-color: #aa0000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_title {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-top: 1em;
+	background-color: #c9ba65;
+	color: #FFFFFF;
+	padding: 2px;
+}
+
+.cream_gc {
+	background-color: #c9ba65;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 3px;
+	font-weight: 700;
+	margin-bottom: 2px;
+	text-align: center;
+
+}
+
+.cream_links {
+	border-style:solid;
+	border-width:1px;
+	width: 300px;	
+	padding: 5px;
+}
+
+.cream_border {
+//	border-width: 1px;
+//	border-style: solid;
+
+
+}
+
+</style>
+
+<script type="text/javascript" language="javascript">
+
+// CREAM Software 
+// Based on CREAM by Erik Hollnagel
+// Programmed by Roger D. Serwy
+// Email: serwy@uiuc.edu
+// Summer 2006
+//
+// Not sure about licensing just yet. 
+
+
+//var DEBUG_WINDOW = window.open("","DEBUG","width=200 scrollbars=yes");
+//DEBUG_WINDOW.document.body.innerHTML="";	//clear out debug window
+
+function DEBUG(w)
+{
+	try {
+		H = DEBUG_WINDOW.document.body.innerHTML + w + "<br>";
+		DEBUG_WINDOW.document.body.innerHTML = H;
+	} catch(ex) {}
+
+}
+
+var CREAM_HEAD = null;		// g_data
+var myXMLHttp; 
+var TARGET_MOUSEDOWN = null;
+
+var PANEL_HEAD = null;
+
+
+function onLoad()
+{
+	// create the entire CREAM table XML structure in memory
+	loadTables();
+
+	PANEL_HEAD = new panel("START", null);
+}
+
+function popupTables() {
+	var k = buildAllTables();
+	PANEL_HEAD.flush();
+	document.body.appendChild(k);
+}
+
+
+function buildAllTables()
+{
+	var d = document.createElement("div");
+
+	var table = null;
+	var g = CREAM_HEAD;
+	while (g != null) {
+		d.appendChild(document.createElement("br"));
+
+		var title = document.createElement("div");
+		title.setAttribute("class", "cream_link_over");
+		title.innerHTML = g.name;
+		d.appendChild(title);
+
+		var t = g.table;
+		while (t != null) {
+			var title = document.createElement("div");
+			title.innerHTML = "<b>" + t.name + "</b>";
+			d.appendChild(title);
+	
+	
+			var tb = buildTable(t);
+			d.appendChild(tb);
+
+
+			d.appendChild(document.createElement("br"));
+
+			t = t.next;
+		}
+		g = g.next;
+	}
+	
+	return d;
+}
+
+
+
+
+
+
+
+function panel(title, myParent)
+{
+	this.parent = myParent;
+	this.child = null;
+	this.width = 220;
+	this.left = 20;
+	this.name = "panel";
+
+	var links = getRetrospective(title);
+	var div;
+	if (links != null) {
+		div = buildRetroLinks(title, links);
+	} else {
+		alert ("\"" + title + "\" not found.");
+		return null;
+	}
+	this.div = div;
+	div.setAttribute("id", "panel");
+
+	if (this.parent != null) {
+		this.left = this.parent.left + this.parent.width;
+	}
+
+	if (this.parent != null) {
+		this.parent.child = this;
+	}
+
+
+
+	var str = "";
+	str += "position: absolute;";
+	str += "top: 40px;";
+	str += "left: " + this.left; + ";";
+	div.setAttribute("style", str);
+
+	document.body.appendChild(div);
+
+	this.width = this.div.clientWidth + 10;
+
+	this.flush = function() {
+		if (this.child != null) {
+			this.child.flush();
+		}
+		try {
+			document.body.removeChild(this.div);
+		} catch (ex) { }
+	}
+	this.flushChild = function() {
+		if (this.child != null) {
+			this.child.flush();	
+		}
+	}
+
+
+}
+
+
+function panelTable(table, myParent)
+{
+	// FIXME: create a function prototype for inheritance issues
+
+	this.parent = myParent;
+	this.child = null;
+	this.width = 600;
+	this.left = 20;
+	this.name = "panel";
+
+
+	var div = document.createElement("div");
+
+
+	var titleDiv = document.createElement("div");
+	titleDiv.setAttribute("class", "cream_gc");
+	titleDiv.innerHTML = "Table: " + table.name;
+	div.appendChild(titleDiv);
+
+	var tableTitle = document.createElement("div");
+	tableTitle.innerHTML = "Categories:";
+	div.appendChild(tableTitle);
+	div.appendChild(buildCategory(table));
+	div.appendChild(document.createElement("br"));
+
+	tableTitle = document.createElement("div");
+	tableTitle.innerHTML = "General and specific antecedents:";
+	div.appendChild(tableTitle);
+	div.appendChild(buildTable(table))
+
+
+
+
+	this.div = div;
+
+
+	if (this.parent != null) {
+		this.left = this.parent.left + this.parent.width;
+	}
+
+	if (this.parent != null) {
+		this.parent.child = this;
+	}
+
+
+
+	var str = "";
+	str += "position: absolute;";
+	str += "top: 40px;";
+	str += "left: " + this.left + ";";
+	str += "width: " + this.width + ";";
+	div.setAttribute("style", str);
+	div.setAttribute("class", "cream_table");
+
+	document.body.appendChild(div);
+
+
+	this.flush = function() {
+		if (this.child != null) {
+			this.child.flush();
+		}
+		try {
+			document.body.removeChild(this.div);
+		} catch (ex) { }
+	}
+	this.flushChild = function() {
+		if (this.child != null) {
+			this.child.flush();	
+		}
+	}
+
+
+}
+
+
+
+function buildRetroPanel(event, title)
+{
+	var p = event.target;
+	// get to panel tag
+	
+	var t = p.getAttribute("id");
+	while (t != "panel") {
+		p = p.parentNode;
+		t = p.getAttribute("id");		
+	}
+
+
+	var src_panel = null;
+	var a = PANEL_HEAD;
+	while (a != null) {
+		if (a.div == p) {
+			src_panel = a;
+			break;
+		}
+		a = a.child;
+	}	
+
+	// i have the panel;
+	// flush children
+	src_panel.flushChild();
+
+	var t = new panel(title, src_panel);
+
+}
+
+function onMouseDown(event)
+{
+	
+}
+
+function displayTable(event, table_name)
+{
+	// find table
+	var p = event.target;
+	var src_panel = null;
+	var a = PANEL_HEAD;
+	while (a != null) {
+		if (a.div == p.parentNode) {
+			src_panel = a;
+			break;
+		}
+		a = a.child;
+	}	
+
+	src_panel.flushChild();
+
+
+	// find table among g_data stru
+	var table = null;
+	var g = CREAM_HEAD;
+	while (g != null) {
+		var t = g.table;
+		while (t != null) {
+			if (t.name == table_name) {
+				table = t;
+			}
+			t = t.next;
+		}
+		g = g.next;
+	}
+
+	if (table != null) {
+		var tmp = new panelTable(table, src_panel);
+	}
+
+
+}
+
+function buildRetroLinksHelper(list, func, hover)
+{
+	// build table for return values
+	var str = "";
+	var a = 0;
+	//return str;
+	while(list != null) {
+		var h = list.ptr.name;
+		if (h != "None defined") {
+		
+			str += "<div class='cream_link_out"+ a + "'";
+			if (hover == true) {
+				str += "onmouseover=\"this.className='cream_link_over'\"";
+				str += "onmouseout=\"this.className='cream_link_out" + a + "'\"";
+			}
+
+			if (func != null) {
+				str += "onmouseup=\"";
+				str += func;
+				str += "(event, '" + h + "')\"";
+			}
+			str += ">";
+
+			str += h;
+			str += "</div>";
+
+			a = (a + 1) % 2;		//alternate background
+		}
+		list = list.next;
+	}
+	return str;
+}
+
+
+function buildRetroLinks(title, links)
+{
+	var d = document.createElement("div");
+	d.setAttribute("class", "cream_links");
+	var str = "";
+
+
+	str += "<div class='cream_gc'>";
+	str += title;
+	str += "</div>";
+
+
+	var g;
+	if (links.dl.ga != null) {	
+		g = links.dl.ga.ptr.parent.parent.parent.name;	// group name
+	} else {
+		g = links.il.ga.ptr.parent.parent.parent.name;
+	}
+
+	str += "<div class='cream_link_out'>";
+	str += "Group: " + g;
+	str += "</div>";
+
+	var t;
+	if (links.dl.ga != null) {	
+		t = links.dl.ga.ptr.parent.parent.name;	// group name
+	} else {
+		t = links.il.ga.ptr.parent.parent.name;
+	}
+
+
+	str += "<div class='cream_link_out'";
+	str += "onmouseover=\"this.className='cream_link_over'\" onmouseout=\"this.className='cream_link_out'\"";
+	str += "onmouseup=\"displayTable(event, '"+ t + "') \">";
+	str += "Table: " + t;
+	str += "</div>";
+	
+
+
+	//str += buildSC(title);
+
+
+
+
+	str += "<table style='border-collapse:collapse; width:300; border-width:0;'>";
+	str += "<tr><td valign=top class='cream_link_title' width=50%>Direct Links</td>";
+	str += "<td valign=top class='cream_link_title' width=50%>Specific Antecedents</td>";
+	str += "<tr>";
+	str += "<td valign=top>";
+	str += buildRetroLinksHelper(links.dl.ga, "buildRetroPanel", true);
+	str += "</td>";
+	str += "<td valign=top>";
+	str += buildRetroLinksHelper(links.dl.sa, null, false);
+	str += "</td>";
+	str += "</tr>";
+	str += "</table>";
+
+
+	str += "<table style='border-collapse:collapse; width:300; border-width:0;'>";
+	str += "<tr><td valign=top class='cream_link_title' width=50%>Indirect Links</td>";
+	str += "<td valign=top class='cream_link_title' width=50%>Specific Antecedents</td>";
+	str += "<tr>";
+	str += "<td valign=top>";
+	str += buildRetroLinksHelper(links.il.ga, "buildRetroPanel", true);
+	str += "</td>";
+	str += "<td valign=top>";
+	str += buildRetroLinksHelper(links.il.sa, null, false);
+	str += "</td>";
+	str += "</tr>";
+	str += "</table>";
+
+
+
+	d.innerHTML = str;
+
+	//document.body.appendChild(d);
+
+	return d;
+}
+
+
+function buildSC(title) 
+{
+	// FIXME: need to include indirect links to SC's, suggesting a divsion in
+	// the display of data at each "event" node - one for SC's, and one for GA's/SA's
+
+	var gc = findGC(title);
+
+	var str = "";
+
+	str += "<table style='border-collapse:collapse; width:300; border-width:0;'>"
+	str += "<tr><td valign=top class='cream_link_title' width=50%>Specific Consequents</td>";
+	str += "<td valing=top class='cream_link_title' width=50%>Explanation / Definition</td>";
+	str += "</tr>";
+
+	var a = 0;
+
+	var sc = gc.sc;
+	while (sc != null) {
+
+		if (sc.name != "None defined") {
+			str += "<tr>";
+
+			str += "<td class='cream_link_out"+a+"' width=50% valign=top>";
+			str += sc.name;
+			str += "</td>";
+	
+			str += "<td class='cream_link_out"+a+"' width=50% valign=top>";
+			str += sc.def;
+			str += "</td>";
+	
+			str += "</tr>";
+
+			a = (a + 1) % 2;
+		}
+		sc = sc.next;
+	}
+	str += "<tr><td></td><td></td></tr>";  // for spacing
+
+	str += "</table>";
+
+	return str;
+}
+
+
+function buildCategory(table)
+{
+	// table - table pointer
+	// need to create a table for categories
+
+	// build TABLE DOM
+	var t = document.createElement("table");
+	t.setAttribute("border", "0");
+	t.setAttribute("padding", "0");
+	t.setAttribute("margin", "0");
+	t.setAttribute("style","border-collapse:collapse;width:600;");
+
+	// add header info 
+	var tr = document.createElement("tr");
+	t.appendChild(tr);
+
+	var td_template = document.createElement("td");
+	td_template.setAttribute("valign","top");
+	td_template.setAttribute("style", "width:200;");
+	td_template.setAttribute("class", "cream_table_data");
+
+	var td;
+	td = td_template.cloneNode(false);
+	td.setAttribute("class", "cream_table_header");
+	td.innerHTML="General Consequent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="Specific Consequent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="Definition / explanation";
+	tr.appendChild(td);
+	
+
+	var gc = table.gc;
+
+	while (gc != null) {
+		var count = 0;
+		var sc = gc.sc;
+		var first = true;
+		while (sc != null) {
+			count++;
+			sc = sc.next;
+		}
+
+		sc = gc.sc;
+		while (sc != null) {
+	
+			var tr = document.createElement("tr");
+			if (first == true) {
+				var td = td_template.cloneNode(false);
+				td.setAttribute("rowspan", count);
+				td.innerHTML = gc.name;
+				tr.appendChild(td);
+				first = false;
+			}
+		
+			td = td_template.cloneNode(false);
+			td.innerHTML = sc.name;
+			tr.appendChild(td);
+
+			td = td_template.cloneNode(false);
+			td.innerHTML = sc.def;
+			tr.appendChild(td);
+
+			t.appendChild(tr);
+			sc = sc.next;
+		}
+
+		gc = gc.next;
+	}
+
+
+
+
+	return t;
+
+}
+
+
+
+
+function buildTable(table)
+{
+
+	// table: -  table pointer
+
+	// build TABLE DOM
+	var t = document.createElement("table");
+	t.setAttribute("border", "0");
+	t.setAttribute("padding", "0");
+	t.setAttribute("margin", "0");
+	t.setAttribute("style","border-collapse:collapse;width:600;");
+
+	//var c = document.createElement("caption");
+	//c.innerHTML = table.name;	
+	//t.appendChild(c);
+		
+	// add header info 
+	var tr = document.createElement("tr");
+	t.appendChild(tr);
+
+	var td_template = document.createElement("td");
+	td_template.setAttribute("valign","top");
+	td_template.setAttribute("style", "width:200;");
+	td_template.setAttribute("class", "cream_table_data");
+
+	var td;
+	td = td_template.cloneNode(false);
+	td.setAttribute("class", "cream_table_header");
+	td.innerHTML="General Consequent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="General Antecedent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="Specific Antecedent";
+	tr.appendChild(td);
+	
+	var str = "";
+
+	var gc = table.gc;
+	while(gc != null) {
+
+		var h = gc.name;
+
+		// build row element
+		var tr = document.createElement("tr");
+		var td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		t.appendChild(tr);
+		str = h;
+		td.innerHTML = str;
+
+
+		// get the general antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var ga = gc.ga;
+		while (ga != null) {
+			var h = ga.name;
+			str += h + "<br>";	
+			ga = ga.next;
+		}
+		td.innerHTML = str;
+
+
+		// get the specific antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var sa = gc.sa;
+		while (sa != null) {
+			var h = sa.name;
+			str += h + "<br>";	
+			sa = sa.next;
+		}
+		td.innerHTML = str;
+	
+		gc = gc.next;
+	}
+	
+
+	//document.body.appendChild(t);	
+	return t;
+
+
+
+}
+
+function findGC(event_name)
+{
+	var gc_obj = null;
+
+	var grp_ptr = CREAM_HEAD;
+	while (grp_ptr != null) 
+	{
+		var tbl_ptr = grp_ptr.table;
+		while (tbl_ptr != null) 
+		{
+			var gc_ptr = tbl_ptr.gc;
+			while (gc_ptr != null) 
+			{
+				if (gc_ptr.name == event_name) 
+				{
+					DEBUG("found it");
+					gc_obj = gc_ptr;
+					break;  // FIXME: break from all while loops
+				}
+				gc_ptr = gc_ptr.next;
+			}
+			tbl_ptr = tbl_ptr.next;
+		}
+		grp_ptr = grp_ptr.next;
+	}	
+
+	return gc_obj;
+}
+
+
+function getRetrospective(event_name) 
+{
+	// find "event" in all the GC's
+
+	var gc_obj = findGC(event_name);
+
+
+	if (gc_obj == null) {
+		// NOT FOUND!
+		return null;
+	}
+
+
+	var tbl_ptr = gc_obj.parent;		// have pointer to table containing the GC
+
+	var dl_stru = null;
+	var il_stru = null;
+
+	var dl_sa_stru = null;
+	var il_sa_stru = null;
+
+	// go thru this table, adding GA's to appropriate list
+	var gc = tbl_ptr.gc;
+
+
+	while (gc != null) 
+	{
+		var ga_append = null;	
+		var sa_append = null;
+	
+		// pointers to append, reduces duplicate code
+		if (gc != gc_obj) {
+			ga_append = il_stru;
+			sa_append = il_sa_stru;
+		} else {
+			ga_append = dl_stru;
+			sa_append = dl_sa_stru;
+		}
+
+		// get all General Antecedents
+		var ga = gc.ga;
+		while (ga != null) 
+		{
+			var tmp = new ga_data_link();
+			tmp.ptr = ga;
+			tmp.prev = ga_append;
+			if (ga_append != null) 	// for first elt
+			{
+				ga_append.next = tmp;
+			}
+			ga_append = tmp;
+
+			ga = ga.next;
+		} 
+
+		// get all Specific Antecedents
+		// FIXME: duplicate code: how to resolve?
+		var sa = gc.sa;
+		while (sa != null) 
+		{
+			var tmp = new sa_data_link();
+			tmp.ptr = sa;
+			tmp.prev = sa_append;
+			if (sa_append != null) 	// for first elt
+			{
+				sa_append.next = tmp;
+			}
+			sa_append = tmp;
+
+			sa = sa.next;
+		} 
+	
+
+		// save appropriate pointers for next iteration
+		if (gc != gc_obj) {
+			il_stru = ga_append;
+			il_sa_stru = sa_append;
+		} else {
+			dl_stru = ga_append;
+			dl_sa_stru = sa_append;
+		}
+
+		// append all GA's
+		gc = gc.next;
+	}
+
+	var dl_head = findHead(dl_stru);
+	var il_head = findHead(il_stru);
+	var dl_sa_head = findHead(dl_sa_stru);
+	var il_sa_head = findHead(il_sa_stru);
+
+	il_head = removeInnerDuplicates(il_head);
+	il_sa_head = removeInnerDuplicates(il_sa_head);
+
+
+	il_head = removeCrossDuplicates(il_head, dl_head);
+	il_sa_head = removeCrossDuplicates(il_sa_head, dl_sa_head);
+
+
+	if (0) {
+	// print the list of DL's
+	dl_stru = dl_head;
+	while (dl_stru != null) 
+	{	//var ga = links.dl_ga;
+
+		DEBUG("DL: " + dl_stru.ptr.name);
+		dl_stru = dl_stru.next;
+	}
+
+	
+	// print the list of IL's
+	il_stru = il_head;
+	while (il_stru != null) 
+	{
+		DEBUG("IL: " + il_stru.ptr.name);
+		il_stru = il_stru.next;
+	}	
+	}
+
+
+	var ret = new retro_link_data();
+
+	ret.dl = new gasa_data();
+	ret.dl.ga = dl_head;
+	ret.dl.sa = dl_sa_head;
+	ret.il = new gasa_data();
+	ret.il.ga = il_head;
+	ret.il.sa = il_sa_head;
+
+	return ret;		// returning pointers to a list of DL and IL, which point into the cream table hierarchy
+
+	
+}
+
+function removeCrossDuplicates(il_head, dl_head)
+{
+
+	// eliminate duplicates between il and dl from il
+	var dl_stru = dl_head;
+	while (dl_stru != null) 
+	{
+		var il_stru = il_head;
+		while (il_stru != null) 
+		{
+			if (il_stru.ptr.name == dl_stru.ptr.name) 
+			{
+				// remove il_stru from list
+				DEBUG("removing dlil dup: " + il_stru.ptr.name);
+				var rem = il_stru;
+				if (rem.prev != null) 
+				{
+					rem.prev.next = rem.next;
+				} 
+				else 
+				{
+					// removing head elt from list
+					if (il_head.next != null) 
+					{
+						il_head.next.prev = null;
+					}
+					il_head = rem.next;
+				}
+				if (rem.next != null) 
+				{
+					rem.next.prev = rem.prev;
+				}	
+			}
+			il_stru = il_stru.next;
+		}
+		dl_stru = dl_stru.next;
+	}
+
+	return il_head;
+}
+
+
+function removeInnerDuplicates(list)
+{
+	var l_outer = list;
+	while (l_outer != null) 
+	{
+		var l_inner = l_outer.next;
+		while (l_inner != null) 
+		{
+			if (l_inner.ptr.name == l_outer.ptr.name) 
+			{
+				//remove l_inner from doubly-linked list
+				DEBUG("removing il dup: " + l_inner.ptr.name);
+				var rem = l_inner;
+				rem.prev.next = rem.next;	// point previous to one after
+				if (rem.next != null) 
+				{
+					rem.next.prev = rem.prev;	// point one after to previous
+				}
+			}
+			l_inner = l_inner.next;
+		}
+		l_outer = l_outer.next;
+	}
+	return list;
+}
+
+
+function findHead(ptr)
+{
+	if (ptr == null) {
+		return null;
+	}
+	while (ptr.prev != null) {
+		ptr = ptr.prev;
+	}
+	return ptr;
+}
+
+
+
+
+function loadTables()
+{
+
+	var myXMLHttp = new XMLHttpRequest();
+
+	//create a DOM structure
+
+	var root = document.createElement("root");
+	var r; 
+	
+	
+	myXMLHttp = new XMLHttpRequest();
+	myXMLHttp.open("GET", "cream.xml", false); 
+	myXMLHttp.send(null);
+	r = myXMLHttp.responseXML;
+	var cream = r.getElementsByTagName("cream")[0];
+
+
+	// pull into data structures
+	// get all groups
+	var groups =  cream.getElementsByTagName("group");
+	for(var i = 0; i < groups.length; i++) {
+		var n = groups[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		//DEBUG("addGroup: " + n);
+		var grp = addGroup(n);
+		// get tables
+		var tables = groups[i].getElementsByTagName("table");
+		for(var j = 0; j < tables.length; j++) {
+			var n = tables[j].getElementsByTagName("name")[0].firstChild.nodeValue;
+			//DEBUG("addTable: " + n);
+			var tbl = addTable(grp, n);
+			// get GC's
+			var gcs = tables[j].getElementsByTagName("gc");
+			for(var k = 0; k < gcs.length; k++) {
+				var n = gcs[k].getElementsByTagName("name")[0].firstChild.nodeValue;	
+				//DEBUG("addGC: " + n);
+				var gc = addGC(tbl, n);
+				// get GA's
+				var gas = gcs[k].getElementsByTagName("ga");
+				for(var l = 0; l < gas.length; l++) {
+					var n = gas[l].firstChild.nodeValue;	
+					//DEBUG("addGA: " + n);
+					addGA(gc, n);
+				}
+				// get SA's
+				var sas = gcs[k].getElementsByTagName("sa");
+				for(var l = 0; l < sas.length; l++) {
+					var n = sas[l].firstChild.nodeValue;	
+					//DEBUG("addSA: " + n);
+					addSA(gc, n);
+				}
+
+				// get SC's
+				var scs = gcs[k].getElementsByTagName("sc");
+				for(var l = 0; l < scs.length; l++) {
+					var n = scs[l].getElementsByTagName("name")[0].firstChild.nodeValue;	
+					var d = scs[l].getElementsByTagName("def")[0].firstChild.nodeValue;	
+
+					//DEBUG("addSC: " + n + " : " + d);
+					addSC(gc, n, d);
+				}
+			}
+		}
+	}
+}
+
+
+/////////////////////////////////////
+// add code - used in loadTables
+
+function addGroup(name)
+{
+	var retval = new g_data();
+	if (CREAM_HEAD == null) {
+		CREAM_HEAD = retval;
+	} else {
+		findEnd(CREAM_HEAD).next = retval;
+	}
+	retval.name = name;
+
+	return retval;
+}
+
+function addTable(group, name)
+{
+	var retval = new t_data();
+	if (group.table == null) {
+		group.table = retval;
+	} else {
+		findEnd(group.table).next = retval;
+	}
+	retval.name = name;
+	retval.parent = group;
+
+	return retval;
+}
+
+
+function addGC(table, name)
+{
+	var retval = new gc_data();
+	if (table.gc == null) {
+		table.gc = retval;
+	} else {
+		findEnd(table.gc).next = retval;
+	}
+	retval.name = name;
+	retval.parent = table;
+
+	return retval;
+}
+
+function addGA(gc, name)
+{
+	var retval = new ga_data();
+	if (gc.ga == null) {
+		gc.ga = retval;
+	} else {
+		findEnd(gc.ga).next = retval;
+	}
+	retval.name = name;
+	retval.parent = gc;
+
+	return retval;
+}
+
+function addSA(gc, name)
+{
+	var retval = new sa_data();
+	if (gc.sa == null) {
+		gc.sa = retval;
+	} else {
+		findEnd(gc.sa).next = retval;
+	}
+	retval.name = name;
+	retval.parent = gc;
+
+	return retval;
+}
+
+function addSC(gc, name, def)
+{
+	var retval = new sc_data();
+	if (gc.sc == null) {
+		gc.sc = retval;
+	} else {
+		findEnd(gc.sc).next = retval;
+	}
+	retval.name = name;
+	retval.def = def;
+	retval.parent = gc;
+
+	return retval;
+}
+
+
+function findEnd(stru)
+{
+	var ptr = stru;
+	while (ptr.next != null) {
+		ptr = ptr.next;
+	}
+	return ptr;
+
+}
+////////////////////////////////
+// data structures
+function g_data() {		// group structure
+	this.name = null;	// str
+	this.table = null;	// t_data
+	this.next = null;	// g_data
+}
+function t_data() {		// table structure
+	this.name = null;	// str
+	this.gc = null;		// gc_data
+	this.parent = null;	// g_data
+	this.next = null;	// t_data
+}
+function gc_data() {		// general consequent structure
+	this.name = null;	// str
+	this.ga = null;		// ga_data
+	this.sa = null;		// sa_data
+	this.sc = null;		// sc_data
+	this.parent = null;	// t_data
+	this.next = null;	// gc_data
+}
+function ga_data() {		// general antecedent structure
+	this.name = null;	// str
+	this.parent = null;	// gc_data
+	this.next = null;	// ga_data
+}
+var sa_data = ga_data;
+
+function sc_data() {		// special consequent structure
+	this.name = null;	// str
+	this.def = null;		// str
+	this.parent = null;	// gc_data
+	this.next = null;	// sc_data
+}
+
+function retro_link_data() {	// link structure - for retro analysis
+	this.dl = null;		//gasa_data 
+	this.il = null;		//gasa_data
+}
+
+function gasa_data() {
+	this.ga = null;		// ptr to ga in CREAM_TABLES
+	this.sa = null;		// ptr to sa in CREAM_TABLES
+}
+
+function ga_data_link() {
+	this.ptr = null;		// pointer to ga
+	this.next = null;	// next for linked list
+	this.prev = null;	// doubly-linked list
+}
+
+var sa_data_link = ga_data_link;
+
+
+</script>
+
+
+</head>
+
+
+
+<body onload="onLoad();" onmousedown="onMouseDown(event);">
+
+<div class="cream_title">CREAM Table Navigator :: 
+<a href="javascript:popupTables()">Show all CREAM tables</a> :: 
+<a href="../interface/test.html">Mock User Interface</a>
+</div>
+
+
+</body>
+
+</html>

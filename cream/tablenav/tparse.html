@@ -1,0 +1,742 @@
+<html><head>
+
+<style type="text/css">
+
+.CREAM_TABLE {
+	border-style: solid;
+	border-width: 1px;
+	text-align: left;
+	vertical-align: top;
+	top: 10;
+}
+
+.item {
+	background-color:#FFFFFF;
+	color:#000000;
+}
+
+.item:hover {
+	background-color:#AAAAAA;
+	color:#000000;
+}
+
+.GC {
+	color: #000000;
+}
+.GC:hover {
+	background-color:#AAAAAA;
+}
+
+
+</style>
+
+<script type="text/javascript" language="javascript">
+
+
+// create a debug window
+
+var DEBUG_WINDOW = this.open("","","");
+function DEBUG(e) {
+	DEBUG_WINDOW.document.body.innerHTML += (e + "<br>");
+}
+
+
+var myXMLHttp; 
+
+function onLoad()
+{
+	//alert("Loading...");
+
+	// create the entire CREAM table XML structure in memory
+	loadTables();
+	var a = displayTables();
+	document.body.appendChild(a);
+
+
+	return
+	//var links = getRetro("Faulty diagnosis");
+	//showLinks(links);
+	DEBUG("running retro:");
+	retro("Faulty diagnosis");
+	return;
+
+	if (0) {
+		var s = "Missing information";
+		var t = findGC(s);	 // have a pointer to the table with this GC
+		var links = getRetrospectiveLinks(t, s)
+		displayLinks(links);
+
+		return;
+	}
+
+
+}
+
+function getRetro(event)
+{
+	// load retro results into Iframe
+	alert(event);
+	
+
+
+	
+	
+}
+
+
+function retro(event)
+{
+	// find the table containing "event" as a GC
+	
+	// find GC
+	var all_gc = cream_tables.getElementsByTagName("gc");
+	var table = null;
+	for (var i = 0; i < all_gc.length; i++) {
+		var str = getTagValue(all_gc[i], "name");
+		if (getTagValue(all_gc[i], "name") == event) {
+			table = all_gc[i].parentNode;	
+			break;
+		}
+	}
+	
+	if (table == null) {
+		alert("Not Found: " + event);
+	}
+
+
+	var dl = newTag("dl");
+	var il = newTag("il");
+
+	var gc = table.getElementsByTagName("gc");	
+	var appendPtr = null;
+	for (var i = 0; i < gc.length; i++) {
+
+		if (getTagValue(gc[i], "name") == event) {
+			appendPtr = dl;
+		} else {
+			appendPtr = il;
+		}
+
+		// append all GA to appendPtr;
+		var tmp = gc[i].getElementsByTagName("ga");
+		for (var j = 0; j < tmp.length; j++) {
+			appendPtr.appendChild(tmp[j].cloneNode(true));
+		}
+
+		// append all SA to appendPtr;
+		var tmp = gc[i].getElementsByTagName("sa");
+		for (var j = 0; j < tmp.length; j++) {
+			appendPtr.appendChild(tmp[j].cloneNode(true));
+		}
+	}
+
+	// remove duplicate GA within "il" list
+
+	var del = newTag("delete");
+	var ga = il.getElementsByTagName("ga");
+	for (var i = 0; i < ga.length; i++) {
+		var v1 = ga[i].firstChild.nodeValue;
+		for (j = i + 1; j < ga.length; j++) {
+			var v2 = ga[j].firstChild.nodeValue;
+			if (v1 == v2) {
+				del.appendChild(ga[j]);
+				j--;
+			}
+	
+		}
+	}
+	
+	// remove duplicates between "il" and "dl" from "il"
+	var dl_ga = dl.getElementsByTagName("ga");
+	var il_ga = il.getElementsByTagName("ga");
+	for (var i = 0; i < dl_ga.length; i++) {
+		v1 = dl_ga[i].firstChild.nodeValue;
+		for (var j = 0; j < il_ga.length; j++) {
+			v2 = il_ga[j].firstChild.nodeValue;
+			if (v1 == v2) {
+				del.appendChild(ga[j]);
+				j--;
+			}
+		}
+	}
+
+	// build proper return structure
+
+	var root = document.implementation.createDocument("","",null);
+	var links = newTag("links");
+	
+	var dl_top = newTag("dl");
+	var group = newTag("group");
+	group.appendChild(addTag("name", getTagValue(table.parentNode, "name")));
+	group.appendChild(dl);
+	dl_top.appendChild(group);
+	
+
+	var il_top = newTag("il");
+	var group = newTag("group");
+	group.appendChild(addTag("name", getTagValue(table.parentNode, "name")));
+	group.appendChild(il);
+	il_top.appendChild(group);
+
+	links.appendChild(dl_top);
+	links.appendChild(il_top);
+	
+	root.appendChild(links);
+
+
+
+	// render the list
+	DEBUG("DIRECT LINKS");
+	var t = dl.getElementsByTagName("ga");
+	for (var i = 0; i < t.length; i++) {
+		DEBUG("RETRO: " + t[i].firstChild.nodeValue);
+	}
+	DEBUG("<BR>INDIRECT LINKS");
+	var t = il.getElementsByTagName("ga");
+	for (var i = 0; i < t.length; i++) {
+		DEBUG("RETRO: " + t[i].firstChild.nodeValue);
+	}
+
+}
+function addTag(tag, value)
+{
+	var retval = document.createElement(tag);
+	retval.innerHTML = value;
+	return retval;
+}
+
+function newTag(tag)
+{
+	return document.createElement(tag);
+}
+
+function getTagValue(xml, tag)
+{
+	var retval = null;
+
+	try {
+		retval = xml.getElementsByTagName(tag)[0].firstChild.nodeValue;
+	} catch(ex) { DEBUG("getTagValue: ERROR: "+tag)};
+
+	return retval;
+}
+
+
+function pred(event)
+{
+	var all_gc = cream_tables.getElementsByTagName("gc");
+
+	var fault_table = null;
+	for (var i = 0; i < all_gc.length; i++) {
+		var v = getTagValue(all_gc[i], "name");
+		if (v == event) {
+			fault_table = getTagValue(all_gc[i].parentNode, "name");
+			DEBUG("Fault in " + fault_table);
+		}	
+	}
+
+
+
+	var all_ga = cream_tables.getElementsByTagName("ga");
+	for (var i = 0; i < all_ga.length; i++) {
+		var v = all_ga[i].firstChild.nodeValue;
+		if (v == event) {
+			var gc = getTagValue(all_ga[i].parentNode, "name");
+			DEBUG("Direct link to GC: " + gc);
+		}
+	}
+
+
+
+}
+
+
+
+
+function showLinks(links)
+{
+	// display link structure
+
+	// get DL
+	var dl = links.getElementsByTagName("dl")[0];
+	// iterate over groups
+	var group = dl.getElementsByTagName("group");
+	
+
+
+	
+
+
+}
+
+function getPredictiveLinks(ga_text)
+{
+	//FIXME: need to provide table information for fault - not return values like Retrospective
+
+	// direct links - use getGCfromGA
+	// indirect links - findGC, take GC's, run getGCfromGA on these GC's
+
+	var links = document.implementation.createDocument("","",null);
+	var root = document.createElement("links");
+
+	// find all direct links		
+	var dl = document.createElement("dl");
+	dl.appendChild(getGCfromGA(ga_text).getElementsByTagName("links")[0]);
+	
+
+
+
+	// find all indirect links
+	var il = document.createElement("il");
+	var t = findGC(ga_text);
+
+	var del = document.createElement("del");
+
+	// get the other GC's
+	var gc = t.getElementsByTagName("gc");
+	for(var i = 0; i < gc.length; i++) {
+		var v = gc[i].getElementsByTagName("name")[0].firstChild.nodeValue;	// get the name of the GC
+		if (v != ga_text) {
+			il.appendChild(getGCfromGA(v).getElementsByTagName("links")[0]);
+		}
+	}
+	
+	// remove duplicates within "dl"
+	var dl_ga = dl.getElementsByTagName("ga");
+	for (var i = 0; i < dl_ga.length; i++) {
+		var v = dl_ga[i].firstChild.nodeValue;		// the node we will compare
+		for(var j = i + 1; j < dl_ga.length; j++) {
+			var v2 = dl_ga[j].firstChild.nodeValue;	// check this if a dup
+			if (v == v2) {
+				del.appendChild(dl_ga[j]);
+				j--;
+			}
+		}
+	}
+
+
+	// remove duplicates within "il"
+	var il_ga = il.getElementsByTagName("ga");
+	for (var i = 0; i < il_ga.length; i++) {
+		var v = il_ga[i].firstChild.nodeValue;		// the node we will compare
+		for(var j = i + 1; j < il_ga.length; j++) {
+			var v2 = il_ga[j].firstChild.nodeValue;	// check this if a dup
+			if (v == v2) {
+				del.appendChild(il_ga[j]);
+				j--;
+			}
+		}
+	}
+
+
+	// remove duplicates between "il" and "dl" from "il"
+	var il_ga = il.getElementsByTagName("ga");
+	var dl_ga = dl.getElementsByTagName("ga");
+	for (var i = 0; i < dl_ga.length; i++) {
+		var v = dl_ga[i].firstChild.nodeValue;
+		for(var j = 0; j < il_ga.length; j++) {
+			var v2 = il_ga[j].firstChild.nodeValue;
+			if (v == v2) {
+				del.appendChild(il_ga[j]);
+				j--;
+			}
+		}
+	}
+
+
+	root.appendChild(dl);
+	root.appendChild(il);
+
+	return root;
+
+}
+
+
+function getGCfromGA(event)
+{
+	// find ga_text in all the GA's
+	var links = document.implementation.createDocument("","",null);
+	var root = document.createElement("links");
+
+	var ga = cream_tables.getElementsByTagName("ga");
+	for(var i = 0; i < ga.length; i++) {
+		var v = ga[i].firstChild.nodeValue;
+
+		if (v == event) {
+			// get the table node, acquire GC's
+			var t = ga[i].parentNode.parentNode;
+			var gc = t.getElementsByTagName("gc");
+
+			// append to results
+			for (var j = 0; j < gc.length; j++) {
+				var v2 = gc[j].getElementsByTagName("name")[0].firstChild.nodeValue;   // name of GC
+				var ga2 = document.createElement("ga");	// to be compatible DOM-wise with getRetrospectiveLinks
+				ga2.appendChild(document.createTextNode(v2));
+				root.appendChild(ga2);
+			}
+		}
+
+	}
+
+	links.appendChild(root);
+
+	return links;
+}
+
+function getRetrospectiveLinks(table, gc_text)
+{
+	//var table = findGC(gc_text);
+
+
+	//need to return a DOM of GA and SA
+
+	var links = document.implementation.createDocument("","",null);
+
+	var root = document.createElement("links");		// need to append to this object, XML can only have one top-most tag
+
+	var dl = document.createElement("dl");
+	var il = document.createElement("il");
+
+	// compile the Direct Links
+	var gc = table.getElementsByTagName("gc");
+	for(var i = 0; i < gc.length; i++) {
+		var v = gc[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		if (v == gc_text) {
+			// ok, we have the match, now pull in GA's and SA's
+			var x = gc[i].getElementsByTagName("ga");
+			for (var j = 0; j < x.length; j++) {
+				//alert(j + " of " + x.length)
+				dl.appendChild(x[j].cloneNode(true));
+			}
+
+			var sa = gc[i].getElementsByTagName("sa");
+			for (var j = 0; j < sa.length; j++) {
+				dl.appendChild(sa[j].cloneNode(true));
+			}
+
+		} else {
+			// not the GC we want, but we have indirect links at the current GC
+			var ga = gc[i].getElementsByTagName("ga");
+			for (var j = 0; j < ga.length; j++) {
+				il.appendChild(ga[j].cloneNode(true));
+			}
+
+			var sa = gc[i].getElementsByTagName("sa");
+			for (var j = 0; j < sa.length; j++) {
+				il.appendChild(sa[j].cloneNode(true));
+			}
+
+
+		}
+	}
+
+	var del = document.createElement("del");
+
+	// remove duplicates within "il"
+	var il_ga = il.getElementsByTagName("ga");
+	for (var i = 0; i < il_ga.length; i++) {
+		var v = il_ga[i].firstChild.nodeValue;		// the node we will compare
+		for(var j = i+1; j < il_ga.length; j++) {
+			var v2 = il_ga[j].firstChild.nodeValue;	// check this if a dup
+			if (v == v2) {
+				del.appendChild(il_ga[j]);
+				j--;
+			}
+		}
+	}
+
+	// remove duplicates between "il" and "dl" from "il"
+	var il_ga = il.getElementsByTagName("ga");
+	var dl_ga = dl.getElementsByTagName("ga");
+	for (var i = 0; i < dl_ga.length; i++) {
+		var v = dl_ga[i].firstChild.nodeValue;
+		for(var j = 0; j < il_ga.length; j++) {
+			var v2 = il_ga[j].firstChild.nodeValue;
+			if (v == v2) {
+				del.appendChild(il_ga[j]);
+				j--;
+			}
+		}
+	}
+
+	
+
+
+
+	// add our results to the root structure of the XML document to return;
+	root.appendChild(dl);
+	root.appendChild(il);
+
+	return root;	
+
+}
+
+
+var cream_tables = document.implementation.createDocument("","",null);
+
+function loadTables()
+{
+	//FIXME: eventually add <include> tag support to table files
+	//FIXME: eliminate duplicate code, or consolidate all tables in one file.			
+
+	myXMLHttp = new XMLHttpRequest();
+
+	//create a DOM structure
+
+	var root = document.createElement("root");
+	var r;
+	var name;
+	var group;
+	
+	
+	// get Error Modes table 19
+	group = document.createElement("group");
+	name = document.createElement("name");
+	name.innerHTML="Error modes";
+	group.appendChild(name);
+	myXMLHttp = new XMLHttpRequest();
+	myXMLHttp.open("GET", "tables/table19.xml", false); 
+	myXMLHttp.send(null);
+	r = myXMLHttp.responseXML;
+	group.appendChild(r.getElementsByTagName("table")[0]);	
+	root.appendChild(group);
+
+	
+	// get Man 
+	group = document.createElement("group");
+	name = document.createElement("name");
+	name.innerHTML="Man";
+	group.appendChild(name);
+	for(i = 20; i<=24; i++) {
+		try {
+			myXMLHttp = new XMLHttpRequest();
+			myXMLHttp.open("GET", "tables/table"+i+".xml", false); 
+			myXMLHttp.send(null);
+			r = myXMLHttp.responseXML;
+			group.appendChild(r.getElementsByTagName("table")[0]);	
+		} catch(ex) { alert(ex); }
+	}
+	root.appendChild(group);
+
+	// get Technology
+	group = document.createElement("group");
+	name = document.createElement("name");
+	name.innerHTML="Technology";
+	group.appendChild(name);
+	for(i = 25; i<=28; i++) {
+		try {
+			myXMLHttp = new XMLHttpRequest();
+			myXMLHttp.open("GET", "tables/table"+i+".xml", false); 
+			myXMLHttp.send(null);
+			r = myXMLHttp.responseXML;
+			group.appendChild(r.getElementsByTagName("table")[0]);	
+		} catch(ex) { alert(ex); }
+	}
+	root.appendChild(group);
+
+
+	// get Organisation
+	group = document.createElement("group");
+	name = document.createElement("name");
+	name.innerHTML="Organisation";
+	group.appendChild(name);
+	for(i = 29; i<=33; i++) {
+		try {
+			myXMLHttp = new XMLHttpRequest();
+			myXMLHttp.open("GET", "tables/table"+i+".xml", false); 
+			myXMLHttp.send(null);
+			r = myXMLHttp.responseXML;
+			group.appendChild(r.getElementsByTagName("table")[0]);	
+		} catch(ex) { alert(ex); }
+	}
+	root.appendChild(group);
+
+	cream_tables.appendChild(root);		
+
+
+}
+
+function displayTables()
+{
+	var t = cream_tables.getElementsByTagName("table");
+
+	var troot = document.createElement("div");
+	for (var i = 0; i < t.length; i++) {
+		var tname = t[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		troot.appendChild(document.createElement("br"));
+		troot.appendChild(createTable(t[i]));
+		troot.appendChild(document.createElement("br"));
+	
+	}
+
+	return troot;
+
+}
+
+
+//findGC
+function findGC(gc_text)
+{
+	var gc = cream_tables.getElementsByTagName("gc");
+	// go thru gc
+
+	var t = null;
+	
+	for(i = 0; i < gc.length; i++) {
+		var v = gc[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		if (v == gc_text) {
+			// get to parent table node
+			return gc[i].parentNode;
+		}
+	}
+
+	alert("findGC: not found: " + gc_text);
+	return t;
+}
+
+function testtable()
+{
+
+try {
+	myXMLHttp= new XMLHttpRequest();
+	myXMLHttp.onreadystatechange = handler;
+	myXMLHttp.open("GET", "tables/table19.xml", true);
+	myXMLHttp.send(null);
+} catch(ex) { alert(ex) }	
+
+
+
+}
+
+function handler()
+{
+	if (myXMLHttp.readyState != 4) { return; }
+
+
+
+	createTable();
+
+}
+
+function createTable(xml)
+{
+	var t = document.createElement("table");
+	t.setAttribute("border", "0");
+	t.setAttribute("padding", "0");
+	t.setAttribute("margin", "0");
+	t.setAttribute("style","border-collapse:collapse;");
+
+	var gc = xml.getElementsByTagName("gc");
+
+
+	var c = document.createElement("caption");
+	c.innerHTML = gc[0].parentNode.getElementsByTagName("name")[0].firstChild.nodeValue;
+	t.appendChild(c);
+
+	// add header info 
+	var tr = document.createElement("tr");
+	var td_template = document.createElement("td");
+	td_template.setAttribute("valign","top");
+	td_template.setAttribute("style", "width:200;");
+	td_template.setAttribute("class", "CREAM_TABLE");
+
+	var td;
+
+	td = td_template.cloneNode(false);
+	td.setAttribute("style", "width:200; background-color:#000000; color:#FFFFFF;");
+	td.innerHTML="General Consequent";
+	tr.appendChild(td);
+	
+	td = td.cloneNode(false);
+	td.innerHTML="General Antecedent";
+	tr.appendChild(td);
+	
+	td = td.cloneNode(false);
+	td.innerHTML="Specific Antecedent";
+	tr.appendChild(td);
+	
+	t.appendChild(tr);
+	
+	var str = "";
+	for (var i = 0; i < gc.length; i++) {
+
+		var h = gc[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		var tr = document.createElement("tr");
+		// get the general consequent
+		var td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		t.appendChild(tr);
+	
+		str = "<a class='GC' href='javascript:getRetro(\"" + h + "\")'>" + h + "</a>";
+		td.innerHTML = str;
+
+		if (0) {
+		// get the specific consequents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var sc = gc[i].getElementsByTagName("sc");
+		for (var j = 0; j < sc.length; j++) {
+			var h = sc[j].getElementsByTagName("name")[0].firstChild.nodeValue;
+			str += h;	
+		}
+		td.innerHTML = str;
+		}
+
+
+		// get the general antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var ga = gc[i].getElementsByTagName("ga");
+		for (var j = 0; j < ga.length; j++) {
+			var h = ga[j].firstChild.nodeValue;
+			str += h + "<br>";	
+		}
+		td.innerHTML = str;
+
+
+		// get the specific antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var sa = gc[i].getElementsByTagName("sa");
+		for (var j = 0; j < sa.length; j++) {
+			var h = sa[j].firstChild.nodeValue;
+			str += h + "<br>";	
+		}
+		td.innerHTML = str;
+
+
+	}
+		
+	return t;
+}
+
+function getXMLValue(xml, name)
+{
+	var a = xml.getElementsByTagName(name);
+	var b = null;
+
+	try {
+		b = a[0].firstChild.nodeValue;
+	} catch(ex) { alert(ex) }
+	
+	return b;
+
+}
+
+
+
+</script>
+
+
+</head>
+
+
+
+<body onload="onLoad();">
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<html>
+
+<head>
+<style type="text/css">
+
+.ta {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+</style>
+
+<script type="text/javascript">
+
+__POINTER = top.shell;
+
+function _okd(event)
+{
+	// 82 is "r"
+	if (event.altKey == true && event.which == 82) {
+		__POINTER.print("running script");
+		// run this script
+		__POINTER.go(event.target.value);
+
+		setTimeout(function() { event.target.focus(); }, 10);
+	}
+}
+
+function insertTab(event,obj) {
+
+    _okd(event);
+
+
+    var tabKeyCode = 9;
+    if (event.which) // mozilla
+        var keycode = event.which;
+    else // ie
+        var keycode = event.keyCode;
+    if (keycode == tabKeyCode) {
+        if (event.type == "keydown") {
+            if (obj.setSelectionRange) {
+                // mozilla
+                var s = obj.selectionStart;
+                var e = obj.selectionEnd;
+                obj.value = obj.value.substring(0, s) + 
+                    "\t" + obj.value.substr(e);
+                obj.setSelectionRange(s + 1, s + 1);
+                obj.focus();
+            } else if (obj.createTextRange) {
+                // ie
+                document.selection.createRange().text="\t"
+                obj.onblur = function() { this.focus(); this.onblur = null; };
+            } else {
+                // unsupported browsers
+            }
+        }
+        if (event.returnValue) // ie ?
+            event.returnValue = false;
+        if (event.preventDefault) // dom
+            event.preventDefault();
+        return false; // should work in all browsers
+    }
+    return true;
+}
+
+</script>
+
+
+</head>
+
+
+<body>
+Alt+r to execute this script
+<hr>
+<textarea class="ta" onkeydown="return insertTab(event,this);" 
+      onkeyup="return insertTab(event,this);" 
+      onkeypress="return insertTab(event,this);" 
+      rows="30" cols="80">
+</textarea>
+
+
+
+</textarea>
+</body>
+
+
+</html>

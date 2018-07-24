@@ -1,0 +1,221 @@
+<html>
+<head>
+
+<style type="text/css">
+
+body {
+	font-family:	sans serif;
+}
+	
+.drag {
+	position:		absolute;
+	border-style: 		solid;
+	border-width: 		1px;
+	border-color: 		#FF0000;
+	background-color: 	#FF00FF;
+
+}
+
+.topGrab {
+	overflow: hidden;
+	#-moz-border-radius: 40px 40px 0px 0px;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+	padding-left:10pt;
+	background-color: #c9ba65;
+	color:#FFFFFF;
+	padding: 3px;
+	cursor: move;
+}
+
+.botGrab {
+	overflow: hidden;
+	-moz-border-radius: 0px 0px 40px 40px;
+	border-style:solid;
+	border-width:1px;
+	border-color:#CCCCCC;
+	padding-left:10pt;
+	background-color: #DDDDDD;
+	color:#FFFFFF;
+	height: 5px;
+	cursor: nw-resize;
+}
+
+.textArea {
+	border-color: #000000;
+	border-width: 1px;
+
+
+}
+
+</style>
+
+
+<script type="text/javascript" language="javascript">
+
+var dd;
+var offsetX = 0;
+var offsetY = 0;
+var dragElt = null;
+
+function onLoad()
+{
+	// ok, let's create a gui element
+
+	var node = document.createElement("div");
+	var str = "";
+	str += "position:absolute;";
+	str += "left: 20px;";
+	str += "top: 20px;";
+	str += "width: 150px;";
+	str += "height: 100px;";
+	node.setAttribute("style", str);
+
+	var topGrab = document.createElement("div");
+	topGrab.innerHTML="Timing<br>Too Early";
+	topGrab.setAttribute("class", "topGrab");
+	//topGrab.style.borderColor="#FF0000";
+
+	var textArea = document.createElement("textarea");
+	textArea.setAttribute("class", "textArea");
+	str = "";
+	//str += "overflow: hidden;";
+	str += "margin: 0px;";
+
+	str += "border-style: solid;";
+	str += "border-top-width: 0px;"
+	str += "border-left-width: 1px;"
+	str += "border-right-width: 1px;"
+	str += "border-bottom-width: 0px;"
+	str += "border-left-color: #CCCCCC;";
+	str += "border-right-color: #CCCCCC;";
+
+
+	str += "font-family: serif;";
+	str += "padding: 2px;";
+	str += "width: 100%;";
+	//str += "background: #DDDDDD";
+	textArea.setAttribute("style", str)	
+	textArea.innerHTML = "Pilot fails to acknowledge ATC commands"
+	
+	var botGrab = document.createElement("div");
+	botGrab.setAttribute("class", "botGrab");
+
+	node.appendChild(topGrab);
+	node.appendChild(textArea);
+	node.appendChild(botGrab);
+
+	topGrab.setAttribute("onmousedown", "onMouseDown(event);");
+	topGrab.setAttribute("onmouseup", "onMouseUp(event);");
+
+
+	//drag();
+	for (var i = 0; i < 4; i++)
+	{
+		document.body.appendChild(node.cloneNode(true));
+	}
+
+	//document.body.appendChild(topGrab);
+}
+
+function drag()
+{
+
+	// create an object on screen
+	dd = document.createElement("div");
+	dd.setAttribute("class", "drag");
+
+	var str = "";
+	str += "position: absolute;";
+	str += "top: 100px;";
+	str += "left: 100px;";
+	str += "border-style: solid;";
+	str += "border-width: 1px;";
+	str += "cursor: move;";
+	str += "width: 200px;";
+	str += "height: 100px;";
+	dd.setAttribute("style", str);
+
+	dd.appendChild(document.createTextNode("Drag Me"));
+	dd.innerHTML = "<textarea>YO</textarea>"
+
+	document.body.appendChild(dd);
+
+	dd.setAttribute("onmousedown", "onMouseDown(event);");
+	dd.setAttribute("onmouseup", "onMouseUp(event);");
+
+if (0) {
+	for (var i = 0; i < 10; i++) {
+		var tmp = dd.cloneNode(true);
+		tmp.innerHTML = "drag me " + i;
+		document.body.appendChild(tmp);
+	}
+}//0
+
+
+
+
+}
+
+
+function d_onMouseDown(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = d_onMouseMove;
+	offsetX = parseInt(event.clientX) - parseInt(e.style.left);
+	offsetY = parseInt(event.clientY) - parseInt(e.style.top);
+}
+
+function d_onMouseMove(event)
+{
+	var e = event.target.parentNode;
+	e.style.left = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.top = (parseInt(event.clientY) - parseInt(offsetY));
+}
+
+function d_onMouseUp(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = null;
+}
+
+
+
+// simple DRAG'N'DROP code - because I'm awesome ;-)
+// modified to move parentNode, because movement handles are within a bigger element
+function onMouseDown(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = onMouseMove;
+	offsetX = parseInt(event.clientX) - parseInt(e.style.left);
+	offsetY = parseInt(event.clientY) - parseInt(e.style.top);
+}
+
+function onMouseMove(event)
+{
+	var e = event.target.parentNode;
+	e.style.left = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.top = (parseInt(event.clientY) - parseInt(offsetY));
+}
+
+function onMouseUp(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = null;
+}
+
+
+</script>
+
+</head>
+
+
+
+<body onload="onLoad();" onmouseup="onMouseUp(event);">
+
+</body>
+
+
+</html>
+

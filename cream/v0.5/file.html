@@ -1,0 +1,135 @@
+<html>
+
+<head>
+
+<link rel=stylesheet href="navigator.css">
+<link rel=stylesheet href="gui.css">
+
+
+<style type="text/css">
+
+body {
+	font-family: sans-serif;
+	background: #FFFFFF;
+}
+.pTitle {
+	font-size: 20pt;
+	color: #CC0000;
+	border-bottom: 2px solid #000000;
+}
+
+.pContent {
+	font-size: 12pt;
+	color: #000000;
+	padding-bottom: 20pt;
+}
+
+
+
+</style>
+
+<script type="text/javascript" src="gui.js"></script>
+
+<script type="text/javascript">
+
+function onLoad()
+{
+
+	var t = document.body;
+
+	var g = document.body.getElementsByTagName("guiGroup");
+
+	var a = guiAddButton(g[0], "div");
+	guiRadioSet(a[0]);
+		
+
+	guiAddButton(g[1], "div");
+
+		
+
+	// need the iframe to call a function in the parent window - how?
+	// top.parent.testFunc();   // that's how
+
+}
+
+function setMode(event, mode)
+{
+	var t = event.target;
+	var g = t.guiArray;
+	for (var i = 0; i < g.length; i++) {
+		guiSetNormal(g[i], "button");
+	}
+	
+	guiSetNormal(t, "buttonpress");
+
+	self.parent.WORKSPACE.workspace.setMode(mode);
+}
+
+function loadFile()
+{
+	var i = document.getElementById("loadfile");
+	
+
+	self.parent.WORKSPACE.workspace.loadFile.call(self.parent.WORKSPACE.workspace, i.value);
+
+	// modify this page
+	var f = document.getElementById("filename");
+	f.innerHTML = i.value;
+	
+	var g = document.getElementById("directionselect");
+	g.setAttribute("style", "display: none;");
+	
+	g = document.getElementById("direction");
+	var m = self.parent.WORKSPACE.workspace.CREAM_MODE;
+	if (m == 1) {
+		g.innerHTML = " Retrospective ";
+	} else {
+		g.innerHTML = " Prospective ";
+	}
+	
+}
+
+function saveFile()
+{	
+	self.parent.WORKSPACE.workspace.saveWorkSpace.call(self.parent.WORKSPACE.workspace);
+}
+
+</script>
+
+
+
+
+</head>
+
+<body onload="onLoad();">
+
+	<div class='pTitle'>
+	Analysis Direction: <span id="direction"></span>
+	</div>
+	<div class='pContent'></div>
+
+
+<guiGroup id="directionselect">
+<button callback="setMode(event, 'retro');">Retrospective - for analysing an event that already happened</button>
+<button callback="setMode(event, 'prosp');">Prospective - for predicting events that can happen</button>
+</guiGroup>
+<br>
+
+<div class='pTitle'>
+Workspace: <span id="filename"></span>
+</div>
+<div class='pContent'></div>
+
+<guiGroup>
+Select file to load: <input type="file" id="loadfile"></input>
+<button callback="loadFile()">Load Workspace...</button>
+<button callback="saveFile()">Save Workspace As...</button>
+</guiGroup>
+<br>
+
+</div>
+
+</body>
+
+
+</html>

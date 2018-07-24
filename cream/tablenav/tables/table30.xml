@@ -1,0 +1,84 @@
+<table><name>Organisation</name>
+
+	<gc><name>Maintenance failure</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Equipment not operational</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Indicators not working</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Inadequate quality control</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Inadequate procedures</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Inadequate reserves</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Management problem</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Unclear roles</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Dilution of responsibility</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Unclear line of command</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Design failure</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Anthropometric mismatch</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Inadequate MMI</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Inadequate task allocation</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Inadequate managerial rules</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Inadequate task planning</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Inadequate work procedure</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Social pressure</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Group think</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

@@ -1,0 +1,29 @@
+<table><name>Training</name>
+
+	<gc><name>Insufficient skills</name>
+		<ga>Management problem</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Performance failure</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Equipment mishandling</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Insufficient knowledge</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Confusion</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Loss of situation awareness</name>	
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

@@ -1,0 +1,19 @@
+<div class='heading'>
+The Workspace
+</div>
+		
+<div class='content'>
+<p>
+The 'Workspace' provides a way of tracking each step of analysis conveniently. The left panel will give suggestions for progressing with an analysis. The "Analysis Path Summary" panel will trace a point in the analysis back to the beginning, which can be useful when the analysis becomes very large and one particular branch no long fits on one screen.
+<p>
+Each node has a toggle for "<b>done</b>" and "<b>visibility</b>". The "done" flag is for your convenience to help keep track of which point of the analysis is done. The "visibility" toggles the rendering an analysis point's child nodes.
+<p>
+The "<b>jump</b>" option gives you the ability to link a part of the analysis to another branch. Often in an analysis, a branch can be continued by following a different branch. When linking a jump between analysis points, each point must of the same type, i.e. "Communication Failure" can only jump to "Communication failure".
+<p>
+The "<b>flow view</b>" and "<b>tree view</b>" switch between different ways of visualizing the analysis.
+<p>
+For each step in the analysis, the CPC definitions offer insight into more likely paths. These are displayed as astericks "*" next to the links in the left panel. The more astericks, the more likely that path.
+
+
+
+</div>

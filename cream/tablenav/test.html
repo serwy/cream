@@ -1,0 +1,49 @@
+<html>
+<head>
+
+<script src="debug.js" type="text/javascript" language="javascript">
+</script>
+
+<script type="text/javascript" language="javascript">
+
+
+function onLoad()
+{
+	// delay 0.5 seconds
+	setTimeout("go()", 500);
+}
+
+function go()
+{
+	// create XML to save to file
+	f = document.createElement("div")
+	g = document.createElement("b");
+	h = document.createTextNode("BOLD");
+	g.appendChild(h);
+	f.appendChild(g);
+	DEBUG(f.innerHTML)
+
+	w = window.open("");
+
+
+	s = document.body.innerHTML = str;
+
+	
+
+}
+
+
+function testNode()
+{
+
+
+}
+
+
+</script>
+
+</head>
+
+<body onload="onLoad();"></body>
+
+</html>

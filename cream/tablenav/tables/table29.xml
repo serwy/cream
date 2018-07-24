@@ -1,0 +1,40 @@
+<table><name>Communication</name>
+	<gc><name>Communication failure</name>
+		<ga>Distraction</ga>
+		<ga>Functional impairment</ga>
+		<ga>Inattention</ga>
+
+		<sa>Noise</sa>
+		<sa>Presentation failure</sa>
+		<sa>Temporary incapacitation</sa>
+
+		<sc><name>Message not received</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Message misunderstood</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Missing information</name>
+		<ga>Mislabelling</ga>
+		<ga>Design failure</ga>
+		<ga>Inadequate procedure</ga>
+
+		<sa>Hidden information</sa>
+		<sa>Presentation failure</sa>
+		<sa>Incorrect language</sa>
+		<sa>Noise</sa>
+	
+		<sc><name>No information</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incorrect information</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Misunderstanding</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>	

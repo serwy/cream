@@ -1,0 +1,104 @@
+<html>
+<head>
+
+
+<script type="text/javascript" language="javascript">
+
+
+
+function onLoad()
+{
+	//	setTimeout("test()",500)
+
+	//drop down menus
+
+
+	var div = document.createElement("div");
+	
+
+	var tdiv = document.createElement("div");
+	var str="";
+	str += "border-style: solid;";
+	str += "border-width: 1px;";
+	str += "border-color: #000000;";
+	tdiv.setAttribute("style",str);
+	tdiv.innerHTML="dropDown";
+	tdiv.setAttribute("onmousedown", "dd(event);");
+	div.appendChild(tdiv);
+	div.setAttribute("isVisible", "true");
+
+	var hide = document.createElement("div");
+	hide.innerHTML="hide1<br>hide2<br>hide3<br>";
+
+	div.appendChild(hide);
+
+	document.body.appendChild(div);
+
+	document.body.appendChild(div.cloneNode(true));
+
+	
+
+}
+
+function dd(event)
+{
+	var t = event.target.parentNode;
+	var setValue="";
+
+	var status = t.getAttribute("isVisible");
+	alert(status);
+
+	if (status == "true") {
+		// make invisible
+		t.setAttribute("isVisible", "false");
+		t.parentNode.style.height = 10;
+		setValue = "hidden";
+
+	} else {
+		t.setAttribute("isVisible", "true");
+		setValue = "visible";
+	}
+
+	var nodes = t.childNodes;
+	for (var a=1; a < nodes.length; a++) {
+		nodes[a].style.visibility = setValue;
+	}
+
+
+}
+
+function test()
+{
+	// call a function in other window
+
+	//get my frame name
+
+	XCALL=top.workspace;
+
+	var g= XCALL.addNode(0);
+	g.x = 50;
+	g.y= 50;
+	g.w = 150;
+	g.h = 50;
+	g.nodePtrUI = new XCALL.createNodeUI(g);
+	
+	alert(top.engine.name)
+
+}
+
+
+
+
+
+
+</script>
+
+
+</head>
+
+
+<body onload="onLoad();">
+
+</body>
+
+</html>

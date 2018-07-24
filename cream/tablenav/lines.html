@@ -1,0 +1,90 @@
+<html>
+
+<head>
+
+
+<style type="text/css">
+
+.line {
+	position:	absolute;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #FF0000;
+}
+
+</style>
+
+<script type="text/javascript" language="javascript">
+
+function onLoad()
+{
+	// initialize line draw
+
+	line(100,100,10,10);
+
+}
+
+
+function line(x1,y1,x2,y2)
+{
+	var tmp;
+	if (x1 > x2) {
+		tmp = x1;
+		x1 = x2;
+		x2 = tmp;
+	}
+
+	if (y1 > y2) {
+		tmp = y1;
+		y1 = y2;
+		y2 = tmp;
+	}
+
+
+	var w = (x2-x1) / 2;
+	var h = y2-y1;
+
+	// add a horizontal line 
+
+	var l1 = document.createElement("div");
+	l1.setAttribute("class", "line");
+	l1.style.left = x1;
+	l1.style.top = y1;
+	l1.style.width = w;
+	l1.style.height = 0;
+	document.body.appendChild(l1);
+
+
+	var l2 = l1.cloneNode(false);
+	l2.setAttribute("class", "line");
+	l2.style.left = x1 + w;
+	l2.style.top = y1;
+	l2.style.width = 0;
+	l2.style.height = h;
+	document.body.appendChild(l2);
+
+	var l3 = l1.cloneNode(false);
+	l3.setAttribute("class", "line");
+	l3.style.left = x1 + w;
+	l3.style.top = y2;
+	l3.style.width = w;
+	l3.style.height = 0;
+	document.body.appendChild(l3);
+
+
+}
+
+</script>
+
+
+
+</head>
+
+
+<body onload="onLoad();"></body>
+
+
+
+
+</html>
+

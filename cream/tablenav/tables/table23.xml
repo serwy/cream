@@ -1,0 +1,124 @@
+<table><name>Temporary person related functions</name>
+
+	<gc><name>Memory failure</name>
+		<ga>Excessive demand</ga>
+		
+		<sa>Daydreaming</sa>
+		<sa>Long time since learning</sa>
+		<sa>Other priority</sa>
+		<sa>Temporary incapacitation</sa>
+		
+		<sc><name>Forgotten</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incorrect recall</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incomplete recall</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Fear</name>
+		<ga>None defined</ga>
+
+		<sa>Earlier error</sa>
+		<sa>Possible consequences</sa>
+		<sa>Uncertainty</sa>
+
+		<sc><name>Random actions</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Action freeze</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Distraction</name>
+		<ga>Equipment failure</ga>
+		<ga>Communication failure</ga>
+
+		<sa>Boss / colleague</sa>
+		<sa>Comfort call</sa>
+		<sa>Commotion</sa>
+		<sa>Competing task</sa>
+		<sa>Telephone</sa>
+	
+		<sc><name>Task suspended</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Task not completed</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Goal forgotten</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Loss of orientation</name>	
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+	<gc><name>Fatigue</name>
+		<ga>Adverse ambient conditions</ga>
+		<ga>Irregular working hours</ga>
+
+		<sa>Exhaustion</sa>
+
+		<sc><name>Delayed response</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Performance variability</name>
+		<ga>Equipment failure</ga>
+		<ga>Excessive demand</ga>
+		<ga>Insuffient skills</ga>
+		
+		<sa>Change of system character</sa>
+		<sa>Illness</sa>
+		<sa>Lack of training</sa>
+		<sa>Overenthusiasm</sa>
+
+		<sc><name>Lack of precision</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Increasing misses</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Inattention</name>
+		<ga>Adverse ambient conditions</ga>
+
+		<sa>Temporary incapacitation</sa>
+
+		<sc><name>Signal missed</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Physiological stress</name>
+		<ga>Adverse ambient conditions</ga>
+		<ga>Irregular work hours</ga>
+	
+		<sa>Boredom</sa>
+
+		<sc><name>Many specific effects</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Psychological stress</name>
+		<ga>Excessive demand</ga>
+		<ga>Insufficient knowledge</ga>
+	
+		<sa>Boredom</sa>
+
+		<sc><name>Many specific effects</name>
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+</table>

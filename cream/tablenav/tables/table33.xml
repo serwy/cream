@@ -1,0 +1,60 @@
+<table><name>Working conditions</name>
+
+	<gc><name>Excessive demand</name>
+		<ga>Inadequate task allocation</ga>
+		<ga>Adverse ambient conditions</ga>
+
+		<sa>Unexpected tasks</sa>
+		<sa>Parallel tasks</sa>
+
+		<sc><name>None defined</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Inadequate work place layout</name>
+		<ga>Design failure</ga>
+		<ga>Communication failure</ga>
+	
+		<sa>None defined</sa>
+
+		<sc><name>Narrow work space</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Dangerous work space</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Elevated work space</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Inadequate team support</name>
+		<ga>None defined</ga>
+		
+		<sa>None defined</sa>
+
+		<sc><name>Unclear job description</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Inadequate communication</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Lack of team cohesiveness</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Irregular working hours</name>
+		<ga>None defined</ga>
+
+		<sa>Shift work</sa>
+		<sa>Changing schedule</sa>
+		<sa>Time zone change</sa>
+
+		<sc><name>Circadian rhythm effects</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

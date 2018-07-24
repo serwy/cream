@@ -1,0 +1,180 @@
+body {
+	font-family: sans-serif;
+	#background: #DDDDDD;
+}
+
+.title {
+	font-size: 14pt;
+	background: #004488;
+	-moz-border-radius: 5pt;
+	color: #ffffff;
+	padding: 3pt;
+	border: 1px solid #000000;
+}
+
+.menu {
+	background: #DDDDDD;
+	-moz-border-radius: 5pt;
+	padding: 3pt;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+	border: 1px solid #000000;
+}	
+
+.menua {
+	#background: transparent;
+	text-decoration: none;
+	color: #000000;
+	-moz-border-radius: 5pt;
+	
+	padding: 2pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+}
+
+.menua:hover {
+	background: #004488;
+	color: #FFFFFF;
+}
+
+
+
+.stack {
+	display: block;
+	background: #DDDDDD;
+	-moz-border-radius: 5pt;
+	padding: 3pt;
+	margin-top: 3pt;
+	margin-bottom: 3pt;
+	border: 1px solid #000000;	
+}
+
+.stack a {
+	background: transparent;
+	text-decoration: none;
+	color: #000000;
+	-moz-border-radius: 5pt;
+	
+	padding: 2pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+}
+
+.stack a:hover {
+	background: #004488;
+	color: #FFFFFF;
+}
+
+.creamTable {
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	background: #004488;	
+	padding: 5pt;
+	#-moz-border-radius: 5pt;
+}
+
+.creamTableContainer {
+	#-moz-border-radius: 5pt;
+	background: #FFFFFF;
+	border: 1px solid #000000;
+}
+
+.creamTableContainer td {
+	padding: 3pt;
+}
+
+
+.creamTableContainer div {
+	padding: 2pt;
+
+}
+
+
+.creamLink {
+	display: block;
+	color: #000000;
+	text-decoration: underline;
+	-moz-border-radius: 5pt;
+	padding-left: 5pt;
+	padding-right: 5pt;
+	padding-top: 2pt;
+	padding-bottom: 2pt;
+	
+}
+
+.creamLink:hover {
+	background: #004488;
+	color: #FFFFFF;
+}
+
+.highlight {
+	text-decoration: none;
+	-moz-border-radius: 5pt;
+	padding: 2pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+	background: #AAAAAA;
+	color: #000000;
+}
+
+.highlight:hover {
+	text-decoration: none;
+	-moz-border-radius: 5pt;
+	padding: 2pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+	background: #004488;
+	color: #ffffff;
+}
+
+.groupLink {
+	background: transparent;
+	text-decoration: underline;
+	color: #FFFFFF;
+	-moz-border-radius: 5pt;
+	
+	padding: 2pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+}
+
+.groupLink:hover {
+	background: #DDDDDD;
+	color: #000000;
+}
+
+
+
+.toggleDisplayContainer {
+	border: 1px solid #000000;
+	#-moz-border-radius: 5pt;
+	margin-top: 2pt;
+	margin-bottom: 2pt;
+	background: #DDDDDD;
+}
+
+.toggleDisplayNormal {
+	display: block;
+	#background: #FFFFFF;
+	color: #000000;
+	padding: 3pt;
+	padding-left: 3pt;
+	
+	#-moz-border-radius: 5pt;
+}
+
+.toggleDisplayHover {
+	display: block;
+	background: #004488;
+	color: #FFFFFF;
+	padding: 3pt;
+	padding-left: 3pt;
+	#-moz-border-radius: 5pt;
+	cursor:	pointer;
+}
+
+.toggleContainer {
+	display: none;
+	padding-left: 15pt;
+	padding-right: 15pt;
+}

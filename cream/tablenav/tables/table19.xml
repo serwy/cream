@@ -1,0 +1,101 @@
+<table>
+	<name>Error modes</name>
+
+	<gc>	
+		<name>Timing / Duration</name>
+		<ga>Communication failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Inattention</ga>
+		<ga>Observation missed</ga>
+		
+		<sa>Earlier omission</sa>
+		<sa>Trapping error</sa>
+	</gc>
+
+	<gc>
+		<name>Sequence</name>
+		<ga>Access limitations</ga>
+		<ga>Communication failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Inattention</ga>
+		<ga>Memory failure</ga>
+		<ga>Wrong identification</ga>
+
+		<sa>Trapping error</sa>
+	</gc>
+
+	<gc>
+		<name>Force</name>
+		<ga>Communication failure</ga>
+		<ga>Equipment failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Observation missed</ga>
+
+		<sa>Ambiguous label</sa>
+		<sa>Convention conflict</sa>
+		<sa>Incorrect label</sa>
+	</gc>
+
+	<gc>
+		<name>Distance / magnitude</name>
+		<ga>Communication failure</ga>
+		<ga>Equipment failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Observation missed</ga>
+		
+		<sa>Ambiguous label</sa>
+		<sa>Convention conflict</sa>
+		<sa>Incorrect label</sa>
+	</gc>
+
+	<gc>
+		<name>Speed</name>
+		<ga>Communication failure</ga>
+		<ga>Distraction</ga>
+		<ga>Equipment failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Observation missed</ga>
+		<ga>Performance variability</ga>
+		
+		<sa>None defined</sa>
+	</gc>
+
+	<gc>
+		<name>Direction</name>
+		<ga>Communication failure</ga>
+		<ga>Faulty diagnosis</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Inattention</ga>
+		<ga>Observation missed</ga>
+
+		<sa>Ambiguous label</sa>
+		<sa>Convention conflict</sa>
+		<sa>Incorrect label</sa>
+	</gc>
+
+	<gc>
+		<name>Wrong object</name>
+		<ga>Access problems</ga>
+		<ga>Communication failure</ga>
+		<ga>Wrong identification</ga>
+		<ga>Inadequate plan</ga>
+		<ga>Inadequate procedure</ga>
+		<ga>Inattention</ga>
+		<ga>Performance variability</ga>
+		<ga>Observation missed</ga>
+
+		<sa>Ambiguous label</sa>
+		<sa>Incorrect label</sa>
+	</gc>
+</table>

@@ -1,0 +1,1749 @@
+<cream>
+	<category>
+		<name>Error modes</name>
+		<desc></desc>
+
+		<group>
+			<name>Error modes</name>
+			<desc></desc>
+
+				<gc>
+					<name>Timing</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Earlier omission</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Trapping error</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Duration</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Earlier omission</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Trapping error</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Force</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Ambiguous label</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Convention conflict</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect label</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Distance / magnitude</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Ambiguous label</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Convention conflict</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect label</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Speed</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Performance variability</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Direction</name>
+					<desc></desc>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Ambiguous label</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Convention conflict</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect label</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Wrong object</name>
+					<desc></desc>
+
+						<ga>
+							<name>Access problems</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Wrong identification</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Performance variability</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Observation missed</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Ambiguous label</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect label</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Sequence</name>
+					<desc></desc>
+
+						<ga>
+							<name>Access limitations</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Memory failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Wrong identification</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Trapping error</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+	</category>
+	<category>
+		<name>Man</name>
+		<desc></desc>
+
+		<group>
+			<name>Observation</name>
+			<desc></desc>
+
+				<gc>
+					<name>Observation missed</name>
+					<desc></desc>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate plan</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Functional impairment</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Information overload</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Multiple signals</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Noise</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Parallax</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>False observation</name>
+					<desc></desc>
+
+						<ga>
+							<name>Fatigue</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Wrong identification</name>
+					<desc></desc>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Missing information</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Mislabelling</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Ambiguous symbol set</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Ambiguous signals</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Erroneous information</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Habit, expectancy</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Information overload</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Interpretation</name>
+			<desc></desc>
+
+				<gc>
+					<name>Faulty diagnosis</name>
+					<desc></desc>
+
+						<ga>
+							<name>Cognitive bias</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Wrong identification</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Confusing symptoms</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Error in mental model</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Misleading symptoms</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Mislearning</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Multiple disturbances</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>New situation</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Erroneous analogy</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Wrong reasoning</name>
+					<desc></desc>
+
+						<ga>
+							<name>Cognitive bias</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Cognitive style</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Too short planning horizon</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>False analogy</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Overgeneralisation</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Mode error</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Decision error</name>
+					<desc></desc>
+
+						<ga>
+							<name>Fear</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Cognitive bias</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Social pressure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Lack of knowledge</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Mode error</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Shock</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Stimulus overload</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Workload</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Delayed interpretation</name>
+					<desc></desc>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Fatigue</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Indicator failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Response slow-down</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Incorrect prediction</name>
+					<desc></desc>
+
+						<ga>
+							<name>Cognitive bias</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Ambiguous information</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Incomplete information</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Planning</name>
+			<desc></desc>
+
+				<gc>
+					<name>Inadequate plan</name>
+					<desc></desc>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Memory failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Wrong reasoning</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Excessive demand</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Insufficient knowledge</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Error in goal</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Inadequate training</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Model error</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Overlook precondition</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Overlook side consequent</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Violation</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Too short planning horizon</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Priority error</name>
+					<desc></desc>
+
+						<ga>
+							<name>Faulty diagnosis</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Legitimate higher priority</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Conflicting criteria</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Temporary person related functions</name>
+			<desc></desc>
+
+				<gc>
+					<name>Memory failure</name>
+					<desc></desc>
+
+						<ga>
+							<name>Excessive demand</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Daydreaming</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Long time since learning</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Other priority</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Temporary incapacitation</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Fear</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Earlier error</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Possible consequences</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Uncertainty</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Distraction</name>
+					<desc></desc>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Boss / colleague</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Comfort call</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Commotion</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Competing task</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Telephone</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Fatigue</name>
+					<desc></desc>
+
+						<ga>
+							<name>Adverse ambient conditions</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Irregular working hours</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Exhaustion</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Performance variability</name>
+					<desc></desc>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Excessive demand</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Insufficient skills</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Change of system character</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Illness</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Lack of training</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Overenthusiasm</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Inattention</name>
+					<desc></desc>
+
+						<ga>
+							<name>Adverse ambient conditions</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Temporary incapacitation</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Physiological stress</name>
+					<desc></desc>
+
+						<ga>
+							<name>Adverse ambient conditions</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Irregular working hours</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Boredom</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Psychological stress</name>
+					<desc></desc>
+
+						<ga>
+							<name>Excessive demand</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Insufficient knowledge</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Boredom</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Permanent person related functions</name>
+			<desc></desc>
+
+				<gc>
+					<name>Functional impairment</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Cognitive style</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Cognitive bias</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+	</category>
+	<category>
+		<name>Technology</name>
+		<desc></desc>
+
+		<group>
+			<name>Equipment</name>
+			<desc></desc>
+
+				<gc>
+					<name>Equipment failure</name>
+					<desc></desc>
+
+						<ga>
+							<name>Maintenance failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Power failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Fire</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Flooding</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Tremor</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>External event</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Impact / Projectile</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Software fault</name>
+					<desc></desc>
+
+						<ga>
+							<name>Inadequate quality control</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Procedures</name>
+			<desc></desc>
+
+				<gc>
+					<name>Inadequate procedure</name>
+					<desc></desc>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate quality control</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Temporary interface problems</name>
+			<desc></desc>
+
+				<gc>
+					<name>Access limitations</name>
+					<desc></desc>
+
+						<ga>
+							<name>Equipment failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Design</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Distance</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Localisation problem</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Obstruction</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Ladder / stair</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Temporary incapacitation</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Ambiguous information</name>
+					<desc></desc>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Sensor failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect coding scheme</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Incomplete information</name>
+					<desc></desc>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Indicator failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Display clutter</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Navigation problems</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Inadequate display hardware</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Permanent interface problems</name>
+			<desc></desc>
+
+				<gc>
+					<name>Access problems</name>
+					<desc></desc>
+
+						<ga>
+							<name>Inadequate work place layout</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Mislabelling</name>
+					<desc></desc>
+
+						<ga>
+							<name>Inadequate work place layout</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Maintenance failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+	</category>
+	<category>
+		<name>Organisation</name>
+		<desc></desc>
+
+		<group>
+			<name>Communication</name>
+			<desc></desc>
+
+				<gc>
+					<name>Communication failure</name>
+					<desc></desc>
+
+						<ga>
+							<name>Distraction</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Functional impairment</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inattention</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Noise</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Presentation failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Temporary incapacitation</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Missing information</name>
+					<desc></desc>
+
+						<ga>
+							<name>Mislabelling</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Inadequate procedure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Hidden information</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Presentation failure</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Incorrect language</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Noise</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Organisation</name>
+			<desc></desc>
+
+				<gc>
+					<name>Maintenance failure</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Inadequate quality control</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Management problem</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Design failure</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Inadequate task allocation</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Social pressure</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Training</name>
+			<desc></desc>
+
+				<gc>
+					<name>Insufficient skills</name>
+					<desc></desc>
+
+						<ga>
+							<name>Management problem</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Insufficient knowledge</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Ambient conditions</name>
+			<desc></desc>
+
+				<gc>
+					<name>Temperature</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Sound</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Humidity</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Illumination</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Other</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Adverse ambient conditions</name>
+					<desc></desc>
+
+						<ga>
+							<name>Temperature</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Sound</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Humidity</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Illumination</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Other</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+
+		<group>
+			<name>Working conditions</name>
+			<desc></desc>
+
+				<gc>
+					<name>Excessive demand</name>
+					<desc></desc>
+
+						<ga>
+							<name>Inadequate task allocation</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Adverse ambient conditions</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Unexpected tasks</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Parallel tasks</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Inadequate work place layout</name>
+					<desc></desc>
+
+						<ga>
+							<name>Design failure</name>
+							<desc></desc>
+						</ga>
+
+						<ga>
+							<name>Communication failure</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Inadequate team support</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>None defined</name>
+							<desc></desc>
+						</sa>
+				</gc>
+
+				<gc>
+					<name>Irregular working hours</name>
+					<desc></desc>
+
+						<ga>
+							<name>None defined</name>
+							<desc></desc>
+						</ga>
+
+						<sa>
+							<name>Shift work</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Changing schedule</name>
+							<desc></desc>
+						</sa>
+
+						<sa>
+							<name>Time zone change</name>
+							<desc></desc>
+						</sa>
+				</gc>
+		</group>
+	</category>
+</cream>
+

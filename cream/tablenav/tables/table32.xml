@@ -1,0 +1,74 @@
+<table><name>Ambient conditions</name>
+	<gc><name>Temperature</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Too hot</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Too cold</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Sound</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Too loud</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Too soft</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Humidity</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+		
+		<sc><name>Too dry</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Too humid</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Illumination</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Too bright</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Too dark</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Other</name>
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Vibration</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc>Adverse ambient conditions
+		<ga>None defined</ga>
+
+		<sa>None defined</sa>
+		
+		<sc><name>None defined</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

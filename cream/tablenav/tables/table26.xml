@@ -1,0 +1,22 @@
+<table><name>Procedures</name>
+
+	<gc><name>Inadequate procedure</name>
+		<ga>Design failure</ga>
+		<ga>Inadequate quality control</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Ambiguous text</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incomplete text</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Incorrect text</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Mismatch to actual equipment</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+</table>

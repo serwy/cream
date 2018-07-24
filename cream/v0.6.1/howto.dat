@@ -1,0 +1,18 @@
+<div class='heading'>
+Quick Explaination of the CREAM technique.
+</div>
+		
+<div class='content'>
+<p>
+The CREAM technique can be used for both retrospective and prospective analysis. Here is how to use it.
+
+<p>
+
+1) Identify the Common Performance Conditions, under 'CPC'<br>
+2) Start with a genotype "Error Mode" (with retrospective) or a phenotype "MTO triad" (with prospective) under 'Workspace'<br>
+3) For each step, select a Specfic Consequent to better explain the step. <br>
+4) For retrospective analysis, if there is enough information to select a specific antecedent, then do so. The analysis stops for that branch. <br>
+5) Continue with each step of the analysis, exploring all the likely paths as shown in the left panel of the Workspace. 
+
+
+</div>

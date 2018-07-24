@@ -1,0 +1,1029 @@
+<html><head>
+
+<style type="text/css">
+
+.cream_table_header {
+	background-color: #c9ba65;
+	color: #FFFFFF;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+
+}
+.cream_table_data {
+	border-style: solid;
+	border-width: 1px;
+
+}
+
+.cream_table {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	padding: 5px;
+
+}
+
+.cream_link_out {
+	text-decoration: none;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_out0 {
+	text-decoration: none;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_out1 {
+	text-decoration: none;
+	background-color: #E5E5E5;
+	color: #000000;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_over {
+	text-decoration:none;
+	display: block;
+	background-color: #aa0000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+
+
+
+
+.cream_link_select {
+	display: block;
+	background-color: #aa0000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 15px;
+}
+
+.cream_link_title {
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding-top: 1em;
+	background-color: #c9ba65;
+	color: #FFFFFF;
+	padding: 2px;
+}
+
+.cream_gc {
+	background-color: #c9ba65;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	color: #FFFFFF;
+	padding: 2px;
+	padding-left: 3px;
+	font-weight: 700;
+	margin-bottom: 2px;
+	text-align: center;
+
+}
+
+.cream_links {
+	border-style:solid;
+	border-width:1px;
+	width: 300px;	
+	padding: 5px;
+}
+
+.cream_border {
+
+}
+
+.dropdown {
+	display: 	block;
+	padding:	5px;
+	text-decoration: none;
+	color: #000000;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #AAAAAA;
+	background-color: #FFFFFF;
+}
+
+.dropdown:hover {
+	display:	block;
+	text-decoration: none;
+	color:	#000000;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #FF0000;
+	background-color: #FFAAAA;
+}
+
+.menublock{
+	display: block;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #AAAAAA;
+	background-color: #FFFFFF;
+	margin: 0pt;
+	margin-bottom: 5pt;
+}
+
+.titleblock {
+	font-family: sans serif;
+	font-size: 10pt;
+	display: block;
+	padding: 2pt;
+	padding-left: 3pt;
+	#margin: 3px;
+
+	background-color: #DDDDDD;
+}
+
+.eltblock {
+	font-size: 10pt;
+	font-family: sans serif;
+	padding: 1pt;
+	padding-left: 5pt;
+	padding-right: 1pt;
+	margin: 2pt;
+}
+
+</style>
+<script type="text/javascript" language="javascript" src="debug.js"></script>
+<script type="text/javascript" language="javascript">
+
+// CREAM Software 
+// Based on CREAM by Erik Hollnagel
+// Programmed by Roger D. Serwy
+// Email: serwy@uiuc.edu
+// Summer 2006, Fall 2006
+//
+// Not sure about licensing just yet. 
+
+
+var CREAM_HEAD = null;		// c_data
+var myXMLHttp; 
+var TARGET_MOUSEDOWN = null;
+
+var PANEL_HEAD = null;
+
+var FIND_ANTECEDENT = new recMenu("Find Antecedent");
+var NODE_OPERATIONS = new recMenu("Node Operations");
+
+var STATE_MACHINE = 0;	// state machine for stuff
+var STATE_DATA = null;
+
+var S_CONNECT = 100;
+var S_DELETE = 200;
+
+function onLoad()
+{
+
+	DEBUGOFF();
+	loadTables();
+
+	//NODE_OPERATIONS.hide();
+	//FIND_ANTECEDENT.hide();
+	//doMenu()
+	document.body.appendChild(NODE_OPERATIONS.DOM);
+	document.body.appendChild(FIND_ANTECEDENT.DOM);	
+	nodeOp();
+	
+}
+
+function nodeOp()
+{
+	// fill node operations menu with options
+
+	// delete node
+	// connect to
+	// make room
+	var n = NODE_OPERATIONS;
+
+	var a = document.createElement("div");
+	str = "deleteNode();";
+	a.setAttribute("onclick", str);
+	a.innerHTML = "Delete the current node";
+	n.addElt(a);
+	
+	var a = document.createElement("div");
+	str = "connectNode();";
+	a.setAttribute("onclick", str);
+	a.innerHTML = "Make a connection to a child node";
+	n.addElt(a);
+
+	var a = document.createElement("div");
+	str = "deleteLine();";
+	a.setAttribute("onclick", str);
+	a.innerHTML = "Break connection to a child node";
+	n.addElt(a);
+
+
+}
+
+function connectNode()
+{
+	STATE_MACHINE = S_CONNECT;
+	STATE_DATA = top.workspace.targetNode;	// save a pointer 
+}
+
+function deleteNode()
+{
+	if (STATE_MACHINE == 0) {
+		var w = top.workspace;
+		var d = w.targetNode;
+		var p = w.getParent(d);
+		if (p != null) {
+			w.selectNode(p);		// go to parent, then delete, keeps UI clean from orphaned updates
+		} else {
+			w.selectNode(w.nodeHead);	// always have a legitimate node selected
+		}
+		w.deleteNode(d);
+	}
+}
+
+function makeRoom()
+{
+	var w = top.workspace;
+	var d = w.targetNode;
+	w.makeRoom(d);
+
+}
+
+function deleteLine()
+{
+	STATE_MACHINE = S_DELETE;
+	STATE_DATA = top.workspace.targetNode;
+}
+
+
+function procNode(nodePtr)
+{
+PUSHDEBUG();
+	DEBUG("engine notified!");
+	var w=top.workspace;
+	
+	if (STATE_MACHINE == 0) {
+		rebuildAntecedents(nodePtr);
+	}
+
+	if (STATE_MACHINE == S_CONNECT) {
+		STATE_MACHINE = 0;
+		// FIXME: ensure that the connection is valid - CREAM integrity ensured
+		// add a connection 
+		DEBUG("connecting: ");
+		DEBUG(w.findNode(STATE_DATA.index).creamTitle);
+		DEBUG(w.findNode(nodePtr.index).creamTitle);
+		w.addLine(STATE_DATA.index, nodePtr.index);
+
+		w.selectNode(STATE_DATA);
+		STATE_DATA.uiPtr.textArea.focus();
+	} 
+
+	if (STATE_MACHINE == S_DELETE) {
+		STATE_MACHINE = 0;
+		// delete a line
+		var si = STATE_DATA.index;
+		var ei = nodePtr.index;
+		w.deleteLine(w.getLinePtr(si,ei));
+		w.selectNode(STATE_DATA);
+		STATE_DATA.uiPtr.textArea.focus();
+	} 
+POPDEBUG();
+}
+
+
+function rebuildAntecedents(nodePtr)
+{
+
+	var retro = getRetrospective(nodePtr.creamTitle);
+
+	// build a table for the Find Antecedent;
+	var f = FIND_ANTECEDENT;
+	f.flush();
+
+	f.setTitle("Find Antecedent: " + nodePtr.creamTitle);
+
+	var dl = new recMenu("Direct links");
+	var dlga = new recMenu("General antecedents");
+	addToAntecedentMenu(retro.dlga, dlga);
+	dl.addRec(dlga);
+
+	var dlsa = new recMenu("Specific antecedents");
+	addToAntecedentMenu(retro.dlsa, dlsa);
+	dl.addRec(dlsa);
+
+	f.addRec(dl);
+
+	var il = new recMenu("Indirect links");
+	var ilga = new recMenu("General antecedents");
+	addToAntecedentMenu(retro.ilga, ilga);
+	il.addRec(ilga);
+
+	var ilsa = new recMenu("Specific antecedents");
+	addToAntecedentMenu(retro.ilsa, ilsa);
+	il.addRec(ilsa);
+
+	f.addRec(il);
+
+
+	function addToAntecedentMenu(listPtr, menuPtr)	// helper function
+	{
+		// processes the linked list of "listPtr" and adds to the appropriate menu "menuPtr"
+		var str = "";
+		var tmp = listPtr;
+		while (tmp != null) {
+			var creamTitle = tmp.data.name;
+			var a = document.createElement("div");
+			str = "sendNode("+nodePtr.index+", \"" + creamTitle + "\")";
+			a.setAttribute("onclick", str);
+			a.innerHTML = creamTitle;
+			menuPtr.addElt(a);
+			
+			tmp = tmp.next;
+		}
+	}
+}
+
+function sendNode(parentNodeIndex, creamTitle)
+{
+	var w = top.workspace;
+	var n = w.newNode(parentNodeIndex);
+	n.setTitle(creamTitle);
+	n.creamTitle = creamTitle;
+
+	w.selectNode(w.targetNode); // refresh UI
+}
+
+function recMenu(titleTxt)
+{
+	var container = document.createElement("div");
+	container.setAttribute("class", "menublock");
+	
+	var title = document.createElement("div");
+	title.setAttribute("class", "titleblock");
+	title.setAttribute("onclick", "recMenuToggle(event);");
+	title.style.cursor='pointer;';
+
+	title.innerHTML = titleTxt;
+	container.appendChild(title);
+	
+	var elt = document.createElement("div");
+	elt.setAttribute("class", "eltblock");
+	elt.style.display = 'block';		// need to initialize here, otherwise toggle needs two clicks to switch on the first try
+	container.appendChild(elt);
+
+	this.container = container;
+	this.title = title;
+	this.elt = elt;
+	this.DOM = container;
+
+	this.addDOM = this.addElt;
+
+	this.addElt = function(nodePtr) {
+		nodePtr.style.marginBottom='3pt';
+		this.elt.appendChild(nodePtr);
+	}
+	this.setTitle = function(text) {
+		this.title.innerHTML = text;
+	}
+
+	this.addRec = function(nodePtr) {
+		nodePtr.DOM.style.marginBottom='3pt';
+		this.elt.appendChild(nodePtr.DOM);
+	}
+	this.hide = function() {
+		this.elt.style.display='none';
+	}
+	
+	this.show = function() {
+		this.elt.style.display='block';
+	}
+	this.flush = function() {
+		// iterate over ELT children, removing
+		var a = this.elt.childNodes.length;
+		for (var b = 0; b < a; b++) {
+			var c = this.elt.childNodes[0]; // always remove 0, it's how the DOM updates 
+			this.elt.removeChild(c);
+		}
+	}
+	
+	return this;
+}
+
+function recMenuToggle(event)
+{
+	var s = event.target.parentNode.childNodes[1].style; // go from title div to elt div
+	if (s.display == 'block') {
+		s.display = 'none';
+	} else {
+		s.display = 'block';
+	}
+}
+
+
+function buildAllTables()
+{
+	var d = document.createElement("div");
+
+	var table = null;
+
+	var c = CREAM_HEAD;
+	while (c != null) {
+		DEBUG(c.name);
+		d.appendChild(document.createElement("br"));
+
+		var title = document.createElement("div");
+		title.setAttribute("class", "cream_link_over");
+		title.innerHTML = c.name;
+		d.appendChild(title);
+
+		var g = c.group;
+		while (g != null) {
+			DEBUG(g.name)
+			var title = document.createElement("div");
+			title.innerHTML = "<b>" + g.name + "</b>";
+			d.appendChild(title);
+	
+			var tb = buildTable(g);
+			d.appendChild(tb);
+
+
+			d.appendChild(document.createElement("br"));
+
+			g = g.next;
+		}
+		c = c.next;
+	}
+	
+	return d;
+}
+function buildTable(table)
+{
+
+	// table: -  table pointer
+
+	// build TABLE DOM
+	var t = document.createElement("table");
+	t.setAttribute("border", "0");
+	t.setAttribute("padding", "0");
+	t.setAttribute("margin", "0");
+	t.setAttribute("style","border-collapse:collapse;width:600;");
+
+	//var c = document.createElement("caption");
+	//c.innerHTML = table.name;	
+	//t.appendChild(c);
+		
+	// add header info 
+	var tr = document.createElement("tr");
+	t.appendChild(tr);
+
+	var td_template = document.createElement("td");
+	td_template.setAttribute("valign","top");
+	td_template.setAttribute("style", "width:200;");
+	td_template.setAttribute("class", "cream_table_data");
+
+	var td;
+	td = td_template.cloneNode(false);
+	td.setAttribute("class", "cream_table_header");
+	td.innerHTML="General Consequent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="General Antecedent";
+	tr.appendChild(td);
+
+	td = td.cloneNode(false);
+	td.innerHTML="Specific Antecedent";
+	tr.appendChild(td);
+	
+	var str = "";
+
+	var gc = table.gc;
+	while(gc != null) {
+
+		var h = gc.name;
+
+		// build row element
+		var tr = document.createElement("tr");
+		var td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		t.appendChild(tr);
+		str = h;
+		td.innerHTML = str;
+
+
+		// get the general antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var ga = gc.ga;
+		while (ga != null) {
+			var h = ga.name;
+			str += h + "<br>";	
+			ga = ga.next;
+		}
+		td.innerHTML = str;
+
+
+		// get the specific antecedents
+		td = td_template.cloneNode(false);
+		tr.appendChild(td);
+		str = "";
+		var sa = gc.sa;
+		while (sa != null) {
+			var h = sa.name;
+			str += h + "<br>";	
+			sa = sa.next;
+		}
+		td.innerHTML = str;
+	
+		gc = gc.next;
+	}
+	
+
+	//document.body.appendChild(t);	
+	return t;
+
+
+
+}
+
+
+function findGC(event_name)
+{
+	DEBUG("findGC(" + event_name + ")");
+	var gc_obj = null;
+
+	var cat_ptr = CREAM_HEAD;
+	while (cat_ptr != null) 
+	{
+		DEBUG("cat: " + cat_ptr.name);
+		var grp_ptr = cat_ptr.group;
+		while (grp_ptr != null) 
+		{
+			DEBUG("grp: " + grp_ptr.name);
+			var gc_ptr = grp_ptr.gc;
+			while (gc_ptr != null) 
+			{
+				DEBUG("gc: " + gc_ptr.name);
+				if (gc_ptr.name.toUpperCase() == event_name.toUpperCase()) 
+				{
+					DEBUG("found it");
+					gc_obj = gc_ptr;
+					break;  // FIXME: break from all while loops
+				}
+				gc_ptr = gc_ptr.next;
+			}
+			grp_ptr = grp_ptr.next;
+		}
+		cat_ptr = cat_ptr.next;
+	}	
+
+
+	return gc_obj;
+}
+
+
+function getRetrospective(event_name) 
+{
+PUSHDEBUG();
+	DEBUG("getRetrospective("+ event_name + ")");
+	var gc_obj = findGC(event_name);  	// find "event" in all the GC's
+
+	if (gc_obj == null) {
+		// NOT FOUND!
+		DEBUG("NOT FOUND!");
+		return null;
+	}
+
+	var grp_ptr = gc_obj.parent;		// have a pointer to group containing the GC
+
+
+	var dl_stru = null;
+	var il_stru = null;
+
+	var dl_sa_stru = null;
+	var il_sa_stru = null;
+
+	// go thru GC's of this group, adding GA's to appropriate list, direct or indirect
+	var gc = grp_ptr.gc;
+
+	while (gc != null) 
+	{
+		var ga_append = null;	
+		var sa_append = null;
+	
+		// pointers to append, reduces duplicate code
+		if (gc != gc_obj) {	// append to the indirect links list
+			ga_append = il_stru;
+			sa_append = il_sa_stru;
+		} else {		// append to the direct links list
+			ga_append = dl_stru;
+			sa_append = dl_sa_stru;
+		}
+
+		// get all General Antecedents
+		var ga = gc.ga;
+		while (ga != null) 
+		{
+			if (ga.name.toUpperCase() != "NONE DEFINED") {
+				var tmp = new doubly_link_list();
+				tmp.data = ga;
+				tmp.prev = ga_append;	// doubly-linked-list
+				if (ga_append != null) 	// for first elt
+				{
+					ga_append.next = tmp;
+				}
+				ga_append = tmp;
+			}
+
+			ga = ga.next;
+		} 
+
+		// get all Specific Antecedents
+		// FIXME: duplicate code: how to resolve?
+		var sa = gc.sa;
+		while (sa != null) 
+		{
+			if (sa.name.toUpperCase() != "NONE DEFINED") {
+				var tmp = new doubly_link_list();
+				tmp.data = sa;
+				tmp.prev = sa_append;	// doubly-linked-list
+				if (sa_append != null) 	// for first elt
+				{
+					sa_append.next = tmp;
+				}
+				sa_append = tmp;
+			}
+
+			sa = sa.next;
+		} 
+	
+
+		// save appropriate pointers for next iteration
+		if (gc != gc_obj) {
+			il_stru = ga_append;
+			il_sa_stru = sa_append;
+		} else {
+			dl_stru = ga_append;
+			dl_sa_stru = sa_append;
+		}
+
+		// append all GA's
+		gc = gc.next;
+	}
+
+	var dl_head = findHead(dl_stru);
+	var il_head = findHead(il_stru);
+	var dl_sa_head = findHead(dl_sa_stru);
+	var il_sa_head = findHead(il_sa_stru);
+
+	il_head = removeInnerDuplicates(il_head);	
+	il_sa_head = removeInnerDuplicates(il_sa_head);
+
+
+	il_head = removeCrossDuplicates(il_head, dl_head);
+	il_sa_head = removeCrossDuplicates(il_sa_head, dl_sa_head);
+
+
+	var retval = new blank_type();
+
+	retval.dlga = dl_head;
+	retval.dlsa = dl_sa_head;
+	retval.ilga = il_head;
+	retval.ilsa = il_sa_head;
+
+POPDEBUG();
+
+	return retval;		// returning pointers to a list of DL and IL, which point into the cream table hierarchy
+}
+
+
+
+
+function removeCrossDuplicates(il_head, dl_head)
+{
+
+	// eliminate duplicates between il and dl from il
+	var dl_stru = dl_head;
+	while (dl_stru != null) 
+	{
+		var il_stru = il_head;
+		while (il_stru != null) 
+		{
+			if (il_stru.data.name == dl_stru.data.name) 
+			{
+				// remove il_stru from list
+				DEBUG("removing dlil dup: " + il_stru.data.name);
+				var rem = il_stru;
+				if (rem.prev != null) 
+				{
+					rem.prev.next = rem.next;
+				} 
+				else 
+				{
+					// removing head elt from list
+					if (il_head.next != null) 
+					{
+						il_head.next.prev = null;
+					}
+					il_head = rem.next;
+				}
+				if (rem.next != null) 
+				{
+					rem.next.prev = rem.prev;
+				}	
+			}
+			il_stru = il_stru.next; // iterate
+		}
+		dl_stru = dl_stru.next; // iterate
+	}
+
+	return il_head;
+}
+
+
+function removeInnerDuplicates(list)
+{
+	var l_outer = list;
+	while (l_outer != null) 
+	{
+		var l_inner = l_outer.next;
+		while (l_inner != null) 
+		{
+			if (l_inner.data.name == l_outer.data.name) 
+			{
+				//remove l_inner from doubly-linked list
+				DEBUG("removing il dup: " + l_inner.data.name);
+				var rem = l_inner;
+				rem.prev.next = rem.next;	// point previous to one after
+				if (rem.next != null) 
+				{
+					rem.next.prev = rem.prev;	// point one after to previous
+				}
+			}
+			l_inner = l_inner.next;
+		}
+		l_outer = l_outer.next;
+	}
+	return list;
+}
+
+
+
+function findHead(ptr)
+{
+	if (ptr == null) {
+		return null;
+	}
+	while (ptr.prev != null) {
+		ptr = ptr.prev;
+	}
+	return ptr;
+}
+
+
+function loadTables()
+{
+PUSHDEBUG();
+	DEBUG("loading CREAM tables:");
+	var myXMLHttp = new XMLHttpRequest();
+
+	//create a DOM structure
+	var root = document.createElement("root");
+	var r; 
+	
+	myXMLHttp = new XMLHttpRequest();
+	myXMLHttp.open("GET", "cream1.xml", false); 
+	myXMLHttp.send(null);
+	r = myXMLHttp.responseXML;
+	var cream = r.getElementsByTagName("cream")[0];
+
+
+	// pull into data structures
+	// get all groups
+	var categories =  cream.getElementsByTagName("category");
+
+	for(var i = 0; i < categories.length; i++) {
+		var n = categories[i].getElementsByTagName("name")[0].firstChild.nodeValue;
+		var cat = addCategory(n);
+		// get groups
+		var groups = categories[i].getElementsByTagName("group");
+		for(var j = 0; j < groups.length; j++) {
+			var n = groups[j].getElementsByTagName("name")[0].firstChild.nodeValue;
+			var tbl = addGroup(cat, n);
+			// get GC's
+			var gcs = groups[j].getElementsByTagName("gc");
+			for(var k = 0; k < gcs.length; k++) {
+				var n = gcs[k].getElementsByTagName("name")[0].firstChild.nodeValue;	
+				var gc = addGC(tbl, n);
+				// get GA's
+				var gas = gcs[k].getElementsByTagName("ga");
+				for(var l = 0; l < gas.length; l++) {
+					var n = gas[l].firstChild.nodeValue;	
+					addGA(gc, n);
+				}
+				// get SA's
+				var sas = gcs[k].getElementsByTagName("sa");
+				for(var l = 0; l < sas.length; l++) {
+					var n = sas[l].firstChild.nodeValue;	
+					addSA(gc, n);
+				}
+				// get SC's
+				var scs = gcs[k].getElementsByTagName("sc");
+				for(var l = 0; l < scs.length; l++) {
+					var n = scs[l].getElementsByTagName("name")[0].firstChild.nodeValue;	
+					var d = scs[l].getElementsByTagName("def")[0].firstChild.nodeValue;	
+					addSC(gc, n, d);
+				}
+			}
+		}
+	}
+
+POPDEBUG();
+
+}
+
+
+/////////////////////////////////////
+// add code - used in loadTables
+
+function addCategory(name)
+{
+	var retval = new c_data();
+	if (CREAM_HEAD == null) {
+		CREAM_HEAD = retval;
+	} else {
+		findEnd(CREAM_HEAD).next = retval;
+	}
+	retval.name = name;
+
+	return retval;
+}
+
+function addGroup(category, name)
+{
+	var retval = new g_data();
+	if (category.group == null) {
+		category.group = retval;
+	} else {
+		findEnd(category.group).next = retval;
+	}
+	retval.name = name;
+	retval.parent = category;
+
+	return retval;
+}
+
+
+function addGC(group, name) // adds GC to the group
+{
+	var retval = new gc_data();
+	if (group.gc == null) {
+		group.gc = retval;
+	} else {
+		findEnd(group.gc).next = retval;
+	}
+	retval.name = name;
+	retval.parent = group;
+
+	return retval;
+}
+
+function addGA(gc, name) // adds GA to the GC, as in holnagel book
+{
+	var retval = new ga_data();
+	if (gc.ga == null) {
+		gc.ga = retval;
+	} else {
+		findEnd(gc.ga).next = retval;
+	}
+	retval.name = name;
+	retval.parent = gc;
+
+	return retval;
+}
+
+function addSA(gc, name) // adds SA to the GC
+{
+	var retval = new sa_data();
+	if (gc.sa == null) {
+		gc.sa = retval;
+	} else {
+		findEnd(gc.sa).next = retval;
+	}
+	retval.name = name;
+	retval.parent = gc;
+
+	return retval;
+}
+
+function addSC(gc, name, def)
+{
+	var retval = new sc_data();
+	if (gc.sc == null) {
+		gc.sc = retval;
+	} else {
+		findEnd(gc.sc).next = retval;
+	}
+	retval.name = name;
+	retval.def = def;
+	retval.parent = gc;
+
+	return retval;
+}
+
+
+function findEnd(stru)
+{
+	var ptr = stru;
+	while (ptr.next != null) {
+		ptr = ptr.next;
+	}
+	return ptr;
+
+}
+////////////////////////////////
+// data structures
+function c_data() {		// category structure
+	this.type = "category";
+	this.name = null;	// str
+	this.group = null;	// g_data
+	this.next = null;	// c_data
+}
+function g_data() {		// group structure
+	this.type = "group";
+	this.name = null;	// str
+	this.gc = null;		// gc_data
+	this.parent = null;	// c_data
+	this.next = null;	// g_data
+}
+function gc_data() {		// general consequent structure
+	this.type = "gc";
+	this.name = null;	// str
+	this.ga = null;		// ga_data
+	this.sa = null;		// sa_data
+	this.sc = null;		// sc_data
+	this.parent = null;	// g_data
+	this.next = null;	// gc_data
+}
+function ga_data() {		// general antecedent structure
+	this.type = "ga";
+	this.name = null;	// str
+	this.parent = null;	// gc_data
+	this.next = null;	// ga_data
+}
+
+function sa_data() {		// specific antecedent structure
+	this.type = "sa";
+	this.name = null;	// str
+	this.parent = null;	// gc_data
+	this.next = null;	// ga_data
+}
+
+function sc_data() {		// special consequent structure
+	this.type = "sc";
+	this.name = null;	// str
+	this.def = null;		// str
+	this.parent = null;	// gc_data
+	this.next = null;	// sc_data
+}
+
+function doubly_link_list() {
+	this.type = "doubly_link";
+	this.data = null;		// pointer to ga
+	this.next = null;	// next for linked list
+	this.prev = null;	// doubly-linked list
+}
+
+function singly_link_list() 
+{
+	this.type="singly_link"
+	this.data = null;
+	this.next = null;	// generic linked-list datatype
+}
+
+function blank_type()
+{
+
+}
+
+</script>
+
+
+</head>
+
+
+
+<body onload="onLoad();">
+
+</body>
+
+</html>

@@ -1,0 +1,1110 @@
+<cream>
+
+<category>	<name>Error modes</name>
+
+	<group>
+		<name>Phenotypes</name>
+		<gc>
+			<name>Phenotypes</name>
+			<ga>Timing</ga>
+			<ga>Duration</ga>
+			<ga>Sequence</ga>
+			<ga>Force</ga>
+			<ga>Distance / magnitude</ga>
+			<ga>Speed</ga>
+			<ga>Direction</ga>
+			<ga>Wrong object</ga>
+		</gc>
+
+	</group>
+
+	<group>
+		<name>Error modes</name>
+	
+		<gc>	
+			<name>Timing</name>
+			<ga>Communication failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Inattention</ga>
+			<ga>Observation missed</ga>
+			
+			<sa>Earlier omission</sa>
+			<sa>Trapping error</sa>
+
+			<sc>
+				<name>Too early</name>
+				<def>An action started too early, before a signal was given or the required conditions had been established. (Premature action)</def>
+			</sc>
+			<sc>
+				<name>Too late</name>
+				<def>An action started too late. (Delayed action)</def>
+			</sc>
+			<sc>
+				<name>Omission</name>
+				<def>An action that was not done at all (within the time interval allowed).</def>
+			</sc>
+
+
+		</gc>
+	
+		<gc>	
+			<name>Duration</name>
+			<ga>Communication failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Inattention</ga>
+			<ga>Observation missed</ga>
+			
+			<sa>Earlier omission</sa>
+			<sa>Trapping error</sa>
+		
+			<sc>
+				<name>Too long</name>
+				<def>An action that was continued beyond the point when it should have stopped</def>
+			</sc>
+
+			<sc>
+				<name>Too short</name>
+				<def>An action that was stopped before it should have been.</def>
+			</sc>
+
+
+		</gc>
+
+		<gc>
+			<name>Force</name>
+			<ga>Communication failure</ga>
+			<ga>Equipment failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Observation missed</ga>
+	
+			<sa>Ambiguous label</sa>
+			<sa>Convention conflict</sa>
+			<sa>Incorrect label</sa>
+
+			<sc>
+				<name>Too little</name>
+				<def>Insufficient force.</def>
+			</sc>
+			<sc>
+				<name>Too much</name>
+				<def>Surplus force, too much effort.</def>
+			</sc>
+
+		</gc>
+	
+		<gc>
+			<name>Distance / magnitude</name>
+			<ga>Communication failure</ga>
+			<ga>Equipment failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Observation missed</ga>
+			
+			<sa>Ambiguous label</sa>
+			<sa>Convention conflict</sa>
+			<sa>Incorrect label</sa>
+
+			<sc>
+				<name>Too far</name>
+				<def>A movement taken too far.</def>
+			</sc>
+			<sc>
+				<name>Too short</name>
+				<def>A movement not taken far enough</def>
+			</sc>
+
+
+		</gc>
+
+		<gc>
+			<name>Speed</name>
+			<ga>Communication failure</ga>
+			<ga>Distraction</ga>
+			<ga>Equipment failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Observation missed</ga>
+			<ga>Performance variability</ga>
+			
+			<sa>None defined</sa>
+
+			<sc>
+				<name>Too fast</name>
+				<def>Action performed too quickly, with too much speed or finished too early.</def>
+			</sc>
+			<sc>
+				<name>Too slow</name>
+				<def>Action performed too slowly, with too little speed or finished too late.</def>
+			</sc>
+
+		</gc>
+	
+		<gc>
+			<name>Direction</name>
+			<ga>Communication failure</ga>
+			<ga>Faulty diagnosis</ga>
+				<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Inattention</ga>
+			<ga>Observation missed</ga>
+	
+			<sa>Ambiguous label</sa>
+			<sa>Convention conflict</sa>
+			<sa>Incorrect label</sa>
+
+			<sc>
+				<name>Wrong direction</name>
+				<def>Movement in the wrong direction, e.g. forwards instead of backwards or left instead of right.</def>
+			</sc>
+			<sc>
+				<name>Wrong movement type</name>
+				<def>The wrong kind of movement, such as pulling a knob instead of turning it.</def>
+			</sc>
+
+		</gc>
+	
+	
+		<gc>
+			<name>Wrong object</name>
+			<ga>Access problems</ga>
+			<ga>Communication failure</ga>
+			<ga>Wrong identification</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Inattention</ga>
+			<ga>Performance variability</ga>
+			<ga>Observation missed</ga>
+	
+			<sa>Ambiguous label</sa>
+			<sa>Incorrect label</sa>
+
+			<sc>
+				<name>Neighbor</name>
+				<def>An object that is in physical proximity to the object that should have been used.</def>
+			</sc>
+			<sc>
+				<name>Similar object</name>
+				<def>An object that is similar in appearance to the object that should have been used.</def>
+			</sc>
+			<sc>
+				<name>Unrelated object</name>
+				<def>An object that was used by mistake, even though it had no obvious relation to the object that should have been used</def>
+			</sc>
+
+		</gc>
+
+		<gc>
+			<name>Sequence</name>
+			<ga>Access limitations</ga>
+			<ga>Communication failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Inadequate procedure</ga>
+			<ga>Inattention</ga>
+			<ga>Memory failure</ga>
+			<ga>Wrong identification</ga>
+	
+			<sa>Trapping error</sa>
+
+			<sc>
+				<name>Omission</name>
+				<def>An action that was not carried out. This includes in particular the omission of the last action(s) of a series</def>
+			</sc>
+			<sc>
+				<name>Jump forward</name>
+				<def>One or more actions in a sequence were skipped.</def>
+			</sc>
+			<sc>
+				<name>Jump backwards</name>
+				<def>One or more earlier actions that have been carried out, is carried out again.</def>
+			</sc>
+			<sc>
+				<name>Repetition</name>
+				<def>The previous action is repeated.</def>
+			</sc>
+			<sc>
+				<name>Reversal</name>
+				<def>The order of two neighboring actions is reversed.</def>
+			</sc>
+			<sc>
+				<name>Wrong action</name>
+				<def>An extraneous or irrelevant action is carried out.</def>
+			</sc>
+
+
+		</gc>
+	
+	</group>
+</category>
+
+
+<category><name>Man</name>
+
+	<group>
+		<name>Observation</name>
+
+		<gc><name>Observation missed</name>
+
+			<ga>Equipment failure</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Inadequate plan</ga>
+			<ga>Functional impairment</ga>
+			<ga>Inattention</ga>
+	
+			<sa>Information overload</sa>
+			<sa>Multiple signals</sa>
+			<sa>Noise</sa>
+			<sa>Parallax</sa>
+	
+			<sc>
+				<name>Overlook cue / signal</name>
+				<def>A signal or an event that should have been the start of an action (sequence) is missed.</def>
+			</sc>
+			<sc>
+				<name>Overlook measurement</name>
+				<def>A measurement or some information is missed, usually during a sequence of actions.</def>
+			</sc>
+			
+		</gc>
+	
+		<gc><name>False observation</name>
+	
+			<ga>Fatigue</ga>
+			<ga>Distraction</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>False reaction</name>
+				<def>A response is given to an incorrect stimulus or event, e.g. starting to drive when the light changes to red.</def>
+			</sc>
+			<sc><name>False recognition</name>
+				<def>An event or some information is incorrectly recognised or mistaken for something else.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Wrong identification</name>
+	
+			<ga>Distraction</ga>
+			<ga>Missing information</ga>
+			<ga>Faulty diagnosis</ga>
+			<ga>Mislabelling</ga>
+	
+			<sa>Ambiguous symbol set</sa>
+			<sa>Ambiguous signals</sa>
+			<sa>Erroneous information</sa>
+			<sa>Habit, expectancy</sa>
+			<sa>Information overload</sa>
+	
+			<sc><name>Mistaken cue</name>
+				<def>A signal or a cue is misunderstood as something else. The difference from "false reaction" is that it does not immediately lead to an action</def>
+			</sc>
+			<sc><name>Partial identification</name>
+				<def>The identification of an event or some information is incomplete, e.g. as in jumping to a conclusion</def>
+			</sc>
+			<sc><name>Incorrect identification</name>
+				<def>The identification of an event or some information is incorrect. The difference from "false recognition" is that identification is a more deliberate process.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Interpretation</name>
+	
+		<gc><name>Faulty diagnosis</name>
+			<ga>Cognitive bias</ga>
+			<ga>Wrong identification</ga>
+			<ga>Inadequate procedure</ga>
+			
+			<sa>Confusing symptoms</sa>
+			<sa>Error in mental model</sa>
+			<sa>Misleading symptoms</sa>
+			<sa>Mislearning</sa>
+			<sa>Multiple disturbances</sa>
+			<sa>New situation</sa>
+			<sa>Erroneous analogy</sa>
+	
+			<sc><name>Wrong diagnosis</name>
+				<def>The diagnosis of the situation or system state is incorrect.</def>
+			</sc>
+			<sc><name>Incomplete diagnosis</name>
+				<def>The diagnosis of the situation or system state is incomplete.</def>
+			</sc>
+	
+		</gc>
+	
+		<gc><name>Wrong reasoning</name>
+			<ga>Cognitive bias</ga>
+			<ga>Cognitive style</ga>
+	
+			<sa>Too short planning horizon</sa>
+			<sa>False analogy</sa>
+			<sa>Overgeneralisation</sa>
+			<sa>Mode error</sa>
+	
+			<sc><name>Induction error</name>
+				<def>Faulty reasoning involving inferences or generalisations (going from specific to general), leading to invalid results.</def>
+			</sc>
+			<sc><name>Deduction error</name>
+				<def>Faulty reasoning involving deduction (going from general to specific), leading to invalid results.</def>
+			</sc>
+			<sc><name>Wrong priorities</name>
+				<def>The selection among alternatives (hypothesis, explanations, interpretations) using incorrect criteria, hence leading to invalid results.</def>
+			</sc>
+	
+		</gc>
+	
+		<gc><name>Decision error</name>
+			<ga>Fear</ga>
+			<ga>Cognitive bias</ga>
+			<ga>Distraction</ga>
+			<ga>Social pressure</ga>
+		
+			<sa>Lack of knowledge</sa>
+			<sa>Mode error</sa>
+			<sa>Shock</sa>
+			<sa>Stimulus overload</sa>
+			<sa>Workload</sa>
+	
+			<sc><name>Decision paralysis</name>
+				<def>Inability to make a decision in a situation.</def>
+			</sc>
+			<sc><name>Wrong decision</name>
+				<def>Making the wrong decision (typically about action alternatives).</def>
+			</sc>
+			<sc><name>Partial decision</name>
+				<def>Making a decision that does not completely specify what to do, hence creates a need for further decisions to complete the course of action.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Delayed interpretation</name>
+			<ga>Inadequate procedure</ga>
+			<ga>Equipment failure</ga>
+			<ga>Fatigue</ga>
+	
+			<sa>Indicator failure</sa>
+			<sa>Response slow-down</sa>
+	
+			<sc><name>No identification</name>
+				<def>An identification is not made in time (for appropriate action to be taken).</def>
+			</sc>
+			<sc><name>Increased time pressure</name>
+				<def>An identification is not made fast enough, e.g. because the reasoning involved is difficult, leading to a time pressure.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Incorrect prediction</name>
+			<ga>Cognitive bias</ga>
+			<ga>Ambiguous information</ga>
+			<ga>Incomplete information</ga>
+		
+			<sa>None defined</sa>
+	
+			<sc><name>Unexpected state change</name>
+				<def>A state change occurred which had not been anticipated.</def>
+			</sc>
+			<sc><name>Unexpected side-effects</name>
+				<def>The event developed in the main as anticipated, but some side-effects had been overlooked.</def>
+			</sc>
+			<sc><name>Process speed misjudged</name>
+				<def>The speed of development (of the system) has been misjudged, so things happen either too slowly or too fast.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Planning</name>
+	
+		<gc><name>Inadequate plan</name>
+			<ga>Distraction</ga>
+			<ga>Memory failure</ga>
+			<ga>Wrong reasoning</ga>
+			<ga>Excessive demand</ga>
+			<ga>Insufficient knowledge</ga>
+	
+			<sa>Error in goal</sa>
+			<sa>Inadequate training</sa>
+			<sa>Model error</sa>
+			<sa>Overlook precondition</sa>
+			<sa>Overlook side consequent</sa>
+			<sa>Violation</sa>
+			<sa>Too short planning horizon</sa>
+	
+			<sc><name>Incomplete plan</name>
+				<def>The plan is not complete, i.e., it does not contain all the details needed when it is carried out. This can have serious consequences later in time.</def>
+			</sc>
+			<sc><name>Wrong plan</name>
+				<def>The plan is wrong, in the sense that it will not achieve its purpose.</def>
+			</sc>
+	
+		</gc>
+	
+		<gc><name>Priority error</name>
+			<ga>Faulty diagnosis</ga>
+			<ga>Communication failure</ga>
+	
+			<sa>Legitimate higher priority</sa>
+			<sa>Conflicting criteria</sa>
+	
+			<sc><name>Wrong goal selected</name>
+				<def>The goal has been wrongly selected, and the plan will therefore not be effective (cf. the conventional definition of a mistake).</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Temporary person related functions</name>
+	
+		<gc><name>Memory failure</name>
+			<ga>Excessive demand</ga>
+			
+			<sa>Daydreaming</sa>
+			<sa>Long time since learning</sa>
+			<sa>Other priority</sa>
+			<sa>Temporary incapacitation</sa>
+			
+			<sc><name>Forgotten</name>
+				<def>An item or some information cannot be recalled when needed.</def>
+			</sc>
+			<sc><name>Incorrect recall</name>
+				<def>Information is incorrectly recalled (e.g. the wrong name for something).</def>
+			</sc>
+			<sc><name>Incomplete recall</name>
+				<def>Information is only recalled partially, i.e., part of the information is missing.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Fear</name>
+			<ga>None defined</ga>
+	
+			<sa>Earlier error</sa>
+			<sa>Possible consequences</sa>
+			<sa>Uncertainty</sa>
+	
+			<sc><name>Random actions</name>
+				<def>Actions do not seem to follow any plan or principle, but rather look like trial-and-error.</def>
+			</sc>
+			<sc><name>Action freeze</name>
+				<def>The person is paralysed, i.e., unable to move or act.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Distraction</name>
+			<ga>Equipment failure</ga>
+			<ga>Communication failure</ga>
+	
+			<sa>Boss / colleague</sa>
+			<sa>Comfort call</sa>
+			<sa>Commotion</sa>
+			<sa>Competing task</sa>
+			<sa>Telephone</sa>
+		
+			<sc><name>Task suspended</name>
+				<def>The performance of a task is suspended because the person's attention was caught by something else.</def>
+			</sc>
+			<sc><name>Task not completed</name>
+				<def>The performance of a task is not completed because of a shift in attention.</def>
+			</sc>
+			<sc><name>Goal forgotten</name>
+				<def>The person cannot remember why something is being done. This may cause a repetition of previous steps.</def>
+			</sc>
+			<sc><name>Loss of orientation</name>	
+				<def>The person cannot remember or think of what to do next or what happened before.</def>
+			</sc>
+	
+		</gc>
+	
+		<gc><name>Fatigue</name>
+			<ga>Adverse ambient conditions</ga>
+			<ga>Irregular working hours</ga>
+	
+			<sa>Exhaustion</sa>
+	
+			<sc><name>Delayed response</name>
+				<def>The person's response speed (physically or mentally) is reduced due to fatigue.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Performance variability</name>
+			<ga>Equipment failure</ga>
+			<ga>Excessive demand</ga>
+			<ga>Insufficient skills</ga>
+			
+			<sa>Change of system character</sa>
+			<sa>Illness</sa>
+			<sa>Lack of training</sa>
+			<sa>Overenthusiasm</sa>
+	
+			<sc><name>Lack of precision</name>
+				<def>Reduced precision of actions, e.g. in reaching a target value.</def>
+			</sc>
+			<sc><name>Increasing misses</name>
+				<def>An increasing number of actions fails to achieve their purpose.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Inattention</name>
+			<ga>Adverse ambient conditions</ga>
+	
+			<sa>Temporary incapacitation</sa>
+	
+			<sc><name>Signal missed</name>
+				<def>A signal or an event was missed due to inattention. This is similar to "observation missed", the difference being whether it is seen as a random event or something that can be explained by a cognitive function.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Physiological stress</name>
+			<ga>Adverse ambient conditions</ga>
+			<ga>Irregular working hours</ga>
+		
+			<sa>Boredom</sa>
+	
+			<sc><name>Many specific effects</name>
+				<def>A general condition caused by physiological stress. This may have many specific effects.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Psychological stress</name>
+			<ga>Excessive demand</ga>
+			<ga>Insufficient knowledge</ga>
+		
+			<sa>Boredom</sa>
+	
+			<sc><name>Many specific effects</name>
+				<def>A general condition caused by psychological stress. This may have many specific effects.</def>
+			</sc>
+	
+		</gc>
+	
+	</group>
+	<group><name>Permanent person related functions</name>
+	
+		<gc><name>Functional impairment</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Deafness</name>
+				<def>todo</def>
+			</sc>
+			<sc><name>Bad eyesight</name>
+				<def>todo</def>
+			</sc>
+			<sc><name>Colour blindness</name>
+				<def>todo</def>
+			</sc>
+			<sc><name>Dyslexia/aphasia</name>
+				<def>todo</def>
+			</sc>
+			<sc><name>Other disability</name>
+				<def>todo</def>
+			</sc>
+			</gc>
+		
+			<gc><name>Cognitive style</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+		
+			<sc><name>Simultaneous scanning</name>
+				<def>Search for data and information is accomplished by looking for several things at the same time.</def>
+			</sc>
+			<sc><name>Successive scanning</name>
+				<def>Search for data and information is accomplished by looking at one thing at a time.</def>
+			</sc>
+			<sc><name>Conservative focusing</name>
+				<def>Search for data and information starts from an assumption of which the various aspects are examined one by one.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Cognitive bias</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Focus gambling</name>
+				<def>The search for data or information changes in an opportunistic way, rather than systematically.</def>
+			</sc>
+			<sc><name>Incorrect revision of probabilities</name>
+				<def>New information does not lead to a proper adjustment of probabilities - either a conservative or a too radical effect.</def>
+			</sc>
+			<sc><name>Hindsight bias</name>
+				<def>Interpretation of past events is influenced by knowledge of the outcome.</def>
+			</sc>
+			<sc><name>Attribution error</name>
+				<def>Event are (mistakenly) seen as being caused by specific phenomena or factors.</def>
+			</sc>
+			<sc><name>Illusion of control</name>
+				<def>Person mistakenly believes that the chosen actions control the developments in the system.</def>
+			</sc>
+			<sc><name>Confirmation bias</name>
+				<def>Search for data or information is restricted to that which will confirm current assumptions.</def>
+			</sc>
+			<sc><name>Hypothesis fixation</name>
+				<def>Search for information and action alternatives is constrained by a strong hypothesis about what the current problem is.</def>
+			</sc>
+		</gc>
+	
+	</group>
+</category>
+
+<category><name>Technology</name>
+
+	<group><name>Equipment</name>
+
+		<gc><name>Equipment failure</name>
+		<ga>Maintenance failure</ga>
+		
+		<sa>Power failure</sa>
+		<sa>Fire</sa>
+		<sa>Flooding</sa>
+		<sa>Tremor</sa>
+		<sa>External event</sa>
+		<sa>Impact / Projectile</sa>
+
+		<sc><name>Actuator stick/slip</name>
+			<def>An actuator or a control either cannot be moved or moves too easily.</def>
+		</sc>
+		<sc><name>Blocking</name>
+			<def>Something obstructs or is in the way of an action.</def>
+		</sc>
+		<sc><name>Breakage</name>
+			<def>An actuator or a control or another piece of equipment breaks.</def>
+		</sc>
+		<sc><name>Release</name>
+			<def>Uncontrolled release of matter or energy that causes other equipment to fail.</def>
+		</sc>
+		<sc><name>Speed-up / slow-down</name>
+			<def>The speed of a process (e.g. a flow) changes significantly.</def>
+		</sc>
+		<sc><name>No indications</name>
+			<def>An equipment failure occurs without a clear signature.</def>
+		</sc>
+
+		</gc>
+	
+		<gc><name>Software fault</name>
+			<ga>Inadequate quality control</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Performance slow-down</name>
+				<def>The performance of the system slows down. This can in particular be critical for command and control.</def>
+			</sc>
+			<sc><name>Information delays</name>
+				<def>There are delays in the transmission of information, hence in the efficiency of communication, both within the system and between systems.</def>
+			</sc>
+			<sc><name>Command queues</name>
+				<def>Commands or actions are not being carried out because the system is unstable, but are (presumably) stacked.</def>
+			</sc>
+			<sc><name>Information not available</name>
+				<def>Information is not available due to software or other problems.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Procedures</name>
+	
+		<gc><name>Inadequate procedure</name>
+			<ga>Design failure</ga>
+			<ga>Inadequate quality control</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Ambiguous text</name>
+				<def>The text of the procedure is ambiguous and open to interpretation. The logic of the procedure may be unclear.</def>
+			</sc>
+			<sc><name>Incomplete text</name>
+				<def>The descriptions given by the procedure are incomplete, and assume the user has specific additional knowledge.</def>
+			</sc>
+			<sc><name>Incorrect text</name>
+				<def>The descriptions of the procedure are factually incorrect.</def>
+			</sc>
+			<sc><name>Mismatch to actual equipment</name>
+				<def>The procedure text does not match the physical reality, due to e.g. equipment upgrades.</def>
+			</sc>
+		</gc>
+	</group>
+	<group><name>Temporary interface problems</name>
+	
+		<gc><name>Access limitations</name>
+			<ga>Equipment failure</ga>
+			<ga>Design failure</ga>
+	
+			<sa>Design</sa>
+			<sa>Distance</sa>
+			<sa>Localisation problem</sa>
+			<sa>Obstruction</sa>
+			<sa>Ladder / stair</sa>
+			<sa>Temporary incapacitation</sa>
+	
+			<sc><name>Item cannot be reached</name>
+				<def>An item is permanently out of reach, e.g. too high, too low, or too far away from the operator's working position.</def>
+			</sc>
+			<sc><name>Item cannot be found</name>
+				<def>An item is permanently difficult to find. Infrequently used items that are inappropriately labelled fall into this category.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Ambiguous information</name>
+			<ga>Design failure</ga>
+	
+			<sa>Sensor failure</sa>
+			<sa>Incorrect coding scheme</sa>
+		
+			<sc><name>Position mismatch</name>
+				<def>There is a mismatch between the indicated positions of an item and the actual position, e.g. controls have unusual movements.</def>
+			</sc>
+	
+			<sc><name>Coding mismatch</name>
+				<def>There is a mismatch in coding, e.g. in the use of colour or shape. This may lead to difficulties in the use of equipment.</def>
+			</sc>
+	
+		</gc>
+	
+		<gc><name>Incomplete information</name>
+			<ga>Design failure</ga>
+			<ga>Inadequate procedure</ga>
+	
+			<sa>Indicator failure</sa>
+			<sa>Display clutter</sa>
+			<sa>Navigation problems</sa>
+			<sa>Inadequate display hardware</sa>
+	
+			<sc><name>[Incomplete information]</name>
+				<def>The information provided by the interface is incomplete, e.g. error messages, directions, warnings, etc.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	
+	<group><name>Permanent interface problems</name>
+		<gc><name>Access problems</name>
+			<ga>Inadequate work place layout</ga>
+			
+			<sa>None defined</sa>
+	
+			<sc><name>Item cannot be reached</name>
+				<def>An item, e.g. a control, cannot be reached, for instance because it is hidden by something or due to a change in the operator's working postion.</def>
+			</sc>
+			<sc><name>Item cannot be found</name>
+				<def>An item, information or a control, cannot be located when it is needed or it is temporarily unavailable.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Mislabelling</name>
+			<ga>Inadequate work place layout</ga>
+			<ga>Maintenance failure</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Incorrect information</name>
+				<def>The labelling or identification of an item is not correct.</def>
+			</sc>
+			<sc><name>Ambiguous identification</name>
+				<def>The labelling or identification of an item is open to interpretation.</def>
+			</sc>
+			<sc><name>Language error</name>
+				<def>The labelling or identification of an item is incorrectly, formulated, or is written in a foreign language.</def>
+			</sc>
+		</gc>
+	
+	</group>
+</category>
+
+<category><name>Organisation</name>
+
+	<group><name>Communication</name>
+		<gc><name>Communication failure</name>
+			<ga>Distraction</ga>
+			<ga>Functional impairment</ga>
+			<ga>Inattention</ga>
+	
+			<sa>Noise</sa>
+			<sa>Presentation failure</sa>
+			<sa>Temporary incapacitation</sa>
+	
+			<sc><name>Message not received</name>
+				<def>The message or the transmission of information did not reach the receiver. This could be due to incorrect address or failure of communication channels.</def>
+			</sc>
+			<sc><name>Message misunderstood</name>
+				<def>The message was received, but it was misunderstood. The misunderstanding is, however, not deliberate.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Missing information</name>
+			<ga>Mislabelling</ga>
+			<ga>Design failure</ga>
+			<ga>Inadequate procedure</ga>
+	
+			<sa>Hidden information</sa>
+			<sa>Presentation failure</sa>
+			<sa>Incorrect language</sa>
+			<sa>Noise</sa>
+		
+			<sc><name>No information</name>
+				<def>Information is not being given when it was needed or requested, e.g. missing feedback.</def>
+			</sc>
+			<sc><name>Incorrect information</name>
+				<def>The information being given is incorrect or incomplete.</def>
+			</sc>
+			<sc><name>Misunderstanding</name>
+				<def>There is a misunderstanding between sender and receiver about the purpose, form or structure of the communication.</def>
+			</sc>
+		</gc>
+	
+	</group>	
+	<group><name>Organisation</name>
+	
+		<gc><name>Maintenance failure</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Equipment not operational</name>
+				<def>Equipment (controls, resources) does not function or is not available due to missing or inappropriate management.</def>
+			</sc>
+			<sc><name>Indicators not working</name>
+				<def>Indications (lights, signals) do not work properly due to missing maintenance.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Inadequate quality control</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Inadequate procedures</name>
+				<def>Equipment / functions is not adequate due to insufficient quality control.</def>
+			</sc>
+			<sc><name>Inadequate reserves</name>
+				<def>Lack of resources or supplies (e.g. inventory, back-up equipment, etc.)</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Management problem</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Unclear roles</name>
+				<def>People in the organisation are not clear about their roles and duties.</def>
+			</sc>
+			<sc><name>Dilution of responsibility</name>
+				<def>There is not clear distribution or responsibility; this is particularly important in abnormal situations.</def>
+			</sc>
+			<sc><name>Unclear line of command</name>
+				<def>The line of command is not well defined and control of the situation may be lost.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Design failure</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Anthropometric mismatch</name>
+				<def>The working environment is inadequate, and the cause is clearly a design failure.</def>
+			</sc>
+			<sc><name>Inadequate MMI</name>
+				<def>The interface is inadequate, and the cause is clearly a design failure.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Inadequate task allocation</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Inadequate managerial rules</name>
+				<def>The organisation of work is deficient due to the lack of clear rules or principles.</def>
+			</sc>
+			<sc><name>Inadequate task planning</name>
+				<def>Task planning/ scheduling is deficient.</def>
+			</sc>
+			<sc><name>Inadequate work procedure</name>
+				<def>Procedures for how work should be carried out are inadequate.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Social pressure</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Group think</name>
+				<def>The individual's situation understanding is guided or controlled by the group.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Training</name>
+		
+		<gc><name>Insufficient skills</name>
+			<ga>Management problem</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Performance failure</name>
+				<def>Lack of skills (practical experience) means that a task cannot be accomplished.</def>
+			</sc>
+			<sc><name>Equipment mishandling</name>
+				<def>Lack of skills (practical experience) means that equipment is incorrectly used.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Insufficient knowledge</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Confusion</name>
+				<def>The person is not quite certain about what to do, due to lack of knowledge.</def>
+			</sc>
+			<sc><name>Loss of situation awareness</name>	
+				<def>The person has lost general situation awareness (understanding) due to lack of knowledge.</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Ambient conditions</name>
+		<gc><name>Temperature</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Too hot</name>
+				<def>Uncomfortably warm.</def>
+			</sc>
+			<sc><name>Too cold</name>
+				<def>Uncomfortably cold.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Sound</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Too loud</name>
+				<def>Noise level is too high.</def>
+			</sc>
+			<sc><name>Too soft</name>
+				<def>Signal level is too low.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Humidity</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+			
+			<sc><name>Too dry</name>
+				<def>Uncomfortably dry.</def>
+			</sc>
+			<sc><name>Too humid</name>
+				<def>Uncomfortably humid.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Illumination</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Too bright</name>
+				<def>High luminosity, glare, reflection.</def>
+			</sc>
+			<sc><name>Too dark</name>
+				<def>Low luminosity, reduced colour and contrast.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Other</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+	
+			<sc><name>Vibration</name>
+				<def>There may be other "dimensions", depending on the specific type of work.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Adverse ambient conditions</name>
+			<ga>None defined</ga>
+	
+			<sa>None defined</sa>
+			
+			<sc><name>[None defined]</name>
+				<def>Highly context dependent, may coincide with some of the Common Performance Conditions</def>
+			</sc>
+		</gc>
+	
+	</group>
+	<group><name>Working conditions</name>
+	
+		<gc><name>Excessive demand</name>
+			<ga>Inadequate task allocation</ga>
+			<ga>Adverse ambient conditions</ga>
+	
+			<sa>Unexpected tasks</sa>
+			<sa>Parallel tasks</sa>
+	
+			<sc><name>None defined</name>
+				<def>Excessive task demands or insufficient time / resources.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Inadequate work place layout</name>
+			<ga>Design failure</ga>
+			<ga>Communication failure</ga>
+		
+			<sa>None defined</sa>
+	
+			<sc><name>Narrow work space</name>
+				<def>Available work space is not large enough for the required activities. This is often the case for maintenance work.</def>
+			</sc>
+			<sc><name>Dangerous work space</name>
+				<def>Work must be carried out in dangerous conditions, e.g. high voltage line work, radiation, unstable mass or energy storage, etc.</def>
+			</sc>
+			<sc><name>Elevated work space</name>
+				<def>Work must be carried out where there is a risk of falling down.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Inadequate team support</name>
+			<ga>None defined</ga>
+			
+			<sa>None defined</sa>
+	
+			<sc><name>Unclear job description</name>
+				<def>The roles within the team are not well defined or well understood.</def>
+			</sc>
+			<sc><name>Inadequate communication</name>
+				<def>The distribution of work / responsibilities within the team is not mutually agreed.</def>
+			</sc>
+			<sc><name>Lack of team cohesiveness</name>
+				<def>There is little cohesiveness in the team, hence little collaboration.</def>
+			</sc>
+		</gc>
+	
+		<gc><name>Irregular working hours</name>
+			<ga>None defined</ga>
+	
+			<sa>Shift work</sa>
+			<sa>Changing schedule</sa>
+			<sa>Time zone change</sa>
+	
+			<sc><name>Circadian rhythm effects</name>
+				<def>Shift work leading to disturbances of physiological and psychological functions (jet lag, lack of sleep, etc.).</def>
+			</sc>
+		</gc>
+		
+	</group>
+</category>
+
+</cream>

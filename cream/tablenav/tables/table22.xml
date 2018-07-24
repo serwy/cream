@@ -1,0 +1,39 @@
+<table><name>Planning</name>
+
+	<gc><name>Inadequate plan</name>
+		<ga>Distraction</ga>
+		<ga>Memory failure</ga>
+		<ga>Wrong reasoning</ga>
+		<ga>Excessive demand</ga>
+		<ga>Insufficient knowledge</ga>
+
+		<sa>Error in goal</sa>
+		<sa>Inadequate training</sa>
+		<sa>Model error</sa>
+		<sa>Overlook precondition</sa>
+		<sa>Overlook side consequent</sa>
+		<sa>Violation</sa>
+		<sa>Too short planning horizon</sa>
+
+		<sc><name>Incomplete plan</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Wrong plan</name>
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+	<gc><name>Priority error</name>
+		<ga>Faulty diagnosis</ga>
+		<ga>Communication failure</ga>
+
+		<sa>Legitimate higher priority</sa>
+		<sa>Conflicting criteria</sa>
+
+		<sc><name>Wrong goal selected</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

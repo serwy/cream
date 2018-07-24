@@ -1,0 +1,53 @@
+<table><name>Temporary interface problems</name>
+
+	<gc><name>Access limitations</name>
+		<ga>Equipment failure</ga>
+		<ga>Design failure</ga>
+
+		<sa>Design</sa>
+		<sa>Distance</sa>
+		<sa>Localisation problem</sa>
+		<sa>Obstruction</sa>
+		<sa>Ladder / stair</sa>
+		<sa>Temporary incapacitation</sa>
+
+		<sc><name>Item cannot be reached</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Item cannot be found</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Ambiguous Information</name>
+		<ga>Design failure</ga>
+
+		<sa>Sensor failure</sa>
+		<sa>Incorrect coding scheme</sa>
+	
+		<sc><name>Position mismatch</name>
+			<def>todo</def>
+		</sc>
+
+		<sc><name>Coding mismatch</name>
+			<def>todo</def>
+		</sc>
+
+	</gc>
+
+	<gc>Incomplete information
+		<ga>Design failure</ga>
+		<ga>Inadequate procedure</ga>
+
+		<sa>Indicator failure</sa>
+		<sa>Display clutter</sa>
+		<sa>Navigation problems</sa>
+		<sa>Inadequate display hardware</sa>
+
+		<sc><name>Incomplete information</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>
+

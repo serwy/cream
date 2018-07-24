@@ -1,0 +1,222 @@
+<cream>
+
+<cpc>
+	<name>Adequacy of organisation</name>
+	<description>The quality of the roles and responsibilities of team members, additional support, communication systems, Safety Management System, instructions and guidelines for externally oriented activities, role of external agencies, etc.</description>
+	<level>	
+		<name>Very efficient</name>
+		<perf>Improved</perf>
+	</level>
+	<level>	
+		<name>Efficient</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>	
+		<name>Inefficient</name>
+		<perf>Reduced</perf>
+	</level>
+	<level>	
+		<name>Deficient</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>0</man>
+	<tech>0</tech>
+	<org>2</org>
+
+</cpc>
+
+
+<cpc>
+	<name>Working conditions</name>
+	<description>The nature of the physical working conditions such as ambient lighting, glare on screens, noise from alarms, interruptions from the task, etc.</description>
+	<level>
+		<name>Advantageous</name>
+		<perf>Improved</perf>
+	</level>
+	<level>
+		<name>Compatible</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Incompatible</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>1</man>
+	<tech>2</tech>
+	<org>1</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Adequacy of MMI and operational support</name>
+	<description>The Man-Machine interface in general, including the information available on control panels, computerised workstations, and operational support provided by specifically designed decision aids.</description>
+	<level>
+		<name>Supportive</name>
+		<perf>Improved</perf>
+	</level>
+	<level>
+		<name>Adequate</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Tolerable</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Inappopriate</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>1</man>
+	<tech>2</tech>
+	<org>1</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Availability of procedures / plans</name>
+	<description>Procedures and plans include operating and emergency procedures, familiar patterns of response heuristics, routines, etc.</description>
+	<level>
+		<name>Appropriate</name>
+		<perf>Improved</perf>
+	</level>
+	<level>
+		<name>Acceptable</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Inappropriate</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>0</man>
+	<tech>2</tech>
+	<org>2</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Number of simultaneous goals</name>
+	<description>The number of taks a person is required to pursue or attend to at the same time (i.e., evaluating the effects of actions, sampling new information, assessing multiple goals, etc.)</description>
+	<level>
+		<name>Fewer than capacity</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Matching current capacity</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>More than capacity</name>
+		<perf>Reduced</perf>
+	</level>
+
+
+	<man>2</man>
+	<tech>2</tech>
+	<org>0</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Available Time</name>
+	<description>The time available to carry out a task and corresponds to how well the task execution is synchronised to the process dynamics</description>
+	<level>
+		<name>Adequate</name>
+		<perf>Improved</perf>
+	</level>
+	<level>
+		<name>Temporarily inadequate</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Continuously inadequate</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>2</man>
+	<tech>0</tech>
+	<org>1</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Time of day (circadian rhythm)</name>
+	<description>The time of day (or night) describes the time at which the task is carried out, in particular whether or not the person is adjusted to the current time (circadian rhythm). Typical examples are the effects of shift work. It is a well-established fact that the time of day has an effect on the quality of work, and that performance is less efficient if the normal circadian rhythm is disrupted.</description>
+	<level>
+		<name>Day-time (adjusted)</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Night-time (unadjusted)</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>1</man>
+	<tech>0</tech>
+	<org>0</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Adequacy of training and experience</name>
+	<description>The level and quality of training provided to operators as familiarisation to new technology, refreshing old skills, etc. It also refers to the level of operational experience.</description>
+	<level>
+		<name>Adequate, high experience</name>
+		<perf>Improved</perf>
+	</level>
+	<level>
+		<name>Adequate, limited experience</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>
+		<name>Inadequate</name>
+		<perf>Reduced</perf>
+	</level>
+
+
+	<man>0</man>
+	<tech>2</tech>
+	<org>2</org>
+
+
+</cpc>
+
+<cpc>
+	<name>Crew collaboration quality</name>
+	<description>The quality of the collaboration between crew members, including the overlap between the official and unofficial structure, the level of trust, and the general social climate among crew members.</description>
+	<level>	
+		<name>Very efficient</name>
+		<perf>Improved</perf>
+	</level>
+	<level>	
+		<name>Efficient</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>	
+		<name>Inefficient</name>
+		<perf>Not significant</perf>
+	</level>
+	<level>	
+		<name>Deficient</name>
+		<perf>Reduced</perf>
+	</level>
+
+	<man>1</man>
+	<tech>0</tech>
+	<org>2</org>
+
+
+
+</cpc>
+
+
+</cream>

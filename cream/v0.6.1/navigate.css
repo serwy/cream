@@ -1,0 +1,13 @@
+#groupPanel
+{
+	overflow: auto;
+	height: 200px;
+	width: 300px;
+	border-right: 1px solid #cccccc;
+}
+#tablePanel
+{	overflow: auto;
+	width: 100%;
+	height: 200px;
+
+}

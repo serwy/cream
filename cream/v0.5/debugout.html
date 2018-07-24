@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Debug Window</title>
+<style type="text/css">
+
+body {
+	#background: #000000;
+	#color: #FFFFFF;
+	font-family: monospace;
+	font-size: 10pt;
+
+}
+
+.clear {
+	border: 2px solid #CCCCCC;
+	margin: 7pt;
+	padding: 5pt;
+	color: #000000;
+	position: fixed;
+	top: 0px;
+	right: 0pt;
+}
+</style>
+
+<script type="text/javascript" language="javascript">
+
+function onMouseDown() {
+	//document.body.innerHTML="";
+}
+
+
+function clearWindow() {
+	
+	document.body.innerHTML = "<div class='clear' onmousedown='clearWindow();'>CLEAR</div>";
+
+
+}
+
+</script>
+
+
+
+</script>
+
+</head>
+
+<body onload="clearWindow();"></body>
+
+
+</html>

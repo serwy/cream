@@ -1,0 +1,148 @@
+
+.appTitleClick {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.aboutCREAM {
+	padding: 20pt;
+	margin: 20pt;
+	border: 2px solid #CCCCCC;
+}
+.eventPanel {
+	border: 2px solid #CCCCCC;
+	margin: 5px;
+	padding: 5px;
+	background: #999999;
+
+
+}
+
+.groupPanel {
+	border: 2px solid #CCCCCC;
+	margin: 5px;
+	padding: 5px;
+	background: #FFFFFF;
+
+
+}
+
+.eTitle {
+	background: #CC0000;
+	color: #FFFFFF;
+}
+
+.tTitle {
+	background: #CCCCCC;
+
+}
+
+.titleClick {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	color: #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+
+	background: #AA0000;
+	border-top: 2px solid #cc8888;
+	border-left: 2px solid #cc8888;
+	border-right: 2px solid #883333;
+	border-bottom: 2px solid #883333;
+	padding-left: 2px;
+	padding-right: 2px;
+	-moz-border-radius: 5px 5px 5px 5px;
+}
+
+.titleClick:hover {
+	display: block;
+	background: #000000;
+	color: #FFFFFF;
+	border: 2px solid #000000;
+}
+
+.titleClickDown {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	color: #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+
+	background: #BB6666;
+	border-top: 2px solid #883333;
+	border-left: 2px solid #883333;
+	border-right: 2px solid #cc8888;
+	border-bottom: 2px solid #cc8888;
+	padding-left: 4px;
+	padding-right: 2px;
+	-moz-border-radius: 5px 5px 5px 5px;
+}
+
+.titleClickDown:hover {
+	display: block;
+	background: #000000;
+	color: #FFFFFF;
+	border: 2px solid #000000;
+}
+
+
+
+
+.creamClick {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+	color: #000000;
+	padding: 0px;
+	margin: 0px;
+	
+	background: #CCCCCC;
+	border-top: 2px solid #DDDDDD;
+	border-left: 2px solid #DDDDDD;
+	border-right: 2px solid #888888;
+	border-bottom: 2px solid #888888;
+	padding-left: 2px;
+	padding-right: 2px;
+	-moz-border-radius: 5px 5px 5px 5px;
+}
+.creamClick:hover {
+	display: block;
+	background: #000000;
+	color: #FFFFFF;
+	border: 2px solid #000000;
+}
+
+.panelNavigate {
+	border: 1px solid #000000;
+	padding: 1px;
+	width: 250px;
+	overflow: hidden;
+}
+
+.panelGroup {
+	border: 1px solid #000000;
+	padding: 1px;
+	overflow: hidden;
+}
+
+
+td {
+	vertical-align: top;
+	font-size: inherit;
+}
+.cTitle {
+	border-bottom: 2px solid #000000;
+	font-size: 20px;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+.cTitleBack {
+	width: 100%;
+	background: #FF0000;
+
+}
+

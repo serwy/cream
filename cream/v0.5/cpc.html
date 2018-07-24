@@ -1,0 +1,330 @@
+<html>
+
+<head>
+
+<link rel=StyleSheet href="navigator.css">
+<link rel=stylesheet href="gui.css">
+
+<style type="text/css">
+
+body {
+	font-family: sans-serif;
+	background: #FFFFFF;
+}
+
+.cpcTextArea {
+	width: 100%;
+	height: 45pt;
+	border: none;
+}
+
+.cpcRED {
+	color: #AA0000;
+	font-weight: 900;
+}
+
+.cpcGREEN {
+	color: #00AA00;
+	font-weight: 900;
+}
+.pTitle {
+	font-size: 20pt;
+	color: #CC0000;
+	border-bottom: 2px solid #000000;
+}
+
+.pContent {
+	font-size: 12pt;
+	color: #000000;
+	padding-bottom: 20pt;
+}
+
+
+
+
+
+
+
+
+</style>
+
+<script type="text/javascript" src="gui.js"></script>
+<script type="text/javascript" src="cpc.js"></script>
+<script type="text/javascript" src="engine.js"></script>
+
+<script type="text/javascript">
+
+function DEBUG() {}
+var CPCMAP = null;
+
+function onLoad()
+{
+	// build CPC stuff
+	
+	loadCPC();
+
+	document.body.appendChild(buildCPC());
+	
+	CPCMAP = document.createElement("div");
+	document.body.appendChild(CPCMAP);
+
+	selectLevel();
+	// need the iframe to call a function in the parent window - how?
+	// top.parent.testFunc();   // that's how
+
+
+	xml = cpcToXml();
+	xmlToCpc(xml);
+}
+
+function cpcToXml()
+{
+	DEBUG("cpcToXml()");
+	// send all this crap to XML
+	var ta = document.body.getElementsByTagName("textarea");
+
+	var allcpc = document.createElement("cpc");
+
+	for (var i = 0; i < CPC_LEVEL.length; i++) {
+		var cpc = document.createElement("cpcitem");
+		var l = document.createElement("level");
+		var t = document.createElement("text");
+		
+		var text = ta[i].value;
+		t.appendChild(document.createTextNode(text));
+
+		l.innerHTML = cpcLevelIndex(CPC_LEVEL[i]);			
+
+		cpc.appendChild(l);
+		cpc.appendChild(t);
+		allcpc.appendChild(cpc);
+	}
+	
+	return allcpc;
+}
+
+function xmlToCpc(xml)
+{
+	DEBUG("xmlToCpc()");
+	// given xml, parse and set the form properly
+	
+	var ta = document.body.getElementsByTagName("textarea");
+
+	var cpc = xml.getElementsByTagName("cpcitem");
+
+	var cpc_parent = CPC_HEAD;
+	for (var i = 0; i < cpc.length; i++) {
+		var l = parseInt(cpc[i].getElementsByTagName("level")[0].innerHTML);
+		var t = cpc[i].getElementsByTagName("text")[0].innerHTML;
+		
+		// need to set levels in CPC_LEVEL;
+		var level = cpc_parent.level;
+		while (l > 0) {
+			level = level.next;
+			l--;
+		}
+
+		CPC_LEVEL[i] = 	level;
+		
+		// set the text
+		//var text = docCPC[i].getElementsByTagName("textarea")[0];
+		ta[i].value = t;
+
+
+
+		cpc_parent = cpc_parent.next;
+	}
+	
+
+
+	setRadioCPC();
+	selectLevel();
+
+}
+
+
+function buildCPC()
+{
+	d = document.createElement("div");
+
+	var s = "";
+
+	s += "<div class='pTitle'>Define Common Performance Conditions:</div>";
+	s += "<div class='pContent'></div>";
+
+	s += "<table rules=all class='panelGroup' cellpadding=3>";
+
+	var count = 1;
+	tmp = CPC_HEAD;
+	while (tmp != null) {
+
+		s += "<tr><td class='eTitle' colspan=2>";
+		s += count + ") " + tmp.name + "</td></tr";
+		s += "<tr><td rowspan=2>";
+		s += "<guigrp>";
+		var l = tmp.level;
+		var tc = 0;
+		while (l != null) {
+			s += "<button callback='";
+			s += "selectLevel(event, " + (count - 1);
+			s += ", " + tc;
+			s += ");";
+			s += "'>" + l.name + "</button>";
+			l = l.next;
+			tc++;
+		}
+		s += "</guigrp>";
+
+		s += "</td>";
+		s += "<td class='tTitle'>Description: " + tmp.desc + "</td></tr>";
+		s += "<tr><td>";
+		s += "<textarea class='cpcTextArea'>[Your analysis here]</textarea>";
+		s += "</td></tr>";
+		s += "<tr><td class='tTitle' colspan=2></td></tr>"; // spacer
+
+		tmp = tmp.next;
+		count++;
+	}
+
+	s += "</table>";
+	s += "<br>";
+
+	
+	// FIXME: add "strength mapping table" here
+
+	d.innerHTML = s;
+	guiAddButton(d, "div");
+
+	return d;
+
+
+}
+
+function calculateMapping()
+{
+	var d = document.createElement("div");
+	// show mappings
+	var s = "";
+
+	s += "<div class='pTitle'>What the CPC's mean:</div>";
+	s += "<div class='pContent'></div>";
+
+
+	s += "<table rules=all frame=all class='panelGroup' cellpadding=5>"
+	s += "<tr class='eTitle'><td>CPC</td><td>Level</td><td>Effect on<br>Performance</td><td>Man</td><td>Technology</td><td>Organization</td></tr>";
+	// FIXME: replace numbers with checks
+	// FIXME: make negative impacts red
+	tmp = CPC_HEAD;
+	var c = 0;
+	while (tmp != null) {
+		s += "<tr>"
+		
+
+		switch (CPC_LEVEL[c].perf.toUpperCase()) {
+			case "REDUCED":
+				s += "<td class='cpcRED'>";
+				break;
+			case "IMPROVED":
+				s += "<td class='cpcGREEN'>";
+				break;
+			default:
+				s += "<td>";
+		}
+
+		s += tmp.name + "</td>";
+		s += "<td>" + CPC_LEVEL[c].name + "</td>";
+		s += "<td>" + CPC_LEVEL[c].perf + "</td>";
+		s += "<td>" + tmp.man + "</td>";
+		s += "<td>" + tmp.tech + "</td>";
+		s += "<td>" + tmp.org + "</td>";
+		s += "</tr>";
+		c++;
+		tmp = tmp.next;
+		
+	}
+	s +="</table>";
+
+	var t = cpcTriplet();
+	s += "<br>";
+	s += "CPC Triplet:";
+	s += "<ul><li class='cpcGREEN'>Improved: " + t[2] + "</li>";
+	s += "<li>Not Significant: " + t[1] + "</li>";
+	s += "<li class='cpcRED'>Reduced: " + t[0] + "</li>";
+	s += "</ul>";
+
+
+	s += "Operator Control Mode: <b>" + cpcControlMode(t) + "</b><br>";
+
+	s += "<br>";
+
+
+
+	s += "<div class='pTitle'>Likely Paths for Analysis:</div>";
+	s += "<div class='pContent'></div>";
+	s += "Sum of reduced performances: (higher numbers means more likely)<br> ";
+	var a = cpcMTO();
+	s += "<ul>";
+	s += "<li>Man: " + a[0] + "</li>";
+	s += "<li>Technology: " + a[1] + "</li>";
+	s += "<li>Organization: " + a[2] + "</li>";
+	s += "</ul>"
+
+	
+
+
+	d.innerHTML = s;
+	return d;
+
+}
+
+function setRadioCPC()
+{
+	// based on CPC_LEVEL values, highlight proper buttons
+
+	var g = document.body.getElementsByTagName("guigrp");
+
+	for (var i = 0; i < g.length; i++) {
+		// which one?
+		var b = g[i].getElementsByTagName("div");
+		var c = cpcLevelIndex(CPC_LEVEL[i]);
+		guiRadioSet(b[c]);
+	}
+
+
+}
+
+function selectLevel(event, cpc, level)
+{
+	if (event != null) {
+		guiRadio(event);
+
+		var l = CPC_LEVEL[cpc].parent.level;
+	
+		while (level > 0) {
+			l = l.next;
+			level--;
+		}
+
+		CPC_LEVEL[cpc] = l;
+	}
+
+	CPCMAP.innerHTML = "";
+	CPCMAP.appendChild(calculateMapping());
+}
+
+
+</script>
+
+
+
+
+</head>
+
+<body onload="onLoad();">
+
+
+
+</body>
+
+
+</html>

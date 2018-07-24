@@ -1,0 +1,49 @@
+<table><name>Equipment</name>
+
+	<gc><name>Equipment failure</name>
+		<ga>Maintenance failure</ga>
+		
+		<sa>Power failure</sa>
+		<sa>Fire</sa>
+		<sa>Flooding</sa>
+		<sa>Tremor</sa>
+		<sa>External event</sa>
+		<sa>Impact / Projectile</sa>
+
+		<sc><name>Actuator stick/slip</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Blocking</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Breakage</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Release</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Speed-up / slow-down</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Software fault</name>
+		<ga>Inadequate quality control</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Performance slow-down</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Information delays</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Command queues</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Information not available</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

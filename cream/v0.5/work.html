@@ -1,0 +1,632 @@
+<html>
+<head>
+<link rel=stylesheet href="navigator.css">
+<style type="text/css">
+
+body {
+	font-size: 10pt;
+}
+
+.line {
+	position:	absolute;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+.drag {
+	font-size: inherit;
+	position:		absolute;
+	border-style: 		solid;
+	border-width: 		1px;
+}
+
+.dragTop {
+	overflow: hidden;
+
+	border-top-width: 0;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-bottom-width: 1px;
+
+	border-style: solid;
+
+	background: #CCCCCC;
+	color: #000000;
+	height: 8px;
+	cursor: move;
+	text-align: right;
+}
+
+.dragContent {
+	font-size: inherit;
+	overflow: hidden;
+	background: #FFFFFF;
+}
+
+.dragBottom {
+	background: #CCCCCC;
+	height: 8px;
+
+	border-top-width: 1px;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+
+	border-style: solid;
+
+	cursor: nw-resize;
+}
+
+.dragFocus {
+	border-color: #AA0000;
+	background: #CC0000;
+}
+
+.dragBlur {
+	border-color: #000000;
+	background: #CCCCCC;
+}
+
+.textArea {
+	#border-width: 0px;
+	display: block;
+	font-family: sans serif;
+	font-size: 10pt;
+	display: block;
+	#width: 100%;
+	#height: 100%;
+}
+
+.nodeData {
+	background: #CCCCCC;
+	border-bottom: 1px solid #888888;
+
+
+}
+
+</style>
+
+<script type="text/javascript" src="engine.js"></script>
+<script type="text/javascript" src="panels.js"></script>
+<script type="text/javascript" src="nodes.js"></script>
+<script type="text/javascript" src="gui.js"></script>
+<script type="text/javascript" language="javascript">
+
+CREAM_MODE = MODE_RETRO;
+
+var lineHead = null;
+
+var NODE_TEXTBOX = 1;
+var NODE_GROUPSELECT = 2;
+
+function DEBUG() { }
+
+
+function saveWorkSpace()
+{
+	w = window.open("", "saving");
+
+
+	w.document.body.innerHTML = "To save this workspace, click File -> Save Page As... <br><br>Only use the .html extension for the file name. <br><br>When done, you may exit this window.";
+
+	// get cpc's to save
+	var xml = self.parent.parent.CPC.cpcToXml();
+	w.document.body.appendChild(xml);
+	xml.setAttribute("style", "display: none;");
+
+
+	var m = document.createElement("mode");
+	m.innerHTML = CREAM_MODE;
+	m.setAttribute("style", "display: none;");
+	w.document.body.appendChild(m);
+
+	// navigate nodeHead
+	// recurse through it
+	// xml-based save
+	var ws = document.createElement("cream");
+	ws.setAttribute("style", "display: none;");
+
+	recDepth = 0;
+	function rec(node) {
+		recDepth++;
+		// navigate the link list, then children
+		var tmp = node;
+		while (tmp != null) {
+			
+			var n = nodeToXML(tmp);
+			n.setAttribute("depth", recDepth);
+			ws.appendChild(n);
+		
+			rec(tmp.child);
+		
+			tmp = tmp.next;
+		}
+		recDepth--;
+	}
+	
+	rec(nodeHead);
+
+	w.document.body.appendChild(ws);
+	w.document.close();
+
+
+}
+
+
+var WINDOW_LOAD;
+function loadFile(file)
+{
+	// for LOCAL FILE reading access :-)	
+	netscape.security.PrivilegeManager.enablePrivilege("UniversalFileRead UniversalBrowserRead");
+	
+
+	var x = new XMLHttpRequest();
+	x.open("GET", "file://" + file, false);
+	x.send(null);
+	
+	var d = document.createElement("div");
+	d.innerHTML = x.responseText;
+
+	var xml = d.getElementsByTagName("cpc")[0];
+	self.parent.parent.CPC.xmlToCpc(xml);
+
+	var c = d.getElementsByTagName("cream")[0];
+	loadWorkSpace(c);
+
+	var m = d.getElementsByTagName("mode")[0];
+	CREAM_MODE = parseInt(m.innerHTML);
+
+}
+
+
+function loadWorkSpace(c)
+{
+	// from a webpage, parse XML for node information
+	// and recreate tree
+
+	// given a document, open it and play with it			
+
+
+	// create node structure
+
+	recDepth = 0;
+	var node = c.getElementsByTagName("node");	
+	var prev = null;
+
+	// n[0] is the head node
+	for(var i = 0; i < node.length; i++) {
+		var r = parseInt(node[i].getAttribute("depth"));
+
+		if (r == 1) { 
+			prev = nodeHead;
+			continue;
+		}
+
+
+		var n = xmlToNode(node[i]);
+		// where does this node go in the tree?
+		DEBUG("depth: " + r + " old: " + recDepth);	
+	
+		if (r > recDepth) {
+			DEBUG("add child");
+			// add n as a child to previous node
+			n.setParent.call(n, prev);
+		}
+		if (r < recDepth) {	// may need to fix this
+			DEBUG("add parent sibling");
+			n.setParent.call(n, prev.parent.parent);
+		}
+
+		if (r == recDepth) {
+			n.setParent.call(n, prev.parent);
+		}
+	
+		n.setBlur();
+		prev = n;
+		recDepth = r;
+	}
+
+}
+
+</script>
+
+<script type="text/javascript">
+
+
+var PANEL = self.parent.panels;
+function onLoad() {
+	loadTables();
+
+	nodeHead = new nodeObject(null, 10, 10, 150, 100);
+	nodeHead.content.innerHTML = "CREAM Start:";
+	nodeHead.callback = "creamSelectConsequent()";
+
+	NODE_FOCUS = nodeHead;
+	// fake event
+	var e = new function() {};
+	e.target = nodeHead.container;
+	moveFocus(e);
+
+}
+
+
+
+
+function creamSelectConsequent()
+{
+
+	PANEL.document.body.innerHTML = "";
+	var p = panelSelectConsequent();
+	var q = guiAddButton(p);
+
+	PANEL.document.body.appendChild(p);
+}
+
+
+// setCreamSA
+//	
+function setCreamSA(n) 
+{
+	DEBUG("setCreamSA()");
+	PANEL.document.body.innerHTML = "";
+
+	var e = panelEditNode(n);
+	guiAddButton(e);
+
+	PANEL.document.body.appendChild(e);
+
+
+}
+
+// deleteNode
+//
+function deleteNode()
+{
+	var p = NODE_FOCUS.parent;
+	NODE_FOCUS.deleteNode();
+	NODE_FOCUS = p;
+
+	p.setFocus();
+
+}
+
+// setDone
+//	- toggle the Done flag on a node
+function setDone(event)
+{
+	// FIXME: write this function
+
+}
+
+// setCreamPanel
+//	callback func from "creamEvent"
+function setCreamPanel(n, event_name)
+{
+	DEBUG("setCreamPanel(" + event_name + ")");
+
+	PANEL.document.body.innerHTML = "";
+
+	var e = panelEditNode(n);
+	guiAddButton(e);
+
+	var p = panelCREAM(event_name);
+
+	guiAddButton(p);
+
+	PANEL.document.body.appendChild(e);
+
+	PANEL.document.body.appendChild(document.createElement("br"));
+	PANEL.document.body.appendChild(p);
+
+	PANEL.scroll(0,0);
+}
+
+// creamEvent
+// 	- called from panel.js tables
+function creamEvent(event_name, event_type)
+{
+	DEBUG("creamEvent(" + event_name + ", " + event_type + ")");
+
+	// add node 
+
+
+if (event_type == "dlg" || event_type == "ilg" || event_type == "dlsa" || event_type == "ilsa") {
+	// where to place?
+	var x = NODE_FOCUS.left + NODE_FOCUS.width + 30;
+	var y = NODE_FOCUS.top;
+	// iterate through children, find lowest one, and append after that one
+	var tmp = NODE_FOCUS.child;
+	while (tmp != null) {
+		if (tmp.top + tmp.height > y) {
+			y = tmp.top + tmp.height + 10;
+		}
+		tmp = tmp.next;
+	}
+	
+	var n = new nodeObject(NODE_FOCUS, x, y, 200, 120);
+
+	//FIXME: callback based on event_type
+
+	if (event_type == "dlg" || event_type == "ilg") {
+		n.callback = "setCreamPanel(this, \"" + event_name + "\")";
+	} else {
+		n.callback = "setCreamSA(this)";  // don't do anything
+	}
+
+	n.data_cons = event_name;
+	n.data_done = 0;
+	
+	// FIXME: dlg = DLGA, ilg = ILGA for retro, DLGC, ILGC for prosp
+	n.data_type = event_type;
+	n.data_text = "[Your analysis here]";
+	n.data_sc = "";
+	nodeData(n);
+
+
+	n.setBlur();
+	makeRoom(n);
+}
+
+if (event_type == "sc") {
+	NODE_FOCUS.data_sc = event_name;
+	nodeData(NODE_FOCUS);
+}
+
+
+}
+
+// makeRoom
+//   - a simple method to ensure new nodes are allocated, moving other nodes around to make room
+function makeRoom(node)
+{
+	var p = node.parent;
+	if (p == null) { return; }
+
+	var gp = p.parent;
+	if (gp == null) { return; }
+
+
+	var n = getNodeOrder(gp);	// gives me order of graphical display of parents to "node"
+
+	DEBUG("len: " + n.length);
+	var topCompare = node.top;
+	var botCompare = node.top + node.container.offsetHeight;
+
+	var i;
+	for (i = 0; i < n.length; i++) {
+		
+		DEBUG("comparing to: " + n[i].content.innerHTML);
+		// does one overlap?
+		var tn = n[i].top;
+		var bn = n[i].top + n[i].container.offsetHeight;
+		
+		if (topCompare >= tn && topCompare <= bn) {
+			if (n[i] != node.parent) {
+				break;
+			}
+		}
+
+		if (botCompare >= tn && botCompare <= bn) {
+			if (n[i] != node.parent) {
+				break;
+			}
+		}
+	}	
+	if (i < n.length) {
+		DEBUG("overlap with: " + n[i].content.innerHTML);
+		// begin shifting everything downward
+		var dy = node.top + node.container.offsetHeight - n[i].top + 10;
+
+		DEBUG("downshift by: " + dy);
+		for (var j = i; j < n.length; j++) {
+			n[j].container.style.top = snapGrid(parseInt(n[j].container.style.top) + dy);
+			n[j].updateChild.call(n[j], 0, dy);
+			n[j].updateDrag.call(n[j]);
+			n[j].updateLine.call(n[j]);
+		}
+	}
+}
+
+function getNodeOrder(node)
+{
+	DEBUG("getNodeOrder(" + node.content.innerHTML + ")");
+	var tmp = node.child;
+
+	var len = lengthOf(tmp);	// how many child nodes?
+	
+	// ptr, top   - sort by top
+	var ret = new Array(len);
+	for(var i = 0; i < len; i++) {
+		ret[i] = tmp;
+		tmp = tmp.next;
+	}	
+	
+	
+	// swaps - bubble sorting
+	for(var i = 0; i < len - 1; i++) {
+		for(var j = i; j < len - 1; j++) {
+			if (ret[j].top > ret[j + 1].top) {
+				var tmp = ret[j];
+				ret[j] = ret[j + 1];
+				ret[j + 1] = tmp;
+			}
+
+		}
+	}
+	
+	for (var i =0; i < len; i++) {
+		DEBUG(i + " " + ret[i].content.innerHTML);	
+			
+	}
+	return ret;
+	
+
+}
+
+function getNodeSpan(node) 
+{
+	DEBUG("getNodeSpan(" + node.content.innerHTML + ")");
+
+	var tmp = node.child;
+	
+	var minY = node.top;
+	var maxY = node.top + node.height;
+
+	while (tmp != null) {
+		if (tmp.top < minY) {
+			minY = tmp.top;
+		}
+		if (tmp.top + tmp.height > maxY) {
+			maxY = tmp.top + tmp.height;
+		}
+		tmp = tmp.next;
+	}
+	return (maxY - minY);
+}
+
+
+
+function nodeToXML(node)
+{
+	DEBUG("nodeToXML");
+	// return a DOM of data for a node
+	var ret = document.createElement("node");
+
+	ret.setAttribute("type", node.type);
+
+	var tmp;
+	tmp = document.createElement("position");
+	tmp.setAttribute("left", node.left);
+	tmp.setAttribute("top", node.top);
+	tmp.setAttribute("width", node.width);
+	tmp.setAttribute("height", node.height);
+	ret.appendChild(tmp);
+
+	tmp = document.createElement("type");
+	tmp.appendChild(toTextNode(node.data_type));
+	ret.appendChild(tmp);
+
+	tmp = document.createElement("consequent");
+	tmp.appendChild(toTextNode(node.data_cons));
+	ret.appendChild(tmp);
+
+	tmp = document.createElement("sc");
+	tmp.appendChild(toTextNode(node.data_sc));
+	ret.appendChild(tmp);
+
+	tmp = document.createElement("text");
+	tmp.appendChild(toTextNode(node.data_text));
+	ret.appendChild(tmp);
+
+	tmp = document.createElement("done");
+	tmp.appendChild(toTextNode(node.data_done));
+	ret.appendChild(tmp);
+
+
+	
+	return ret;
+
+}
+
+function xmlToNode(xml)
+{
+	// return a new node object
+	var n = new nodeObject();
+	
+
+	var p = xml.getElementsByTagName("position")[0];
+
+	n.top = parseInt(p.getAttribute("top"));
+	n.left = parseInt(p.getAttribute("left"));
+	n.width = parseInt(p.getAttribute("width"));
+	n.height = parseInt(p.getAttribute("height"));
+	
+
+	var tmp = xml.getElementsByTagName("type")[0];
+	n.data_type = tmp.innerHTML;
+
+	var tmp = xml.getElementsByTagName("consequent")[0];
+	n.data_cons = tmp.innerHTML;
+
+	var tmp = xml.getElementsByTagName("sc")[0];
+	n.data_sc = tmp.innerHTML;
+
+	var tmp = xml.getElementsByTagName("text")[0];
+	n.data_text = tmp.innerHTML;
+
+
+	var tmp = xml.getElementsByTagName("done")[0];
+	n.data_done = parseInt(tmp.innerHTML);
+
+
+	n.update();
+	nodeData(n);
+
+	if (n.data_type == "dlg" || n.data_type == "ilg") {
+		n.callback = "setCreamPanel(this, \"" + n.data_cons + "\")";
+	} else {	
+		n.callback = "setCreamSA(this)";  // don't do anything
+	}
+
+
+	return n;
+
+}
+
+
+function toTextNode(txt)
+{
+	return document.createTextNode(txt);
+}
+
+
+function selectNodeWrapper(event)	//wrapper for selectNode
+{
+
+	// FIXME: make work better
+	selectNode(event.target.parentNode.nodeObject);
+
+}
+
+
+function setNodeText(event)
+{
+	var t = event.target;
+	NODE_FOCUS.data_text = t.value;
+	
+	nodeData(NODE_FOCUS);	
+
+
+}
+
+
+// setMode() - sets CREAM directionality 
+function setMode(mode){
+	if (mode == "retro") {
+		CREAM_MODE = MODE_RETRO;
+	} else {
+		CREAM_MODE = MODE_PROSP;
+	}
+}
+
+
+function onKeyPress(event) {
+	//saveWorkSpace();
+	//alert("press");
+}
+</script>
+
+
+
+</head>
+
+
+
+
+<body onload="onLoad();" onmouseup="onMouseUp(event);" onmousemove="onMouseMove(event);" onkeypress='onKeyPress(event);'>
+</body>
+
+
+</html>
+

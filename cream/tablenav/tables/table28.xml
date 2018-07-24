@@ -1,0 +1,29 @@
+<table><name>Permanent interface problems</name>
+	<gc><name>Access problems</name>
+		<ga>Inadequate work place layout</ga>
+		
+		<sa>None defined</sa>
+
+		<sc><name>Item cannot be reached</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Item cannot be found</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+	<gc><name>Mislabelling</name>
+		<ga>Inadequate work place layout</ga>
+		<ga>Maintenance failure</ga>
+
+		<sa>None defined</sa>
+
+		<sc><name>Incorrect information</name>
+			<def>todo</def>
+		</sc>
+		<sc><name>Ambiguous identification</name>
+			<def>todo</def>
+		</sc>
+	</gc>
+
+</table>

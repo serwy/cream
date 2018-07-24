@@ -1,0 +1,283 @@
+<html>
+
+<head>
+<title>CREAM - Cognitive Reliability Error Analysis Method - Table Navigator</title>
+<style type="text/css">
+
+</style>
+<LINK REL=StyleSheet HREF="tables.css">
+
+<script src="engine.js" type="text/javascript"></script>
+<script src="tables.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+//
+// CREAM Table Navigator
+//
+// Author: Roger D. Serwy
+//         roger.serwy@gmail.com
+//
+// Implementation of Retrospective and Prospective algorithms for
+// Erik Hollnagel's CREAM system.
+//
+// Developed for PSYCH494 - Advanced Research in Psychology
+// University of Illinois - Urbana Champaign
+// February 2007
+//
+
+
+var STACK_CONTAINER = null;
+var STACK_HEAD = null;
+var STACK_CLEAR = null; 
+
+var CREAM_CONTAINER = null;
+
+var MODE_RETRO = 1;
+var MODE_PROSP = 2;
+var MODE = null;
+
+
+function onLoad() {
+	
+	loadTables();
+
+	setMode(MODE_RETRO);
+
+	STACK_CONTAINER = document.createElement("div");
+	STACK_CONTAINER.setAttribute("class", "stack");
+	document.body.appendChild(STACK_CONTAINER);
+
+	CREAM_CONTAINER = document.createElement("div");
+	document.body.appendChild(CREAM_CONTAINER);
+
+	processCream("Start");  // get the ball rolling
+
+}
+
+//
+// chooseStart()
+// add the navigator table to the cream_container
+function chooseStart()
+{
+	var a = buildTableNav();
+	CREAM_CONTAINER.innerHTML = "";
+	CREAM_CONTAINER.appendChild(a);
+}
+//
+// processCream()
+// callback function for button clicks for CREAM table navigation
+function processCream(event) {
+	if (event.toUpperCase() == "NONE DEFINED") { 
+		return;
+	}
+
+	if (STACK_HEAD != STACK_CLEAR) {
+		STACK_HEAD = STACK_CLEAR; // clear stack if clicked earlier in stack
+	}
+
+	var res = setTable(event);
+
+	if (res == 0) {
+		var a = new stackList();
+		a.event = event;
+		a.next = STACK_HEAD;
+		STACK_HEAD = a;
+		STACK_CLEAR = STACK_HEAD;
+		rebuildStack();
+
+	}
+
+}
+
+//
+// setTable()
+// sets cream_container to contain the "event" table
+function setTable(event) {
+
+	var a = null;
+	if (event == "Start") {
+		a = buildTableNav();
+	} else {
+
+		if (MODE == MODE_RETRO && findGC(event) == null) {
+			alert("Cannot find \"" + event + "\" as a General Consequent");
+			return -1;
+		}
+		if (MODE == MODE_PROSP && findGA(event).length == 0) {
+			alert("Cannot find \"" + event + "\" as a General Antecedent");
+			return -1;
+		}
+
+		switch(MODE) {
+			case MODE_RETRO:	
+				a = buildRetrospectiveTable(event);
+				break;
+			case MODE_PROSP:
+				a = buildProspectiveTable(event);
+				break;
+			default:
+				break;
+		}
+
+	}
+	CREAM_CONTAINER.innerHTML = "";
+	CREAM_CONTAINER.appendChild(a);
+	return 0;
+}
+
+//
+// rebuildStack()
+// redisplays the navigation stack
+function rebuildStack() {
+	var i = 0;
+	var ptr = STACK_HEAD;
+
+	var s = "";
+
+	while (ptr != null) {
+		var t = "&nbsp;&raquo;&nbsp;";
+		t += "<a href=\"javascript:stackBack(" + i + ");\">";
+		t += ptr.event;
+		t += "</a>";
+		s = t + s;
+		i++;
+		ptr = ptr.next;
+	}
+	STACK_CONTAINER.innerHTML = s;	
+}
+
+//
+// stackBack()
+// display the table from earlier in the stack
+// keep track of the STACK_HEAD and STACK_CLEAR pointers
+function stackBack(index) {
+	// move stack head pointer to index
+	var i = 0;
+	var ptr = STACK_HEAD;
+	while (ptr != null) {
+		i++;
+		if (i == index + 1) {
+			STACK_CLEAR = ptr; // so user can navigate back without losing forward position
+			break;
+		}
+		ptr = ptr.next;
+	}
+	rebuildStack();
+
+	setTable(STACK_CLEAR.event);
+}
+
+// do retrospective
+
+function stackList() {
+	this.event = "";
+	this.next = null;
+}
+
+//
+// addStack()
+// adds an event to the navigation stack
+function addStack(event) {
+	var a = new stackList();
+	a.event = event;
+	a.next = null;
+}
+
+//
+// setMode()
+// sets the analysis mode, retrospective or prospective
+function setMode(mode) {
+	// clear classes for anchors
+
+	var r = document.getElementById("MODE_RETRO");
+	var p = document.getElementById("MODE_PROSP");
+
+	r.setAttribute("class", "menua");
+	p.setAttribute("clasS", "menua");
+	
+	MODE = mode;
+
+	if (mode == MODE_RETRO) {
+		r.setAttribute("class", "highlight");
+	} else {
+		p.setAttribute("class", "highlight");
+	}		
+
+}
+
+//
+// mainMenu()
+// FIXME: clean code up
+// handler for topmenu
+function mainMenu(event) {
+	//alert(event);
+	switch(event) {
+		case 'RETROSPECTIVE':
+			setMode(MODE_RETRO);
+			break;
+		case 'PROSPECTIVE':
+			setMode(MODE_PROSP);
+			break;
+		default:
+			break;
+	}
+
+}
+
+//
+// showGroup()
+// callback for displaying the group table information in 
+// the cream_container
+function showGroup(event) {
+	var g = findGroup(event);
+	var a = buildCompleteTable(g);
+
+
+	var t = document.getElementById("showgroup");
+	var d;
+	if (t == null) {
+		d = document.createElement("div");
+	} else {
+		d = t;
+	}
+
+
+	d.setAttribute("id", "showgroup");
+	d.setAttribute("class", "creamTableContainer");
+	d.style.marginTop = "5pt";
+
+	var s = "";
+	s += "<a name='CREAM_TABLE'></a>";
+	s += "<div class='creamTable'>";
+	s += "Group: " + event;
+	s += "<br>(scroll up to return to navigator)";
+	s += "</div>";
+	s += a.innerHTML;
+	d.innerHTML = s;
+	CREAM_CONTAINER.appendChild(d);
+
+	window.location="#CREAM_TABLE";
+}
+
+</script>
+
+
+</head>
+
+<body onload="onLoad()"></body>
+<div class="title">
+CREAM - Cognitive Reliability Error Analysis Method<br>
+Table Navigator</div>
+<div class="menu">
+<span>
+Analysis Method:
+<a class="menua" id="MODE_RETRO" href="javascript:mainMenu('RETROSPECTIVE');">Retrospective</a>
+<a class="menua" id="MODE_PROSP" href="javascript:mainMenu('PROSPECTIVE');">Prospective</a>
+</span>
+</div>
+
+
+</body>
+
+
+</html>

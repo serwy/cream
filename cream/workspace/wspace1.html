@@ -1,0 +1,834 @@
+<html>
+<head>
+
+<style type="text/css">
+
+body {
+	font-family:	sans serif;
+}
+	
+.line {
+	position:	absolute;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCCCCC;
+}
+
+.drag {
+	position:		absolute;
+	border-style: 		solid;
+	border-width: 		1px;
+	border-color: 		#FF0000;
+	background-color: 	#FF00FF;
+
+}
+
+.topGrab {
+	overflow: hidden;
+	-moz-border-radius: 40px 40px 0px 0px;
+	font-family: sans serif;
+	font-size: 10pt;
+	border-style:solid;
+	border-width:1px;
+	border-color:#AAAAAA;
+	#background-color: #c9ba65;
+	background-color: #CCCCCC;
+	color:#000000;
+	padding: 1px;
+	padding-left:10pt;
+	cursor: move;
+}
+
+.botGrab {
+	overflow: hidden;
+	-moz-border-radius: 0px 0px 40px 40px;
+	border-style:solid;
+	border-width:1px;
+	border-color:#CCCCCC;
+	padding-left:10pt;
+	background-color: #DDDDDD;
+	color:#FFFFFF;
+	height: 1px;
+	cursor: nw-resize;
+}
+
+.textArea {
+	border-color: #000000;
+	border-width: 1px;
+	font-family: sans serif;
+	font-size: 10pt;
+}
+
+</style>
+
+<script src="debug.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+
+var dd;
+var offsetX = 0;
+var offsetY = 0;
+var startX = 0;
+var startY = 0;
+var mouseMove = null;
+var targetNode = null;	// ptr to node object that is moved, and currently selected
+
+var linesToUpdate = null;
+
+var nodeHead = null;
+
+var lineHead = null;
+
+function saveWorkSpace()
+{
+	// ok, i need to generate XML to save to file
+}
+
+function loadWorkSpace()
+{
+
+
+}
+
+function propagateMovement(nodePtr, dx, dy)
+{
+PUSHDEBUG()
+
+	// FIXME: offscreen node placement, when x<0 or y < 0;
+
+	DEBUG("propagateMovement(nodePtr, " + dx + ", " + dy + ");");
+	
+	// get a list of all child nodes
+	var nodeListHead = getChildNodes(nodePtr);
+
+	// go thru list
+	var tmp = nodeListHead;
+	while (tmp != null) {
+		
+		DEBUG(tmp.data.creamTitle);
+		// move node
+		tmp.data.x += dx;
+		tmp.data.y += dy;
+		tmp.data.updateUI();
+		tmp=tmp.next;
+	}
+
+	// update lines
+	var l = lineHead;
+	while (l != null) {
+		updateLine(l);
+		l = l.next;
+
+	}	
+
+POPDEBUG();
+}
+
+function getChildNodes(nodePtr)
+{
+	function getAllChildNodes(nodePtr)
+	{
+		var nodeListHead = null;
+		// get all child for current nodePtr
+		var l = getLines(nodePtr, 0, 1);
+		while (l != null) {
+			if (l.data.endNode.visited != 1) {
+				var t = new singly_link_list();
+				t.data = l.data.endNode;
+				t.data.visited = 1;		// a flag for visiting, prevents infinite recursive loops if
+				t.next = nodeListHead;
+				nodeListHead = t;
+			}
+			l = l.next;
+		}
+		
+		// visit all the children, to get children, recursively
+		var tmp = nodeListHead;
+		while (tmp != null) {
+			var c = getAllChildNodes(tmp.data);
+			var e = findEnd(nodeListHead);
+			e.next = c;
+	
+			tmp = tmp.next;
+		}
+	
+		return nodeListHead;
+	}
+	
+	function findEnd(stru)
+	{
+		if (stru == null) {
+			return null;
+		}
+		var ptr = stru;
+		while (ptr.next != null) {
+			ptr = ptr.next;
+		}
+		return ptr;
+
+	}
+
+	var a = getAllChildNodes(nodePtr);
+	// clear all visited flags
+	var b = a;
+	while (b != null) {
+		b.data.visited = 0;
+		b = b.next;
+	}
+
+	return a;
+}
+
+
+function addLine(startIndex, endIndex)
+{
+	DEBUG("addLine("+startIndex+", " + endIndex + ")");
+	var newLine = new lineList();
+
+	// FIXME: checks for null finds
+	newLine.startNode = findNode(startIndex);
+	newLine.endNode = findNode(endIndex);
+
+
+	newLine.next = lineHead;	// insert at beginning
+	lineHead = newLine;	
+
+	buildLine(newLine);
+
+	return newLine;	
+
+	
+}
+
+function buildLine(linePtr)
+{
+	var x1 = linePtr.startNode.x + linePtr.startNode.w;
+	var y1 = linePtr.startNode.y;
+	
+	var x2 = linePtr.endNode.x - 2;
+	var y2 = linePtr.endNode.y;
+
+	// build Div's
+
+	var w = (x2-x1) / 2;
+	var h = y2-y1;
+
+	// add a horizontal line 
+
+	var l1 = document.createElement("div");
+	document.body.appendChild(l1);
+
+
+	var l2 = l1.cloneNode(false);
+	document.body.appendChild(l2);
+
+	var l3 = l1.cloneNode(false);
+	document.body.appendChild(l3);
+
+	linePtr.div1 = l1;
+	linePtr.div2 = l2;
+	linePtr.div3 = l3;
+	
+	updateLine(linePtr);
+
+}
+
+function updateLine(linePtr)
+{
+
+	var x1 = linePtr.startNode.x + linePtr.startNode.w;
+	var y1 = linePtr.startNode.y + 10;
+	
+	var x2 = linePtr.endNode.x - 2;
+	var y2 = linePtr.endNode.y + 10;
+
+	var tmp;
+
+	//what is the box? \ or / ?
+
+	var w = (x2-x1) / 2;
+	var h = y2-y1;
+
+
+	// for the \ line
+	var l1 = linePtr.div1;
+	var l2 = linePtr.div2;
+	var l3 = linePtr.div3;
+	l1.setAttribute("class", "line");
+	l2.setAttribute("class", "line");
+	l3.setAttribute("class", "line");
+
+	if (w > 0) {
+		l1.style.left = x1;
+		l1.style.top = y1;
+		l1.style.width = w;
+		l1.style.height = 0;
+
+		l3.style.left = x1 + w;
+		l3.style.top = y2;
+		l3.style.width = w;
+		l3.style.height = 0;
+
+
+	} else {
+		l1.style.left = x1 + w;
+		l1.style.top = y1;
+		l1.style.width = -w - 2;
+		l1.style.height = 0;
+
+		l3.style.left = x2 + 2;
+		l3.style.top = y2;
+		l3.style.width = -w - 2;
+		l3.style.height = 0;
+
+
+	}
+
+	if (h > 0) {
+		l2.style.left = x1 + w;
+		l2.style.top = y1;
+		l2.style.width = 0;
+		l2.style.height = h;
+	} else {
+		l2.style.left = x1 + w;
+		l2.style.top = y2;
+		l2.style.width = 0;
+		l2.style.height = -h;
+
+
+
+	}
+
+
+
+}
+
+
+function addNode(index)
+{
+	var node = new nodeList();
+	node.index = index;
+
+	// add to the link-listed structure
+	node.next = nodeHead;
+	nodeHead = node;
+
+
+	return node;
+}
+
+function findNode(index) {
+	var tmp = nodeHead;
+	while (tmp != null) {
+		if (tmp.index == index) {
+			return tmp;
+		}
+		tmp = tmp.next;
+	}
+	return null;	// index not found! 
+}
+
+
+function nodeList() {		// datatype
+	this.index = -1;
+	this.x = 0;
+	this.y = 0;
+	this.w = 0;
+	this.h = 0;
+	this.uiPtr = null;
+	this.next = null;
+	this.creamEvent = "";	// antecedent / consequent
+
+	this.createUI = function() {
+		this.uiPtr = new buildNodeUI(this);
+	}
+
+	this.setTitle = function(title) {
+		this.uiPtr.topGrab.innerHTML = title;
+	}
+
+	this.setText = function(text) {
+		this.uiPtr.textArea.innerHTML = text;
+	}
+
+	this.updateUI = function() {
+		this.uiPtr.updateUI();	
+	}
+}
+
+function lineList() {		// datatype
+	this.startNode = null;
+	this.endNode = null;
+
+	this.div1 = null;
+	this.div2 = null;
+	this.div3 = null;
+
+	this.next = null;
+}
+
+function singly_link_list() { 	// generic datatype
+	this.data = null;
+	this.next = null;
+}
+
+
+function deleteNode(nodePtr)
+{
+	DEBUG("Deleting node: " + nodePtr.uiPtr.topGrab.innerHTML);
+
+	// ok, delete the node, deallocate the DIV, delete line links
+
+	document.body.removeChild(nodePtr.uiPtr.container);
+
+	var l = getLines(nodePtr, 1, 1);
+
+	while (l != null) {
+		deleteLine(l.data);
+		l = l.next;
+	}
+}
+
+
+
+function deleteLine(linePtr)
+{
+	if (linePtr == null) { return; }
+	DEBUG("Deleting line:");
+
+
+	document.body.removeChild(linePtr.div1);
+	document.body.removeChild(linePtr.div2);
+	document.body.removeChild(linePtr.div3);
+
+	var tmp = lineHead;
+
+	if (tmp == linePtr) {
+		lineHead = linePtr.next;
+		return;
+	}
+
+	while (tmp != null) {
+		if (tmp.next == linePtr) {
+			tmp.next = linePtr.next;	// unlink, re-link around
+		}
+		tmp = tmp.next;
+	}
+}
+
+function getLinePtr(startIndex, endIndex)
+{
+	var tmp = lineHead;
+	while (tmp != null) {
+		if (tmp.startNode.index == startIndex && tmp.endNode.index == endIndex) {
+			return tmp;
+		}
+		tmp = tmp.next;
+	}
+	return null;
+}
+
+function getParent(nodePtr)
+{
+	// this will return a parent, not all possible parents to the current node
+	var l = getLines(nodePtr, 1, 0);
+
+	if (l != null) {
+		return l.data.startNode;
+	} else {
+		return null;
+	}
+
+}
+
+function getLines(nodePtr, parentLines, childLines)	// returns a linked-list of lines connected to a node
+{
+	var lHead = null;
+
+	// find all lines that touch a node;
+	var tmp = lineHead;
+	while (tmp != null) {
+		if (((tmp.startNode == nodePtr) && childLines) || ((tmp.endNode == nodePtr)) && parentLines) {
+			// add to list
+			var t = new singly_link_list();
+			t.next = lHead;
+			t.data = tmp;
+			lHead = t;
+		}
+		tmp = tmp.next;	// iterate
+	}
+
+	return lHead;		// a pointer to linked list of lines that connect to nodePtr
+}
+
+
+
+function buildNodeUI(nodePtr)  // places the node into the HTML DOM
+{
+
+	var container = document.createElement("div");
+
+	var str = "";
+	str += "position:absolute;";
+	str += "left: " + nodePtr.x + "px;";
+	str += "top: " + nodePtr.y + "px;";
+	str += "width: " + nodePtr.w + "px;";
+	str += "height: " + nodePtr.h + "px;";
+	container.setAttribute("style", str);
+
+	var topGrab = document.createElement("div");
+	topGrab.innerHTML="Node";
+	topGrab.setAttribute("class", "topGrab");
+	var textArea = document.createElement("textarea");
+	textArea.setAttribute("class", "textArea");
+
+	str = "";
+	str += "margin: 0px;";
+	str += "border-style: solid;";
+	str += "border-top-width: 0px;"
+	str += "border-left-width: 1px;"
+	str += "border-right-width: 1px;"
+	str += "border-bottom-width: 0px;"
+	str += "border-left-color: #CCCCCC;";
+	str += "border-right-color: #CCCCCC;";
+	str += "padding: 2px;";
+	str += "width: 100%;";
+	str += "height: 100%;";
+
+	textArea.setAttribute("style", str)	
+	textArea.innerHTML = ""
+	textArea.setAttribute("onmousedown", "s_onMouseDown(event);");
+	
+	var botGrab = document.createElement("div");
+	botGrab.setAttribute("class", "botGrab");
+
+
+	container.appendChild(topGrab);
+	container.appendChild(textArea);
+	container.appendChild(botGrab);
+
+	topGrab.setAttribute("onmousedown", "d_onMouseDown(event);");
+	topGrab.setAttribute("onmouseup", "d_onMouseUp(event);");
+
+	botGrab.setAttribute("onmousedown", "r_onMouseDown(event);");
+	botGrab.setAttribute("onmouseup", "r_onMouseUp(event);");
+
+
+	container.setAttribute("index", nodePtr.index);  // keep track of node
+
+	document.body.appendChild(container);
+
+	this.container = container;
+	this.topGrab = topGrab;
+	this.botGrab = botGrab;
+	this.textArea = textArea;
+
+	this.updateUI = function()
+	{
+		var str = "";
+		str += "position:absolute;";
+		str += "left: " + nodePtr.x + "px;";
+		str += "top: " + nodePtr.y + "px;";
+		str += "width: " + nodePtr.w + "px;";
+		str += "height: " + nodePtr.h + "px;";
+		this.container.setAttribute("style", str);
+
+
+	}
+
+
+}
+
+function dragUpdateLines(tmp) 	// iterate over lines when dragging
+{
+	while (tmp != null) {
+		updateLine(tmp.data);
+		tmp = tmp.next;
+	}
+}
+
+function onLoad()
+{
+DEBUGOFF();
+//	setTimeout("doNodes()", 500);
+	setTimeout("test()", 500);
+}
+
+function test() {
+	var a = newNode();
+	a.creamTitle = "START";
+	a.setTitle("Start");
+	selectNode(a);
+}
+
+
+var newNodeIndex = 0;
+function newNode(parentNodeIndex) 
+{
+	parentNode = findNode(parentNodeIndex);
+
+	DEBUG("newNode:");
+	var node = addNode(newNodeIndex);
+	newNodeIndex++;
+	
+	//intelligently place node
+	if (parentNode != null) {
+		DEBUG("parentNode exists");
+		// place as a child node;
+		var childLines = getLines(parentNode, 0, 1); // get all the child lines
+		DEBUG("childLines: " + childLines);
+		// find the lowest one
+		var lowpoint = 0;
+		if (childLines == null) {
+			lowpoint = parentNode.y;
+		} 
+		while (childLines != null) {
+			var b = childLines.data.endNode.y +  childLines.data.endNode.h + 20;
+			DEBUG("b: " + b);
+			if (b > lowpoint) {
+				lowpoint = b;
+			}
+			childLines = childLines.next;
+		}
+
+		node.x = parentNode.x + parentNode.w + 20;
+		node.y = lowpoint + 10;
+		node.w = 150;
+		node.h = 50;
+		node.createUI();
+		// connect nodes
+		DEBUG("parentIndex: " + parentNode.index);
+		DEBUG("childIndex: " + node.index);
+		addLine(parentNode.index, node.index);
+	} else {
+		node.x = 10;
+		node.y = 10;
+		node.w = 150;
+		node.h = 50;
+		node.createUI();
+	}
+
+	return node;
+}
+
+var ENGINE = top.engine;
+
+function selectNode(nodePtr)
+{
+PUSHDEBUG();
+DEBUGON();
+	DEBUG("selectNode("+nodePtr.creamTitle+")");
+
+	if (nodePtr == null) {
+		ALERT("null ptr to selectNode");
+
+	}
+
+	if (targetNode != null && targetNode != nodePtr) {
+		// unhighlight old target		
+		targetNode.uiPtr.topGrab.style.background=""; //"#c9ba65";
+		targetNode.uiPtr.topGrab.style.color="";
+		targetNode.uiPtr.container.style.zIndex = "0";
+
+
+		//make child lines black
+		var childLines = getLines(targetNode, 0, 1);
+
+		while (childLines != null) {
+			childLines.data.div1.style.borderColor="";
+			childLines.data.div1.style.zIndex="0";
+
+			childLines.data.div2.style.borderColor="";
+			childLines.data.div2.style.zIndex="0";
+
+			childLines.data.div3.style.borderColor="";
+			childLines.data.div3.style.zIndex="0";
+
+			childLines.data.endNode.uiPtr.container.style.zIndex="0";   // put on bottom
+			childLines.data.endNode.uiPtr.topGrab.style.background='';
+		
+			childLines = childLines.next;
+
+
+
+		}
+
+	}
+
+	targetNode = nodePtr;
+	linesToUpdate = getLines(nodePtr, 1, 1);
+	
+	var t = targetNode.uiPtr;
+	t.topGrab.style.background="#FF0000";
+	t.topGrab.style.color="#FFFFFF";
+	t.container.style.zIndex = "19";
+
+	//make child lines red
+	var childLines = getLines(nodePtr, 0, 1);
+
+	while (childLines != null) {
+		childLines.data.div1.style.borderColor="#FF0000";
+		childLines.data.div1.style.zIndex="20";
+
+		childLines.data.div2.style.borderColor="#FF0000";
+		childLines.data.div2.style.zIndex="20";
+
+		childLines.data.div3.style.borderColor="#FF0000";
+		childLines.data.div3.style.zIndex="20";
+
+		childLines.data.endNode.uiPtr.container.style.zIndex="20";   // put on top 
+		childLines.data.endNode.uiPtr.topGrab.style.background="#EECCCC";
+
+		childLines = childLines.next;
+	}
+
+//	if (targetNode != nodePtr) {
+	
+		// notify engine of newly selected node
+		try {
+			ENGINE.procNode(nodePtr);
+		} catch(ex) { DEBUG("ENGINE NOT NOTIFIED!" + ex); }
+
+//	}
+
+
+
+
+POPDEBUG();
+}
+
+function s_onMouseDown(event)  // select
+{
+	var e = event.target.parentNode;
+
+	var i = parseInt(e.getAttribute("index"));
+	selectNode(findNode(i));
+}
+
+
+function r_onMouseDown(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = r_onMouseMove;
+	mouseMove = e;
+	offsetX = parseInt(event.clientX) - parseInt(e.style.width);
+	offsetY = parseInt(event.clientY) - parseInt(e.style.height);
+
+	startX = parseInt(event.clientX);	// for propagateMovement
+
+	var i = parseInt(e.getAttribute("index"));
+	selectNode(findNode(i));
+
+}
+
+function r_onMouseMove(event)
+{
+	var e = event.target.parentNode;
+	e.style.width = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.height = (parseInt(event.clientY) - parseInt(offsetY));
+
+	targetNode.w = parseInt(event.clientX) - parseInt(offsetX);
+	targetNode.h = parseInt(event.clientY) - parseInt(offsetY);
+
+	dragUpdateLines(linesToUpdate);
+
+}
+function r_onMouseUp(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = null;
+	e.style.width = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.height = (parseInt(event.clientY) - parseInt(offsetY));
+	mouseMove = null;
+
+	var dx = parseInt(event.clientX) - startX;
+	propagateMovement(targetNode, dx, 0);
+
+
+}
+
+
+
+
+function d_onMouseDown(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = d_onMouseMove;
+	mouseMove = e;
+	offsetX = parseInt(event.clientX) - parseInt(e.style.left);
+	offsetY = parseInt(event.clientY) - parseInt(e.style.top);
+
+	startX = parseInt(event.clientX);	// for propagateMovement
+	startY = parseInt(event.clientY);
+
+	var i = parseInt(e.getAttribute("index"));
+	selectNode(findNode(i));
+}
+
+function d_onMouseMove(event)
+{
+	var e = event.target.parentNode;
+	e.style.left = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.top = (parseInt(event.clientY) - parseInt(offsetY));
+
+	targetNode.x = parseInt(event.clientX) - parseInt(offsetX);
+	targetNode.y = parseInt(event.clientY) - parseInt(offsetY);
+
+	// iterate over lines to update
+	dragUpdateLines(linesToUpdate);
+
+}
+
+function d_onMouseUp(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = null;
+
+	var dx = parseInt(event.clientX) - startX;
+	var dy = parseInt(event.clientY) - startY;
+	propagateMovement(targetNode, dx, dy);
+}
+
+
+
+
+// simple DRAG'N'DROP code - because I'm awesome ;-)
+// modified to move parentNode, because movement handles are within a bigger element
+function onMouseDown(event)
+{
+	var e = event.target.parentNode;
+	e.onmousemove = onMouseMove;
+	offsetX = parseInt(event.clientX) - parseInt(e.style.left);
+	offsetY = parseInt(event.clientY) - parseInt(e.style.top);
+}
+
+function onMouseMove(event)
+{
+	var e = event.target.parentNode;
+	e.style.left = (parseInt(event.clientX) - parseInt(offsetX));
+	e.style.top = (parseInt(event.clientY) - parseInt(offsetY));
+}
+
+function onMouseUp(event)
+{
+//	var e = event.target.parentNode;
+//	e.onmousemove = null;
+	
+	//mouseMove.onmousemove = null;
+
+}
+
+
+
+
+</script>
+
+</head>
+
+
+
+<body onload="onLoad();" onmouseup="onMouseUp(event);">
+</body>
+
+
+</html>
+
