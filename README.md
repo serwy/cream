@@ -1,9 +1,10 @@
-# cream
+# CREAM Navigator
+
 CREAM - Cognitive Reliability and Error Analyis Method
 
 The original web-based program can now be found at: https://serwy.github.io/cream
 
-# Introduction
+## Introduction
 
 This repository is a re-hosting of the original work formerly found at _(now broken)_: 
 
@@ -13,7 +14,7 @@ This repository is a re-hosting of the original work formerly found at _(now bro
 
 It was used for the publication: https://doi.org/10.1177/154193120705101842
 
-# See Also
+## See Also
 
 http://erikhollnagel.com/ideas/cream.html
 
